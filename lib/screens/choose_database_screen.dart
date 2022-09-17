@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    home: Home(),
-  ));
-}
-List databases = ["Database 1","Database 2","Database 3","Database 4","Database 5","Database 5","Database 6"];
+class ChooseDatabase extends StatefulWidget {
+  const ChooseDatabase({Key? key}) : super(key: key);
 
-Widget databaseTemplate(database){
+  @override
+  State<ChooseDatabase> createState() => _ChooseDatabaseState();
+}
+//Mock Database for now while we make data dynamic
+List databases = ["Database 1","Database 2","Database 3","Database 4","Database 5","Database 6","Database 7"];
+
+//Template to list over the databases
+Widget chooseDatabaseTemplate(database){
   return Padding(
-    padding: const EdgeInsets.fromLTRB(8, 8, 8, 20),
+    padding: const EdgeInsets.fromLTRB(8, 8, 8, 10),
     child:
     TextButton(
         onPressed: ()=>{},
         style: TextButton.styleFrom(
           backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
-          minimumSize: const Size(150,100),
+          minimumSize: const Size(150,75),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         child:  Text(database,style: const TextStyle(color: Colors.white, fontSize: 20),)
@@ -23,8 +26,7 @@ Widget databaseTemplate(database){
   );
 }
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class _ChooseDatabaseState extends State<ChooseDatabase> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +50,7 @@ class Home extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           TextButton(
-                            onPressed: ()=>{},
+                            onPressed: ()=>Navigator.pushReplacementNamed(context, 'main_screen'),
                             style: TextButton.styleFrom(
                               primary: const Color.fromRGBO(165, 165, 165, 1),
                             ),
@@ -79,7 +81,7 @@ class Home extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 400,
-                        child:ListView(children: databases.map((database) => databaseTemplate(database)).toList(),),
+                        child:ListView(children: databases.map((database) => chooseDatabaseTemplate(database)).toList(),),
                       ),
 
                     ],
