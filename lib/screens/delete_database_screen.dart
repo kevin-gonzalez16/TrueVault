@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    home: Home(),
-  ));
+class DeleteDatabase extends StatefulWidget {
+  const DeleteDatabase({Key? key}) : super(key: key);
+
+  @override
+  State<DeleteDatabase> createState() => _DeleteDatabaseState();
 }
 
-List databases = ["Database 1","Database 2","Database 3","Database 4","Database 5","Database 5","Database 6"];
+//Mock Database for now while we make data dynamic
+List databases = ["Database 1","Database 2","Database 3","Database 4","Database 5","Database 6","Database 7"];
 
-Widget databaseTemplate(database){
+//Template to list over the database
+Widget deleteDatabaseTemplate(database){
   return Padding(
     padding: const EdgeInsets.fromLTRB(0, 0, 8, 20),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         ElevatedButton(onPressed: ()=>{},
             style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.fromLTRB(5,5,5,5),
                 primary: const Color.fromRGBO(255, 117, 117, 1)
             ), child: const Icon(Icons.delete, color:Colors.white)
         ),
@@ -27,17 +31,16 @@ Widget databaseTemplate(database){
               minimumSize: const Size(250,50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             ),
-            child:  Text(database,style: const TextStyle(color: Colors.white, fontSize: 20),)
+            child:  Text(database,style: const TextStyle(color: Colors.white, fontSize: 25),)
         ),
       ],
     ),
   );
 }
 
-class Home extends StatelessWidget{
-  const Home({Key? key}) : super(key:key);
+class _DeleteDatabaseState extends State<DeleteDatabase> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
       body: Center(
@@ -59,7 +62,7 @@ class Home extends StatelessWidget{
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           TextButton(
-                            onPressed: ()=>{},
+                            onPressed: ()=>{Navigator.pushReplacementNamed(context, "main_screen")},
                             style: TextButton.styleFrom(
                               primary: const Color.fromRGBO(165, 165, 165, 1),
                             ),
@@ -90,7 +93,7 @@ class Home extends StatelessWidget{
                       ),
                       SizedBox(
                         height: 400,
-                        child:ListView(children: databases.map((database) => databaseTemplate(database)).toList(),),
+                        child:ListView(children: databases.map((database) => deleteDatabaseTemplate(database)).toList(),),
                       ),
 
                     ],
