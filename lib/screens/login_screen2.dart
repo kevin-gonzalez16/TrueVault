@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen2 extends StatefulWidget {
+  const LoginScreen2({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginScreen2> createState() => _LoginScreen2State();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController createMasterPasswordTextEditingController =
-      TextEditingController();
-
-  TextEditingController confirmMasterPasswordTextEditingController =
-      TextEditingController();
-
-  bool match = true;
-
+class _LoginScreen2State extends State<LoginScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,75 +39,37 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ))),
-
             Container(
               height: 60.0,
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
-                controller: createMasterPasswordTextEditingController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Color(0xffc9c9c9),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
                     borderSide: BorderSide(width: 3, color: Color(0xffC9C9C9)),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
-                  hintText: 'Create Master Password',
+                  hintText: 'Master Password',
                   hintStyle: TextStyle(fontSize: 18, color: Color(0xff989898)),
                 ),
               ),
             ),
-
             Container(
               height: 30.0,
             ),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: confirmMasterPasswordTextEditingController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color(0xffc9c9c9),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3, color: Color(0xffC9C9C9)),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  hintText: 'Confirm Master Password',
-                  hintStyle: TextStyle(fontSize: 18, color: Color(0xff989898)),
-                ),
-              ),
-            ),
-            //spacer(),
-            Text(
-              match ? "" : "Password Don't Match",
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.red,
-              ),
-            ),
-            //spacer(),
-
             RaisedButton(
                 child: Text(
                   'Log in',
                   style: TextStyle(color: Color(0xff989898)),
                 ),
                 color: Color(0xff189AB4),
+                //  color: Color(0xff189AB4),
                 onPressed: () {
-                  setState(() {
-                    if (createMasterPasswordTextEditingController.text ==
-                        confirmMasterPasswordTextEditingController.text) {
-                      match = true;
-                    } else {
-                      match = false;
-                    }
-                  });
+                  setState(() {});
                 }),
-            Spacer(),
           ],
         )));
   }
