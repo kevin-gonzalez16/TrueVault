@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d32852c9-ee18-4051-accc-63385da310dc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/choose_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/choose_database_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/delete_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/delete_database_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/login_screen2.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/splash_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,15 +64,9 @@
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RunManager" selected="Flutter Test.Template function creates a button for each database">
-    <configuration name="Cancel button in Choose Database returns to main screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Cancel button in Choose Database returns to main screen" />
-      <option name="testFile" value="$PROJECT_DIR$/test/widget_test.dart" />
-      <option name="useRegexp" value="true" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Cancel button in Delete Database returns to main screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Cancel button in Delete Database returns to main screen" />
+  <component name="RunManager" selected="Flutter.main.dart">
+    <configuration name="Correct password redirects you to the main screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Correct password redirects you to the main screen" />
       <option name="testFile" value="$PROJECT_DIR$/test/widget_test.dart" />
       <option name="useRegexp" value="true" />
       <method v="2" />
@@ -78,24 +77,31 @@
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="First time user sees the register screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="First time user sees the register screen" />
+      <option name="testFile" value="$PROJECT_DIR$/test/widget_test.dart" />
+      <option name="useRegexp" value="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Incorrect password keeps you in the login screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Incorrect password keeps you in the login screen" />
+      <option name="testFile" value="$PROJECT_DIR$/test/widget_test.dart" />
+      <option name="useRegexp" value="true" />
+      <method v="2" />
+    </configuration>
     <configuration name="Template function creates a button for each database" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Template function creates a button for each database" />
       <option name="testFile" value="$PROJECT_DIR$/test/database_template_test.dart" />
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in widget_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/widget_test.dart" />
-      <option name="useRegexp" value="false" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.Incorrect password keeps you in the login screen" />
+        <item itemvalue="Flutter Test.Correct password redirects you to the main screen" />
+        <item itemvalue="Flutter Test.First time user sees the register screen" />
         <item itemvalue="Flutter Test.Template function creates a button for each database" />
         <item itemvalue="Flutter Test.Each database in the list should have a button" />
-        <item itemvalue="Flutter Test.tests in widget_test.dart" />
-        <item itemvalue="Flutter Test.Cancel button in Delete Database returns to main screen" />
-        <item itemvalue="Flutter Test.Cancel button in Choose Database returns to main screen" />
       </list>
     </recent_temporary>
   </component>

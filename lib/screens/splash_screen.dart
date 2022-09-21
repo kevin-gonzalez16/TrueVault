@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/login_screen.dart';
+import 'package:true_vault/screens/register_screen.dart';
 import 'dart:async';
 import 'package:true_vault/screens/main_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -20,9 +22,18 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(duration, navigateToDeviceScreen);
   }
 
-  navigateToDeviceScreen() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => MainScreen()));
+  navigateToDeviceScreen () async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? firstTime = prefs.getBool('first_time');
+    if(firstTime != null && !firstTime){//not the users first time
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    }
+    else{ //users first time
+      prefs.setBool('first_time', false);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => RegisterScreen()));
+    }
   }
 
   @override

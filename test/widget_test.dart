@@ -7,9 +7,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:true_vault/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/delete_database_screen.dart';
+import 'package:true_vault/screens/login_screen.dart';
+import 'package:true_vault/screens/register_screen.dart';
+import 'package:true_vault/screens/splash_screen.dart';
 
 void main() {
 
@@ -35,6 +38,38 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text("New Database"), findsOneWidget);
+
+  });
+
+  testWidgets("Correct password redirects you to the main screen", (WidgetTester tester) async{
+
+    await tester.pumpWidget(const MaterialApp(home:LoginScreen()));
+    expect(find.text("Master Password"), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), "PASSWORD");
+    await tester.tap(find.byType(RaisedButton));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text("New Database"), findsOneWidget);
+    expect(find.text("Open Database"), findsOneWidget);
+    expect(find.text("Delete Database"), findsOneWidget);
+
+  });
+
+  testWidgets("Incorrect password keeps you in the login screen", (WidgetTester tester) async{
+
+    await tester.pumpWidget(const MaterialApp(home:LoginScreen()));
+    expect(find.text("Master Password"), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), "NOT_PASSWORD");
+    await tester.tap(find.byType(RaisedButton));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text("New Database"), findsNothing);
+    expect(find.text("Open Database"), findsNothing);
+    expect(find.text("Delete Database"), findsNothing);
 
   });
 }

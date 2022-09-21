@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/delete_database_screen.dart';
 import 'package:true_vault/screens/login_screen.dart';
-import 'package:true_vault/screens/login_screen2.dart';
+import 'package:true_vault/screens/register_screen.dart';
 import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/screens/splash_screen.dart';
 
