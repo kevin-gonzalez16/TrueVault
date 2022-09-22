@@ -9,15 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
+import 'package:true_vault/screens/create_database_screen.dart';
 import 'package:true_vault/screens/delete_database_screen.dart';
 import 'package:true_vault/screens/login_screen.dart';
 import 'package:true_vault/screens/register_screen.dart';
 import 'package:true_vault/screens/splash_screen.dart';
 
 void main() {
-
-  testWidgets("Cancel button in Choose Database returns to main screen", (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home:ChooseDatabase()));
+  testWidgets("Cancel button in Choose Database returns to main screen",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: ChooseDatabase()));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -25,12 +26,11 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text("New Database"), findsOneWidget);
-
   });
 
-  testWidgets("Cancel button in Delete Database returns to main screen", (WidgetTester tester) async{
-
-    await tester.pumpWidget(const MaterialApp(home:DeleteDatabase()));
+  testWidgets("Cancel button in Delete Database returns to main screen",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: DeleteDatabase()));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -38,12 +38,23 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text("New Database"), findsOneWidget);
-
   });
 
-  testWidgets("Correct password redirects you to the main screen", (WidgetTester tester) async{
+  testWidgets("Cancel button in Create Database returns to main screen",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: CreateDatabase()));
+    expect(find.text("cancel"), findsOneWidget);
+    expect(find.text("New Database"), findsNothing);
 
-    await tester.pumpWidget(const MaterialApp(home:LoginScreen()));
+    await tester.tap(find.byKey(const Key("newDatabaseCancelButton")));
+    await tester.pumpAndSettle();
+
+    expect(find.text("New Database"), findsOneWidget);
+  });
+
+  testWidgets("Correct password redirects you to the main screen",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
     expect(find.text("Master Password"), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), "PASSWORD");
@@ -54,12 +65,11 @@ void main() {
     expect(find.text("New Database"), findsOneWidget);
     expect(find.text("Open Database"), findsOneWidget);
     expect(find.text("Delete Database"), findsOneWidget);
-
   });
 
-  testWidgets("Incorrect password keeps you in the login screen", (WidgetTester tester) async{
-
-    await tester.pumpWidget(const MaterialApp(home:LoginScreen()));
+  testWidgets("Incorrect password keeps you in the login screen",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
     expect(find.text("Master Password"), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), "NOT_PASSWORD");
@@ -70,6 +80,5 @@ void main() {
     expect(find.text("New Database"), findsNothing);
     expect(find.text("Open Database"), findsNothing);
     expect(find.text("Delete Database"), findsNothing);
-
   });
 }
