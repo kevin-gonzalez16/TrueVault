@@ -88,7 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     borderSide: BorderSide(width: 3, color: Color(0xffC9C9C9)),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  hintText: 'Confirm Master Password',
+                  hintText: ('Confirm Master Password'),
                   hintStyle: TextStyle(fontSize: 18, color: Color(0xff989898)),
                 ),
               ),

@@ -81,4 +81,42 @@ void main() {
     expect(find.text("Open Database"), findsNothing);
     expect(find.text("Delete Database"), findsNothing);
   });
+
+  testWidgets("Matching passwords redirects you to the main screen",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: RegisterScreen()));
+
+    expect(find.text("Create Master Password"), findsOneWidget);
+    await tester.enterText(
+        find.byKey(const Key("register-text-field-1")), "PASSWORD");
+    expect(find.text("Confirm Master Password"), findsOneWidget);
+    await tester.enterText(
+        find.byKey(const Key("register-text-field-2")), "PASSWORD");
+    await tester.tap(find.byType(RaisedButton));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text("New Database"), findsOneWidget);
+    expect(find.text("Open Database"), findsOneWidget);
+    expect(find.text("Delete Database"), findsOneWidget);
+  });
+
+  testWidgets("unmatching passwords keeps you in the register screen",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: RegisterScreen()));
+
+    expect(find.text("Create Master Password"), findsOneWidget);
+    await tester.enterText(
+        find.byKey(const Key("register-text-field-1")), "PASSWORD");
+    expect(find.text("Confirm Master Password"), findsOneWidget);
+    await tester.enterText(
+        find.byKey(const Key("register-text-field-2")), "NOT_PASSWORD");
+    await tester.tap(find.byType(RaisedButton));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text("New Database"), findsNothing);
+    expect(find.text("Open Database"), findsNothing);
+    expect(find.text("Delete Database"), findsNothing);
+  });
 }
