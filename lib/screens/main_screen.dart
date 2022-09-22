@@ -14,6 +14,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false, // set it to false
         backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
         body: Center(
             child: Column(
@@ -70,6 +71,7 @@ class _MainScreenState extends State<MainScreen> {
                         height: 60,
                         width: 220,
                         child: TextButton(
+                          key: const Key("new-database-button"),
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Color(0xff189AB4)),
@@ -89,6 +91,7 @@ class _MainScreenState extends State<MainScreen> {
                           },
                           child: const Text(
                             'New Database',
+                            key: Key("new-database-button-text"),
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         )),
@@ -99,6 +102,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: Material(
                         color: Colors.green, // Button color
                         child: InkWell(
+                          key: const Key("new-database-icon-button"),
                           splashColor: Colors.white, // Splash color
                           onTap: () {
                             Navigator.push(
@@ -128,6 +132,7 @@ class _MainScreenState extends State<MainScreen> {
                         height: 60,
                         width: 220,
                         child: TextButton(
+                          key: const Key("choose-database-button"),
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Color(0xff189AB4)),
@@ -147,6 +152,7 @@ class _MainScreenState extends State<MainScreen> {
                           },
                           child: const Text(
                             'Open Database',
+                            key: Key("choose-database-button-text"),
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         )),
@@ -158,6 +164,7 @@ class _MainScreenState extends State<MainScreen> {
                         color:
                             Color.fromARGB(200, 95, 116, 170), // Button color
                         child: InkWell(
+                          key: const Key("choose-database-icon-button"),
                           splashColor: Colors.white, // Splash color
                           onTap: () {
                             Navigator.push(
@@ -189,6 +196,7 @@ class _MainScreenState extends State<MainScreen> {
                         height: 60,
                         width: 220,
                         child: TextButton(
+                          key: const Key("delete-database-button"),
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Color(0xff189AB4)),
@@ -208,6 +216,7 @@ class _MainScreenState extends State<MainScreen> {
                           },
                           child: const Text(
                             'Delete Database',
+                            key: Key("delete-database-button-text"),
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         )),
@@ -218,6 +227,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: Material(
                         color: Colors.red, // Button color
                         child: InkWell(
+                          key: const Key("delete-database-icon-button"),
                           splashColor: Colors.white, // Splash color
                           onTap: () {
                             Navigator.push(

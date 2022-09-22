@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/utils/user.dart';
 
-
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -58,6 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                key: const Key("register-text-field-1"),
                 controller: createMasterPasswordTextEditingController,
                 decoration: InputDecoration(
                   filled: true,
@@ -79,6 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                key: const Key("register-text-field-2"),
                 controller: confirmMasterPasswordTextEditingController,
                 decoration: InputDecoration(
                   filled: true,
@@ -103,6 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             //spacer(),
 
             RaisedButton(
+                key: const Key("register-screen-button"),
                 child: Text(
                   'Log in',
                   style: TextStyle(color: Color(0xff989898)),
@@ -114,9 +116,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     if (createMasterPasswordTextEditingController.text ==
                         confirmMasterPasswordTextEditingController.text) {
                       match = true;
-                      user.password = confirmMasterPasswordTextEditingController.text;
+                      user.password =
+                          confirmMasterPasswordTextEditingController.text;
                       Navigator.pushReplacement(
-                          context, MaterialPageRoute(builder: (context) => MainScreen()));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainScreen()));
                     } else {
                       match = false;
                     }

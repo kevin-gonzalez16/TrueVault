@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/utils/user.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -49,6 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                key: const Key("login-text-field"),
                 controller: passwordController,
                 decoration: InputDecoration(
                   filled: true,
@@ -66,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 30.0,
             ),
             RaisedButton(
+                key: const Key("login-screen-button"),
                 child: Text(
                   'Log in',
                   style: TextStyle(color: Color(0xff989898)),
@@ -74,9 +75,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 //  color: Color(0xff189AB4),
                 onPressed: () {
                   User user = User();
-                  if(user.password == passwordController.text) {
-                    Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) => MainScreen()));
+                  if (user.password == passwordController.text) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => MainScreen()));
                   }
                   setState(() {});
                 }),
