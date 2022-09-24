@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
-import 'package:true_vault/utils/user.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -74,8 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Color(0xff189AB4),
                 //  color: Color(0xff189AB4),
                 onPressed: () {
-                  User user = User();
-                  if (user.password == passwordController.text) {
+                  if ("PASSWORD" == passwordController.text) {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => MainScreen()));
                   }
