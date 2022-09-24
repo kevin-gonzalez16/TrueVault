@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
-import 'package:true_vault/utils/user.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -111,13 +110,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 color: Color(0xff189AB4),
                 onPressed: () {
-                  User user = User();
                   setState(() {
                     if (createMasterPasswordTextEditingController.text ==
                         confirmMasterPasswordTextEditingController.text) {
                       match = true;
-                      user.password =
-                          confirmMasterPasswordTextEditingController.text;
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
