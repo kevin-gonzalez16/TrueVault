@@ -1,32 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
+import 'package:true_vault/utils/database.dart';
 
 
 class ChooseDatabase extends StatefulWidget {
-  const ChooseDatabase({Key? key}) : super(key: key);
+  final List<Database> databases;
+  const ChooseDatabase({Key? key, required this.databases}) : super(key: key);
 
   @override
   State<ChooseDatabase> createState() => _ChooseDatabaseState();
 }
 
-//Mock Database for now while we make data dynamic
-List databases = ["Database 1","Database 2","Database 3","Database 4","Database 5","Database 6","Database 7"];
-
 //Template to list over the databases
-Widget chooseDatabaseTemplate(database){
+Widget chooseDatabaseTemplate(Database database, int index){
   //Individual Database Buttons
   return Padding(
     padding: const EdgeInsets.fromLTRB(8, 3, 8, 10),
     child: AspectRatio(
       aspectRatio: 16/4,
       child: TextButton(
+          key: Key("chooseDatabaseButton"+index.toString()),
           onPressed: ()=>{
           },
           style: TextButton.styleFrom(
             backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
-          child: Text(database,style: const TextStyle(color: Colors.white, fontSize: 20),)
+          child: Text(
+            database.databaseName,
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+            key: Key("chooseDatabaseButtonText"+index.toString()),
+          )
       ),
     ),
   );
@@ -97,7 +101,7 @@ class _ChooseDatabaseState extends State<ChooseDatabase> {
                               scrollDirection: Axis.vertical,
                               itemCount: databases.length,
                               itemBuilder: (BuildContext test, int index){
-                                return chooseDatabaseTemplate(databases[index]);
+                                return chooseDatabaseTemplate(databases[index], index);
                               },
                             )
                           )

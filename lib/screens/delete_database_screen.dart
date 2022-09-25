@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
+import 'package:true_vault/utils/database.dart';
+
 
 class DeleteDatabase extends StatefulWidget {
-  const DeleteDatabase({Key? key}) : super(key: key);
+  final List<Database> databases;
+  const DeleteDatabase({Key? key, required this.databases}) : super(key: key);
 
   @override
   State<DeleteDatabase> createState() => _DeleteDatabaseState();
 }
 
-//Mock Database for now while we make data dynamic
-List databases = ["Database 1","Database 2","Database 3","Database 4","Database 5","Database 6","Database 7"];
-
 //Template to list over the database
-Widget deleteDatabaseTemplate(database){
+Widget deleteDatabaseTemplate(Database database, context,index){
   return Padding(
     padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        ElevatedButton(onPressed: ()=>{},
+        ElevatedButton(
+          key: Key("deleteDatabaseElevatedButton"+index.toString()),
+            onPressed: (){
+              Navigator.pop(context,index);
+            },
             style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.fromLTRB(5,5,5,5),
@@ -26,13 +30,20 @@ Widget deleteDatabaseTemplate(database){
             ), child: const Icon(Icons.delete, color:Colors.white)
         ),
         TextButton(
-            onPressed: ()=>{},
+            key: Key("deleteDatabaseTextButton"+index.toString()),
+            onPressed: (){
+              Navigator.pop(context,index);
+            },
             style: TextButton.styleFrom(
               backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
               minimumSize: const Size(240,50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             ),
-            child:  Text(database,style: const TextStyle(color: Colors.white, fontSize: 25),)
+            child:  Text(
+              database.databaseName,
+              style: const TextStyle(color: Colors.white, fontSize: 25),
+              key: Key("deleteDatabaseText"+index.toString()),
+            )
         ),
 
       ],
@@ -104,7 +115,7 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
                             scrollDirection: Axis.vertical,
                             itemCount: databases.length,
                             itemBuilder: (BuildContext test, int index){
-                              return deleteDatabaseTemplate(databases[index]);
+                              return deleteDatabaseTemplate(databases[index],context,index);
                             },
                           )
                       )

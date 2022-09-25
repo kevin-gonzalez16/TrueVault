@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/main_screen.dart';
+import 'package:true_vault/utils/database.dart';
 
 class CreateDatabase extends StatefulWidget {
   const CreateDatabase({Key? key}) : super(key: key);
@@ -9,6 +11,9 @@ class CreateDatabase extends StatefulWidget {
 }
 
 class _CreateDatabase extends State<CreateDatabase> {
+  TextEditingController databaseNameController = TextEditingController();
+  TextEditingController databaseLocationController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -62,6 +67,8 @@ class _CreateDatabase extends State<CreateDatabase> {
                           children: [
                             //  SizedBox(height: 40),
                             TextField(
+                              key:const Key("newDatabaseNameTextField"),
+                              controller: databaseNameController,
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 filled: true,
@@ -78,6 +85,8 @@ class _CreateDatabase extends State<CreateDatabase> {
                             ),
                             // SizedBox(height: 50),
                             TextField(
+                              key:const Key("newDatabaseLocationTextField"),
+                              controller: databaseLocationController,
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 filled: true,
@@ -97,6 +106,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                 height: 80,
                                 width: 250,
                                 child: TextButton(
+                                  key:const Key("createDatabaseButton"),
                                   style: ButtonStyle(
                                       backgroundColor: MaterialStateProperty.all(
                                           Color.fromARGB(200, 24, 154, 180)),
@@ -108,7 +118,25 @@ class _CreateDatabase extends State<CreateDatabase> {
                                               side: BorderSide(
                                                   color: Color.fromARGB(
                                                       200, 24, 154, 180))))),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      if(databaseLocationController.text == "" || databaseNameController.text == ""){
+                                        //TODO
+                                        //Do not allow empty fields
+                                      }
+                                      else{
+                                        Database databaseObj = Database(
+                                        databaseNameController.text,
+                                            databaseLocationController.text,
+                                            "PASSWORD"
+                                        );
+                                        //TODO
+                                        //Redirect the user to the opened database view
+                                        Navigator.pop(context,databaseObj);
+
+                                      }
+                                    });
+                                  },
                                   child: const Text(
                                     'Create Database',
                                     style: TextStyle(
