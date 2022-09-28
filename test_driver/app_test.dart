@@ -10,6 +10,8 @@ void main() {
     final loginScreenButton = find.byValueKey('login-screen-button');
     final loginTextField = find.byValueKey('login-text-field');
 
+    final landingScreenRegisterButton = find.byValueKey("landingScreenRegisterButton");
+
     final registerLoginButton = find.byValueKey('register-screen-button');
 
     final newDatabaseButton = find.byValueKey('new-database-button');
@@ -63,6 +65,7 @@ void main() {
 
       test('register password works', () async {
         //not actually testing a created password yet
+        await driver.tap(landingScreenRegisterButton);
 
         await driver.tap(registerTextField1);
         await driver.enterText("PASSWORD");
@@ -99,7 +102,7 @@ void main() {
         await driver.tap(createDatabaseButton);
         expect(await driver.getText(newDatabaseButtonText), "New Database");
         await driver.tap(newDatabaseButton);
-        //Testing acutal database creation
+        //Testing actual database creation
         await driver.tap(newDatabaseNameTextField);
         await driver.enterText("New Database Name 2");
         await driver.tap(newDatabaseLocationTextField);
