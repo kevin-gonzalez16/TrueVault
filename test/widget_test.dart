@@ -7,18 +7,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/create_database_screen.dart';
 import 'package:true_vault/screens/delete_database_screen.dart';
 import 'package:true_vault/screens/login_screen.dart';
 import 'package:true_vault/screens/register_screen.dart';
-import 'package:true_vault/screens/splash_screen.dart';
+import 'package:true_vault/utils/database.dart';
 
 void main() {
   testWidgets("Cancel button in Choose Database returns to main screen",
       (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: ChooseDatabase()));
+    List <Database>databases = [];
+    Database newDatabase = Database("new database1", "/", "SECURE_PASSWORD123");
+    databases.add(newDatabase);
+    await tester.pumpWidget(MaterialApp(home: ChooseDatabase(databases:databases)));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -30,7 +32,10 @@ void main() {
 
   testWidgets("Cancel button in Delete Database returns to main screen",
       (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: DeleteDatabase()));
+    List <Database>databases = [];
+    Database newDatabase = Database("new database1", "/", "SECURE_PASSWORD123");
+    databases.add(newDatabase);
+    await tester.pumpWidget(MaterialApp(home: DeleteDatabase(databases:databases)));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -101,7 +106,7 @@ void main() {
     expect(find.text("Delete Database"), findsOneWidget);
   });
 
-  testWidgets("unmatching passwords keeps you in the register screen",
+  testWidgets("Non-matching passwords keeps you in the register screen",
       (WidgetTester tester) async {
     await tester.pumpWidget(const MaterialApp(home: RegisterScreen()));
 
