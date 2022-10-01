@@ -19,37 +19,34 @@ class _LandingScreenState extends State<LandingScreen> {
         body: Center(
             child: Column(
               children: [
-                Container(
-                  height: 60.0,
-                ),
-                Container(
-                    width: 325.0,
-                    height: 150.0,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      color: Color(0xff189AB4),
-                    ),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 20.0,
-                            ),
-                            const Icon(
-                              Icons.donut_large_rounded,
-                              color: Colors.white,
-                              size: 90.0,
-                            ),
-                          ],
-                        )
-                    )
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0,50,0,0),
+                  child: Container(
+                      width: 325.0,
+                      height: 150.0,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: Color(0xff189AB4),
+                      ),
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: const [
+                              Icon(
+                                Icons.donut_large_rounded,
+                                color: Colors.white,
+                                size: 90.0,
+                              ),
+                            ],
+                          )
+                      )
+                  ),
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(25,50,25,5),
+                  padding: const EdgeInsets.fromLTRB(25,30,25,0),
                   child: AspectRatio(
-                      aspectRatio: 8/2,
+                      aspectRatio: 9/2,
                       child:TextButton(
                         key: const Key("landingScreenRegisterButton"),
                         onPressed: ()=>{
@@ -57,6 +54,7 @@ class _LandingScreenState extends State<LandingScreen> {
                               MaterialPageRoute(builder: (context) => const RegisterScreen()))
                         },
                         child: const Text("Register",
+                            key: Key("landingScreenRegisterButtonText"),
                             style: TextStyle(fontSize: 20),
                         ),
                         style: TextButton.styleFrom(
@@ -71,15 +69,17 @@ class _LandingScreenState extends State<LandingScreen> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(25,35,25,5),
+                  padding: const EdgeInsets.fromLTRB(25,35,25,0),
                   child: AspectRatio(
-                    aspectRatio: 8/2,
+                    aspectRatio: 9/2,
                     child:TextButton(
+                      key: const Key("landingScreenLoginButton"),
                       onPressed: ()=>{
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => const LoginScreen()))
                       },
                       child: const Text("Login",
+                        key: Key("landingScreenLoginButtonText"),
                         style: TextStyle(fontSize: 20),
                       ),
                       style: TextButton.styleFrom(
@@ -92,7 +92,6 @@ class _LandingScreenState extends State<LandingScreen> {
                     )
                   ),
                 ),
-
               ],
             )));
   }

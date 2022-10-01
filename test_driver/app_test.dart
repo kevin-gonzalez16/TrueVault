@@ -11,8 +11,12 @@ void main() {
     final loginTextField = find.byValueKey('login-text-field');
 
     final landingScreenRegisterButton = find.byValueKey("landingScreenRegisterButton");
+    final landingScreenLoginButton = find.byValueKey("landingScreenLoginButton");
 
     final registerLoginButton = find.byValueKey('register-screen-button');
+    final logoutButton = find.byValueKey("logoutButton");
+    final landingScreenRegisterButtonText = find.byValueKey("landingScreenRegisterButtonText");
+    final landingScreenLoginButtonText = find.byValueKey("landingScreenLoginButtonText");
 
     final newDatabaseButton = find.byValueKey('new-database-button');
     final chooseDatabaseButton = find.byValueKey('choose-database-button');
@@ -169,5 +173,16 @@ void main() {
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
       });
     });
+    test('Login Password Works', () async {
+        await driver.tap(logoutButton);
+        expect(await driver.getText(landingScreenRegisterButtonText), "Register");
+        expect(await driver.getText(landingScreenLoginButtonText), "Login");
+        await driver.tap(landingScreenLoginButton);
+        await driver.tap(loginTextField);
+        await driver.enterText("PASSWORD");
+        await driver.tap(loginScreenButton);
+        expect(await driver.getText(newDatabaseButtonText), "New Database");
+    });
+
   });
 }

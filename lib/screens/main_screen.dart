@@ -4,6 +4,8 @@ import 'package:true_vault/screens/create_database_screen.dart';
 import 'package:true_vault/screens/delete_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
 
+import 'landing_screen.dart';
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -24,11 +26,26 @@ class _MainScreenState extends State<MainScreen> {
             child: Column(
           children: [
             Container(
-              height: 60.0,
+              height: 30.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TextButton(
+                  key: const Key("logoutButton"),
+                    child: const Text("Logout",
+                      style: TextStyle(color:Colors.grey),
+                    ),
+                    onPressed: ()=>{
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => const LandingScreen()))
+                    },
+                ),
+              ],
             ),
             Container(
                 width: 325.0,
-                height: 150.0,
+                height: 125.0,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   color: Color(0xff189AB4),
