@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d32852c9-ee18-4051-accc-63385da310dc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/generated_plugin_registrant.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/splash_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/landing_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/landing_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/main_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_driver/app_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test_driver/app_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,9 +60,9 @@
     <property name="settings.editor.selected.configurable" value="emulator" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RunManager" selected="Flutter.main.dart">
-    <configuration name="new-database button works" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="new-database button works" />
+  <component name="RunManager" selected="Flutter Test.tests in database_class_test.dart">
+    <configuration name="TrueVault App Setup" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="TrueVault App Setup" />
       <option name="testFile" value="$PROJECT_DIR$/test_driver/app_test.dart" />
       <option name="useRegexp" value="false" />
       <method v="2" />
@@ -93,11 +89,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter Test.tests in widget_test.dart" />
-        <item itemvalue="Flutter Test.tests in form_class_test.dart" />
-        <item itemvalue="Flutter Test.tests in database_template_test.dart" />
         <item itemvalue="Flutter Test.tests in database_class_test.dart" />
-        <item itemvalue="Flutter Test.new-database button works" />
+        <item itemvalue="Flutter Test.tests in database_template_test.dart" />
+        <item itemvalue="Flutter Test.tests in form_class_test.dart" />
+        <item itemvalue="Flutter Test.tests in widget_test.dart" />
+        <item itemvalue="Flutter Test.TrueVault App Setup" />
       </list>
     </recent_temporary>
   </component>
