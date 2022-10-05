@@ -23,7 +23,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool _hasPassword1LowercaseCharacter = false;
   bool match = true;
   bool isValidPassword = false;
-  //bool empty = false;
   bool notValid = true;
 
   onPasswordChanged(String password) {
@@ -97,7 +96,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 60.0,
             ),
             TextField(
-              //key: const Key("register-text-field-1"),
               controller: createMasterPasswordTextEditingController,
               onChanged: (password) => onPasswordChanged(password),
               obscureText: !_isVisible,
@@ -133,7 +131,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 30.0,
             ),
             TextField(
-              // key: const Key("register-text-field-2"),
               controller: confirmMasterPasswordTextEditingController,
               onChanged: (password) => onPasswordChanged(password),
               obscureText: !_isVisible,
@@ -175,13 +172,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 color: Colors.red,
               ),
             ),
-            /*  Text(
-              empty ? "" : "Please enter a password",
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.red,
-              ),
-            ), */
             Text(
               notValid ? "" : "Password does not meet the requirements",
               style: TextStyle(
@@ -221,7 +211,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: TextStyle(color: Color(0xff189AB4)))
               ],
             ),
-
             Row(
               children: [
                 AnimatedContainer(
@@ -338,55 +327,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: TextStyle(color: Color(0xff189AB4)))
               ],
             ),
-
-            /* Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                key: const Key("register-text-field-1"),
-                controller: createMasterPasswordTextEditingController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color(0xffc9c9c9),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(width: 3, color: Color(0xffC9C9C9)),
-                  ),
-                  hintText: 'Create Master Password',
-                  hintStyle: TextStyle(fontSize: 18, color: Color(0xff989898)),
-                ),
-              ),
-            ), 
-
-            Container(
-              height: 30.0,
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                key: const Key("register-text-field-2"),
-                controller: confirmMasterPasswordTextEditingController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color(0xffc9c9c9),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3, color: Color(0xffC9C9C9)),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  hintText: ('Confirm Master Password'),
-                  hintStyle: TextStyle(fontSize: 18, color: Color(0xff989898)),
-                ),
-              ),
-            ),
-            //spacer(),
-            Text(
-              match ? "" : "Password Don't Match",
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.red,
-              ),
-            ),
-            */
             Container(
               height: 30.0,
             ),
@@ -410,7 +350,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     }
                   });
                 }),
-            // Spacer(),
           ],
         )));
   }
