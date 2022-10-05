@@ -10,13 +10,17 @@ void main() {
     final loginScreenButton = find.byValueKey('login-screen-button');
     final loginTextField = find.byValueKey('login-text-field');
 
-    final landingScreenRegisterButton = find.byValueKey("landingScreenRegisterButton");
-    final landingScreenLoginButton = find.byValueKey("landingScreenLoginButton");
+    final landingScreenRegisterButton =
+        find.byValueKey("landingScreenRegisterButton");
+    final landingScreenLoginButton =
+        find.byValueKey("landingScreenLoginButton");
 
     final registerLoginButton = find.byValueKey('register-screen-button');
     final logoutButton = find.byValueKey("logoutButton");
-    final landingScreenRegisterButtonText = find.byValueKey("landingScreenRegisterButtonText");
-    final landingScreenLoginButtonText = find.byValueKey("landingScreenLoginButtonText");
+    final landingScreenRegisterButtonText =
+        find.byValueKey("landingScreenRegisterButtonText");
+    final landingScreenLoginButtonText =
+        find.byValueKey("landingScreenLoginButtonText");
 
     final newDatabaseButton = find.byValueKey('new-database-button');
     final chooseDatabaseButton = find.byValueKey('choose-database-button');
@@ -34,8 +38,10 @@ void main() {
     final deleteDatabaseIconButton =
         find.byValueKey('delete-database-icon-button');
 
-    final newDatabaseNameTextField = find.byValueKey('newDatabaseNameTextField');
-    final newDatabaseLocationTextField = find.byValueKey('newDatabaseLocationTextField');
+    final newDatabaseNameTextField =
+        find.byValueKey('newDatabaseNameTextField');
+    final newDatabaseLocationTextField =
+        find.byValueKey('newDatabaseLocationTextField');
     final createDatabaseButton = find.byValueKey('createDatabaseButton');
 
     final chooseDatabaseCancelButton =
@@ -122,16 +128,51 @@ void main() {
         expect(await driver.getText(chooseDatabaseButtonText), "Open Database");
         await driver.tap(chooseDatabaseButton);
         //Checking for created databases
-        final chooseDatabaseButton0 = find.byValueKey('chooseDatabaseButtonText0');
-        final chooseDatabaseButton1 = find.byValueKey('chooseDatabaseButtonText1');
-        expect(await driver.getText(chooseDatabaseButton0), "New Database Name");
-        expect(await driver.getText(chooseDatabaseButton1), "New Database Name 1");
-        final chooseDatabaseButton2 = find.byValueKey('chooseDatabaseButtonText2');
-        expect(await driver.getText(chooseDatabaseButton2), "New Database Name 2");
+        final chooseDatabaseButton0 =
+            find.byValueKey('chooseDatabaseButtonText0');
+        final chooseDatabaseButton1 =
+            find.byValueKey('chooseDatabaseButtonText1');
+        expect(
+            await driver.getText(chooseDatabaseButton0), "New Database Name");
+        expect(
+            await driver.getText(chooseDatabaseButton1), "New Database Name 1");
+        final chooseDatabaseButton2 =
+            find.byValueKey('chooseDatabaseButtonText2');
+        expect(
+            await driver.getText(chooseDatabaseButton2), "New Database Name 2");
         //
         await driver.tap(chooseDatabaseCancelButton);
         expect(await driver.getText(chooseDatabaseButtonText), "Open Database");
       });
+
+      test('chooseDatabaseButton works', () async {
+        expect(await driver.getText(chooseDatabaseButtonText), "Open Database");
+        await driver.tap(chooseDatabaseButton);
+
+        final chooseDatabaseButton0 = find.byValueKey('chooseDatabaseButton0');
+        await driver.tap(chooseDatabaseButton0);
+        final databaseNameText = find.byValueKey("New Database Name_text");
+        expect(await driver.getText(databaseNameText), "New Database ...");
+        final chooseRecordBackButton =
+            find.byValueKey("chooseRecordBackButton");
+        await driver.tap(chooseRecordBackButton);
+
+        final chooseDatabaseButtonText0 =
+            find.byValueKey('chooseDatabaseButtonText0');
+        final chooseDatabaseButtonText1 =
+            find.byValueKey('chooseDatabaseButtonText1');
+        expect(await driver.getText(chooseDatabaseButtonText0),
+            "New Database Name");
+        expect(await driver.getText(chooseDatabaseButtonText1),
+            "New Database Name 1");
+        final chooseDatabaseButtonText2 =
+            find.byValueKey('chooseDatabaseButtonText2');
+        expect(await driver.getText(chooseDatabaseButtonText2),
+            "New Database Name 2");
+        await driver.tap(chooseDatabaseCancelButton);
+        expect(await driver.getText(chooseDatabaseButtonText), "Open Database");
+      });
+
       test('open-database-icon button works', () async {
         expect(await driver.getText(chooseDatabaseButtonText), "Open Database");
         await driver.tap(chooseDatabaseIconButton);
@@ -143,7 +184,8 @@ void main() {
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseButton);
         //Testing for actual database deletion
-        final deleteDatabaseElevatedButton1 = find.byValueKey("deleteDatabaseElevatedButton1");
+        final deleteDatabaseElevatedButton1 =
+            find.byValueKey("deleteDatabaseElevatedButton1");
         await driver.tap(deleteDatabaseElevatedButton1);
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
@@ -160,13 +202,15 @@ void main() {
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseIconButton);
         //Testing for actual database deletion
-        final deleteDatabaseElevatedButton0 = find.byValueKey("deleteDatabaseElevatedButton0");
+        final deleteDatabaseElevatedButton0 =
+            find.byValueKey("deleteDatabaseElevatedButton0");
         await driver.tap(deleteDatabaseElevatedButton0);
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseButton);
         final deleteDatabaseText0 = find.byValueKey("deleteDatabaseText0");
-        expect(await driver.getText(deleteDatabaseText0), "New Database Name 2");
+        expect(
+            await driver.getText(deleteDatabaseText0), "New Database Name 2");
         //
         await driver.tap(deleteDatabaseCancelButton);
         expect(
@@ -174,15 +218,14 @@ void main() {
       });
     });
     test('Login Password Works', () async {
-        await driver.tap(logoutButton);
-        expect(await driver.getText(landingScreenRegisterButtonText), "Register");
-        expect(await driver.getText(landingScreenLoginButtonText), "Login");
-        await driver.tap(landingScreenLoginButton);
-        await driver.tap(loginTextField);
-        await driver.enterText("PASSWORD");
-        await driver.tap(loginScreenButton);
-        expect(await driver.getText(newDatabaseButtonText), "New Database");
+      await driver.tap(logoutButton);
+      expect(await driver.getText(landingScreenRegisterButtonText), "Register");
+      expect(await driver.getText(landingScreenLoginButtonText), "Login");
+      await driver.tap(landingScreenLoginButton);
+      await driver.tap(loginTextField);
+      await driver.enterText("PASSWORD");
+      await driver.tap(loginScreenButton);
+      expect(await driver.getText(newDatabaseButtonText), "New Database");
     });
-
   });
 }

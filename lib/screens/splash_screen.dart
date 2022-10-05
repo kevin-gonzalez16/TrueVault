@@ -4,6 +4,7 @@ import 'package:true_vault/screens/login_screen.dart';
 import 'package:true_vault/screens/register_screen.dart';
 import 'dart:async';
 import 'package:true_vault/screens/main_screen.dart';
+import 'package:true_vault/screens/view_database_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -22,11 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(duration, navigateToDeviceScreen);
   }
 
-  navigateToDeviceScreen (){
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LandingScreen()));
-
-
+  navigateToDeviceScreen() {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const LandingScreen()));
   }
 
   @override
