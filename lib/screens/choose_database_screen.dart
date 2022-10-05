@@ -20,14 +20,14 @@ Widget chooseDatabaseTemplate(Database database, int index, context) {
       aspectRatio: 16 / 4,
       child: TextButton(
           key: Key("chooseDatabaseButton" + index.toString()),
-          onPressed: () => {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ViewDatabaseScreen(
-                              databaseName: database.databaseName,
-                            )))
-              },
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ViewDatabaseScreen(
+                          database: database,
+                        )));
+          },
           style: TextButton.styleFrom(
             backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
             shape:
