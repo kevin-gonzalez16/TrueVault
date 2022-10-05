@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:true_vault/utils/database.dart';
 
 class ViewDatabaseScreen extends StatefulWidget {
-  final String databaseName;
-  const ViewDatabaseScreen({Key? key, required this.databaseName})
+  final Database database;
+  const ViewDatabaseScreen({Key? key, required this.database})
       : super(key: key);
 
   @override
   State<ViewDatabaseScreen> createState() => _ViewDatabaseScreenState();
 }
-
-List<String> recordsMock = [
-  "Website.com",
-  "Website2.com",
-  "PhoneApp1",
-  "Website3.com",
-  "Website4.com"
-];
 
 String nameShortener(String databaseName) {
   return databaseName.length > 14
@@ -117,12 +110,12 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                             size: 90.0,
                           ),
                           Padding(
-                            padding: EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(15.0),
                             child: Text(
                               nameShortener(
-                                widget.databaseName,
+                                widget.database.databaseName,
                               ),
-                              key: Key(widget.databaseName + "_text"),
+                              key: Key(widget.database.databaseName + "_text"),
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 25),
                             ),
@@ -146,10 +139,13 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                           child: SizedBox(
                               child: ListView.builder(
                         scrollDirection: Axis.vertical,
-                        itemCount: recordsMock.length,
+                        itemCount: widget.database.forms.length,
                         itemBuilder: (BuildContext test, int index) {
                           return viewDatabaseTemplate(
-                              recordsMock[index], context, index);
+                              widget.database.forms[index]
+                                  .formDetails["serviceName"],
+                              context,
+                              index);
                         },
                       ))),
                     ],
