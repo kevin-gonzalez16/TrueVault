@@ -64,6 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false, // set it to false
         backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
         body: Center(
             child: Column(
@@ -96,6 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 60.0,
             ),
             TextField(
+              key: const Key("register-text-field-1"),
               controller: createMasterPasswordTextEditingController,
               onChanged: (password) => onPasswordChanged(password),
               obscureText: !_isVisible,
@@ -131,6 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 30.0,
             ),
             TextField(
+              key: const Key("register-text-field-2"),
               controller: confirmMasterPasswordTextEditingController,
               onChanged: (password) => onPasswordChanged(password),
               obscureText: !_isVisible,

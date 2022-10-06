@@ -78,10 +78,10 @@ void main() {
         await driver.tap(landingScreenRegisterButton);
 
         await driver.tap(registerTextField1);
-        await driver.enterText("PASSWORD");
+        await driver.enterText("myPASSWORD1!");
 
         await driver.tap(registerTextField2);
-        await driver.enterText("PASSWORD");
+        await driver.enterText("myPASSWORD1!");
         await driver.tap(registerLoginButton);
         expect(await driver.getText(newDatabaseButtonText), "New Database");
       });
@@ -226,6 +226,59 @@ void main() {
       await driver.enterText("PASSWORD");
       await driver.tap(loginScreenButton);
       expect(await driver.getText(newDatabaseButtonText), "New Database");
+    });
+
+    test('Be able to create a new record form inside a database', () async {
+      //open database we previously created
+      await driver.tap(chooseDatabaseButton);
+      final chooseDatabaseButton2 = find.byValueKey('chooseDatabaseButton0');
+      await driver.tap(chooseDatabaseButton2);
+      //create a form
+      final newRecordIconButton = find.byValueKey('new-record-icon-button');
+      await driver.tap(newRecordIconButton);
+
+      final titleInputNewForm = find.byValueKey('title-input-new-form');
+      await driver.tap(titleInputNewForm);
+      await driver.enterText("Title1");
+      final usernameInputNewForm = find.byValueKey('username-input-new-form');
+      await driver.tap(usernameInputNewForm);
+      await driver.enterText("Username Example");
+      final passwordInputNewForm = find.byValueKey('password-input-new-form');
+      await driver.tap(passwordInputNewForm);
+      await driver.enterText("myPASSWORD1");
+      final notesInputNewForm = find.byValueKey('notes-input-new-form');
+      await driver.tap(notesInputNewForm);
+      await driver.enterText("Notes Example");
+      final newFormSaveButton = find.byValueKey("new-form-save-button");
+      await driver.tap(newFormSaveButton);
+      final viewRecordButtonText = find.byValueKey("view-record-button-text");
+      expect(await driver.getText(viewRecordButtonText), "Title1");
+    });
+    test('Be able to open a created record form inside a database', () async {
+      //open the form
+
+      final viewRecordButton = find.byValueKey("view-record-button");
+      await driver.tap(viewRecordButton);
+
+      //press eye icon to view password
+      final eyeIconViewForm = find.byValueKey("eye-icon-button-view-form");
+      await driver.tap(eyeIconViewForm);
+
+      //check that title matches
+      final viewFormTitle = find.byValueKey("view-form-title");
+      expect(await driver.getText(viewFormTitle), "Title1");
+
+      // //check that username matches
+      final viewFormUsername = find.byValueKey("view-form-username");
+      expect(await driver.getText(viewFormUsername), "Username Example");
+
+      // //check that password matches
+      final viewFormPassword = find.byValueKey("view-form-password");
+      expect(await driver.getText(viewFormPassword), "myPASSWORD1");
+
+      // //check that notes matches
+      final viewFormNotes = find.byValueKey("view-form-notes");
+      expect(await driver.getText(viewFormNotes), "Notes Example");
     });
   });
 }
