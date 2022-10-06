@@ -1,5 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:true_vault/utils/database.dart';
+import 'package:true_vault/screens/new_record_form.dart';
+import 'package:true_vault/screens/view_record.dart';
+import 'package:true_vault/utils/form.dart' as formClass;
 
 class ViewDatabaseScreen extends StatefulWidget {
   final Database database;
@@ -16,7 +21,7 @@ String nameShortener(String databaseName) {
       : databaseName;
 }
 
-Widget viewDatabaseTemplate(String database, context, index) {
+Widget viewDatabaseTemplate(formClass.Form form, context, index) {
   return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
       child: Row(
@@ -35,9 +40,14 @@ Widget viewDatabaseTemplate(String database, context, index) {
                             borderRadius: BorderRadius.circular(20.0),
                             side: const BorderSide(
                                 color: Colors.white, width: 2.5)))),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ViewRecordForm(form: form)));
+                },
                 child: Text(
-                  database,
+                  form.formDetails["serviceName"],
                   key: const Key("view-record-button-text"),
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
@@ -142,10 +152,7 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                         itemCount: widget.database.forms.length,
                         itemBuilder: (BuildContext test, int index) {
                           return viewDatabaseTemplate(
-                              widget.database.forms[index]
-                                  .formDetails["serviceName"],
-                              context,
-                              index);
+                              widget.database.forms[index], context, index);
                         },
                       ))),
                     ],
@@ -162,7 +169,16 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                       child: InkWell(
                         key: const Key("new-record-icon-button"),
                         splashColor: Colors.white, // Splash color
-                        onTap: () {},
+                        onTap: () async {
+                          formClass.Form myform = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => NewRecordForm()))
+                              as formClass.Form;
+                          setState(() {
+                            widget.database.addForm(myform);
+                          });
+                        },
                         child: const SizedBox(
                             width: 56,
                             height: 56,

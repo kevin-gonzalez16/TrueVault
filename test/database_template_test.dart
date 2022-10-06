@@ -4,6 +4,7 @@ import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/delete_database_screen.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
+import 'package:true_vault/utils/form.dart' as formClass;
 
 void main() {
   test('Template function creates a button for each database', () {
@@ -16,6 +17,7 @@ void main() {
     databases.add(newDatabase);
     databases.add(newDatabase1);
     databases.add(newDatabase2);
+    formClass.Form myform = formClass.Form(["", "", "", "", "", ""]);
 
     //final chooseButtons = databases.map((database) => chooseDatabaseTemplate(database)).toList();
     final chooseButtons = [];
@@ -28,7 +30,7 @@ void main() {
         .toList();
 
     final recordButtons = databases
-        .map((database) => viewDatabaseTemplate("database", 0, 0))
+        .map((database) => viewDatabaseTemplate(myform, 0, 0))
         .toList();
 
     expect(chooseButtons.length, 3);

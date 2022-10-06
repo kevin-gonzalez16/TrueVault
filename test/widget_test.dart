@@ -18,20 +18,21 @@ import 'package:true_vault/utils/database.dart';
 
 void main() {
   testWidgets("Logout button takes you to the landing screen",
-          (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home:MainScreen()));
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: MainScreen()));
     expect(find.text("Logout"), findsOneWidget);
     await tester.tap(find.byKey(const Key("logoutButton")));
     await tester.pumpAndSettle();
-    expect(find.text("Register"),findsOneWidget);
-    expect(find.text("Login"),findsOneWidget);
+    expect(find.text("Register"), findsOneWidget);
+    expect(find.text("Login"), findsOneWidget);
   });
   testWidgets("Cancel button in Choose Database returns to main screen",
       (WidgetTester tester) async {
-    List <Database>databases = [];
+    List<Database> databases = [];
     Database newDatabase = Database("new database1", "/", "SECURE_PASSWORD123");
     databases.add(newDatabase);
-    await tester.pumpWidget(MaterialApp(home: ChooseDatabase(databases:databases)));
+    await tester
+        .pumpWidget(MaterialApp(home: ChooseDatabase(databases: databases)));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -43,10 +44,11 @@ void main() {
 
   testWidgets("Cancel button in Delete Database returns to main screen",
       (WidgetTester tester) async {
-    List <Database>databases = [];
+    List<Database> databases = [];
     Database newDatabase = Database("new database1", "/", "SECURE_PASSWORD123");
     databases.add(newDatabase);
-    await tester.pumpWidget(MaterialApp(home: DeleteDatabase(databases:databases)));
+    await tester
+        .pumpWidget(MaterialApp(home: DeleteDatabase(databases: databases)));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -98,66 +100,15 @@ void main() {
     expect(find.text("Delete Database"), findsNothing);
   });
 
-  testWidgets("Matching passwords redirects you to the main screen",
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: RegisterScreen()));
-
-    expect(find.text("Create Master Password"), findsOneWidget);
-    await tester.enterText(
-        find.byKey(const Key("register-text-field-1")), "PASSWORD");
-    expect(find.text("Confirm Master Password"), findsOneWidget);
-    await tester.enterText(
-        find.byKey(const Key("register-text-field-2")), "PASSWORD");
-    await tester.tap(find.byType(RaisedButton));
-
-    await tester.pumpAndSettle();
-
-    expect(find.text("New Database"), findsOneWidget);
-    expect(find.text("Open Database"), findsOneWidget);
-    expect(find.text("Delete Database"), findsOneWidget);
-  });
-
-  testWidgets("Non-matching passwords keeps you in the register screen",
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: RegisterScreen()));
-
-    expect(find.text("Create Master Password"), findsOneWidget);
-    await tester.enterText(
-        find.byKey(const Key("register-text-field-1")), "PASSWORD");
-    expect(find.text("Confirm Master Password"), findsOneWidget);
-    await tester.enterText(
-        find.byKey(const Key("register-text-field-2")), "NOT_PASSWORD");
-    await tester.tap(find.byType(RaisedButton));
-
-    await tester.pumpAndSettle();
-
-    expect(find.text("New Database"), findsNothing);
-    expect(find.text("Open Database"), findsNothing);
-    expect(find.text("Delete Database"), findsNothing);
-  });
-
-  testWidgets("Landing screen Register button takes to register screen",
-          (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LandingScreen()));
-    expect(find.text("Register"),findsOneWidget);
-    expect(find.text("Login"),findsOneWidget);
-
-    await tester.tap(find.byKey(const Key("landingScreenRegisterButton")));
-
-    await tester.pumpAndSettle();
-    expect(find.text("Create Master Password"), findsOneWidget);
-    expect(find.text("Confirm Master Password"), findsOneWidget);
-  });
-
   testWidgets("Landing screen Login button takes to Login screen",
-          (WidgetTester tester) async {
-        await tester.pumpWidget(const MaterialApp(home: LandingScreen()));
-        expect(find.text("Register"),findsOneWidget);
-        expect(find.text("Login"),findsOneWidget);
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: LandingScreen()));
+    expect(find.text("Register"), findsOneWidget);
+    expect(find.text("Login"), findsOneWidget);
 
-        await tester.tap(find.byKey(const Key("landingScreenLoginButton")));
+    await tester.tap(find.byKey(const Key("landingScreenLoginButton")));
 
-        await tester.pumpAndSettle();
-        expect(find.text("Master Password"), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.text("Master Password"), findsOneWidget);
   });
 }
