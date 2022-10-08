@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 60.0,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(10.0),
               child: TextField(
                 key: const Key("login-text-field"),
                 controller: passwordController,
