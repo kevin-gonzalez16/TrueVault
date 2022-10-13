@@ -4,15 +4,16 @@ import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
 
 class ChooseDatabase extends StatefulWidget {
+  //all of user's databases
   final List<Database> databases;
   const ChooseDatabase({Key? key, required this.databases}) : super(key: key);
-
   @override
   State<ChooseDatabase> createState() => _ChooseDatabaseState();
 }
 
 //Template to list over the databases
 Widget chooseDatabaseTemplate(Database database, int index, context) {
+
   //Individual Database Buttons
   return Padding(
     padding: const EdgeInsets.fromLTRB(8, 3, 8, 10),
@@ -23,10 +24,8 @@ Widget chooseDatabaseTemplate(Database database, int index, context) {
           onPressed: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => ViewDatabaseScreen(
-                          database: database,
-                        )));
+                MaterialPageRoute(builder: (context) => ViewDatabaseScreen(database: database))
+            );
           },
           style: TextButton.styleFrom(
             backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
@@ -37,7 +36,8 @@ Widget chooseDatabaseTemplate(Database database, int index, context) {
             database.databaseName,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             key: Key("chooseDatabaseButtonText" + index.toString()),
-          )),
+          )
+      ),
     ),
   );
 }

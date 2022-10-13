@@ -4,50 +4,55 @@ import 'package:true_vault/utils/database.dart';
 
 
 class DeleteDatabase extends StatefulWidget {
+  //all of user's databases
   final List<Database> databases;
   const DeleteDatabase({Key? key, required this.databases}) : super(key: key);
-
   @override
   State<DeleteDatabase> createState() => _DeleteDatabaseState();
 }
 
 //Template to list over the database
 Widget deleteDatabaseTemplate(Database database, context,index){
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        ElevatedButton(
-          key: Key("deleteDatabaseElevatedButton"+index.toString()),
-            onPressed: (){
-              Navigator.pop(context,index);
-            },
-            style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.fromLTRB(5,5,5,5),
-                primary: const Color.fromRGBO(255, 117, 117, 1)
-            ), child: const Icon(Icons.delete, color:Colors.white)
-        ),
-        TextButton(
-            key: Key("deleteDatabaseTextButton"+index.toString()),
-            onPressed: (){
-              Navigator.pop(context,index);
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
-              minimumSize: const Size(240,50),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            ),
-            child:  Text(
-              database.databaseName,
-              style: const TextStyle(color: Colors.white, fontSize: 25),
-              key: Key("deleteDatabaseText"+index.toString()),
-            )
-        ),
 
-      ],
-    ),
+  //Individual delete buttons
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(0, 3, 8, 10),
+    child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            key: Key("deleteDatabaseElevatedButton"+index.toString()),
+              onPressed: (){
+                Navigator.pop(context,index);
+              },
+              style: ElevatedButton.styleFrom(
+                  shape: const CircleBorder(),
+                  padding: const EdgeInsets.fromLTRB(5,5,5,5),
+                  primary: const Color.fromRGBO(255, 117, 117, 1)
+              ), child: const Icon(Icons.delete, color:Colors.white)
+          ),
+          Expanded(
+            child: AspectRatio(
+              aspectRatio: 16/4,
+              child: TextButton(
+                  key: Key("deleteDatabaseTextButton"+index.toString()),
+                  onPressed: (){
+                    Navigator.pop(context,index);
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+                  child:  Text(
+                    database.databaseName,
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    key: Key("deleteDatabaseText"+index.toString()),
+                  )
+              ),
+            ),
+          ),
+        ],
+      ),
   );
 }
 
