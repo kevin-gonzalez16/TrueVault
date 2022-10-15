@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d32852c9-ee18-4051-accc-63385da310dc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/passwordGenerator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/passwordGenerator.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/password_generator_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/password_generator_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,26 +59,26 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunManager" selected="Flutter Test.tests in password_generator_test.dart">
+    <configuration name="Generator does not include ignore characters" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Generator does not include ignore characters" />
+      <option name="testFile" value="$PROJECT_DIR$/test/password_generator_test.dart" />
+      <option name="useRegexp" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Generator includes user input" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Generator includes user input" />
+      <option name="testFile" value="$PROJECT_DIR$/test/password_generator_test.dart" />
+      <option name="useRegexp" value="false" />
+      <method v="2" />
+    </configuration>
     <configuration name="Generator makes digit strings" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Generator makes digit strings" />
       <option name="testFile" value="$PROJECT_DIR$/test/password_generator_test.dart" />
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Generator makes space strings" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Generator makes space strings" />
-      <option name="testFile" value="$PROJECT_DIR$/test/password_generator_test.dart" />
-      <option name="useRegexp" value="false" />
-      <method v="2" />
-    </configuration>
     <configuration name="Generator makes special strings" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Generator makes special strings" />
-      <option name="testFile" value="$PROJECT_DIR$/test/password_generator_test.dart" />
-      <option name="useRegexp" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Generator makes upper case strings" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Generator makes upper case strings" />
       <option name="testFile" value="$PROJECT_DIR$/test/password_generator_test.dart" />
       <option name="useRegexp" value="false" />
       <method v="2" />
@@ -89,10 +91,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Flutter Test.tests in password_generator_test.dart" />
+        <item itemvalue="Flutter Test.Generator includes user input" />
+        <item itemvalue="Flutter Test.Generator does not include ignore characters" />
         <item itemvalue="Flutter Test.Generator makes special strings" />
         <item itemvalue="Flutter Test.Generator makes digit strings" />
-        <item itemvalue="Flutter Test.Generator makes space strings" />
-        <item itemvalue="Flutter Test.Generator makes upper case strings" />
       </list>
     </recent_temporary>
   </component>

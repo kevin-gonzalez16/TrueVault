@@ -12,10 +12,10 @@ String generatePassword(int passwordLength, List<String>ignoreChars, List<String
   String passwordString = "";
   int currentChar = 0;
   int charToAdd = 0;
+  Random random = Random();
 
   for(int x = 0; x<passwordLength; x++){
 
-    Random random = Random();
     charToAdd = randomCode(0,composedChars.length-1,random);
 
     if(composedChars[charToAdd] == "upper"){
@@ -55,6 +55,30 @@ String generatePassword(int passwordLength, List<String>ignoreChars, List<String
         passwordLength += 1;
       }
     }
+    //check if it has forbidden character
+    if(passwordString.isNotEmpty && ignoreChars.contains(passwordString[passwordString.length-1])){
+      passwordString = passwordString.substring(0,passwordString.length-1);
+      passwordLength += 1;
+    }
   }
+
+  //Check for include chars
+  if(includeChars.isNotEmpty){
+    //iterate the include list
+    for (var element in includeChars) {
+      //if the string does not contain at least one char from the list
+      if(!passwordString.contains(element)){
+        //get a random index whose char is not also in the list
+        random = Random();
+        int randomIndex = randomCode(0, passwordString.length-1, random);
+        while(includeChars.contains(passwordString[randomIndex])){
+          randomIndex = randomCode(0, passwordString.length-1, random);
+        }
+        //replace that random char with the include one
+        passwordString = passwordString.substring(0,randomIndex) + element + passwordString.substring(randomIndex+1);
+      }
+    }
+  }
+
   return passwordString;
 }
