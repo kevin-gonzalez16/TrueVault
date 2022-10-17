@@ -55,6 +55,8 @@ void main() {
     final registerTextField1 = find.byValueKey('register-text-field-1');
     final registerTextField2 = find.byValueKey('register-text-field-2');
 
+    String generatedPasswordTextString = "";
+
     late FlutterDriver driver;
 
     // Connect to the Flutter driver before running any tests.
@@ -251,13 +253,45 @@ void main() {
       await driver.enterText("Notes Example");
       final newFormSaveButton = find.byValueKey("new-form-save-button");
       await driver.tap(newFormSaveButton);
-      final viewRecordButtonText = find.byValueKey("view-record-button-text");
+      final viewRecordButtonText = find.byValueKey("view-record-button-text0");
       expect(await driver.getText(viewRecordButtonText), "Title1");
     });
+
+    test('Be able to create a generated password in a new record', () async{
+      final newRecordIconButton = find.byValueKey('new-record-icon-button');
+      await driver.tap(newRecordIconButton);
+
+      final titleInputNewForm = find.byValueKey('title-input-new-form');
+      await driver.tap(titleInputNewForm);
+      await driver.enterText("Test");
+
+      final usernameInputNewForm = find.byValueKey('username-input-new-form');
+      await driver.tap(usernameInputNewForm);
+      await driver.enterText("Username Example");
+
+      final notesInputNewForm = find.byValueKey('notes-input-new-form');
+      await driver.tap(notesInputNewForm);
+      await driver.enterText("Notes Example");
+
+      //test the password generation
+      final generatePasswordButton = find.byValueKey("generate-password-button");
+      await driver.tap(generatePasswordButton);
+      final passwordGeneratorEyeButton = find.byValueKey("password-generator-eye-button");
+      await driver.tap(passwordGeneratorEyeButton);
+      final generatedPasswordText = find.byValueKey("generated-password-text");
+      generatedPasswordTextString = await driver.getText(generatedPasswordText);
+      final passwordGeneratorDoneButton = find.byValueKey("password-generator-done-button");
+      driver.tap(passwordGeneratorDoneButton);
+      final newFormSaveButton = find.byValueKey("new-form-save-button");
+      await driver.tap(newFormSaveButton);
+      final viewRecordButtonText = find.byValueKey("view-record-button-text1");
+      expect(await driver.getText(viewRecordButtonText), "Test");
+    });
+
     test('Be able to open a created record form inside a database', () async {
       //open the form
 
-      final viewRecordButton = find.byValueKey("view-record-button");
+      final viewRecordButton = find.byValueKey("view-record-button0");
       await driver.tap(viewRecordButton);
 
       //press eye icon to view password
@@ -275,6 +309,36 @@ void main() {
       // //check that password matches
       final viewFormPassword = find.byValueKey("view-form-password");
       expect(await driver.getText(viewFormPassword), "myPASSWORD1");
+
+      // //check that notes matches
+      final viewFormNotes = find.byValueKey("view-form-notes");
+      expect(await driver.getText(viewFormNotes), "Notes Example");
+
+      final viewRecordBackButton = find.byValueKey("view-record-back-button");
+      await driver.tap(viewRecordBackButton);
+    });
+
+    test('Be able to open a created record form with generated password', () async {
+      //open the form
+
+      final viewRecordButton = find.byValueKey("view-record-button1");
+      await driver.tap(viewRecordButton);
+
+      //press eye icon to view password
+      final eyeIconViewForm = find.byValueKey("eye-icon-button-view-form");
+      await driver.tap(eyeIconViewForm);
+
+      //check that title matches
+      final viewFormTitle = find.byValueKey("view-form-title");
+      expect(await driver.getText(viewFormTitle), "Test");
+
+      // //check that username matches
+      final viewFormUsername = find.byValueKey("view-form-username");
+      expect(await driver.getText(viewFormUsername), "Username Example");
+
+      // //check that password matches
+      final viewFormPassword = find.byValueKey("view-form-password");
+      expect(await driver.getText(viewFormPassword), generatedPasswordTextString);
 
       // //check that notes matches
       final viewFormNotes = find.byValueKey("view-form-notes");

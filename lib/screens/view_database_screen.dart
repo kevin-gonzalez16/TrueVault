@@ -31,7 +31,7 @@ Widget viewDatabaseTemplate(formClass.Form form, context, index) {
               height: 60,
               width: 220,
               child: TextButton(
-                key: const Key("view-record-button"),
+                key: Key("view-record-button"+index.toString()),
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
                         const Color.fromRGBO(23, 42, 58, 1.0)),
@@ -48,7 +48,7 @@ Widget viewDatabaseTemplate(formClass.Form form, context, index) {
                 },
                 child: Text(
                   form.formDetails["serviceName"],
-                  key: const Key("view-record-button-text"),
+                  key: Key("view-record-button-text"+index.toString()),
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
               )),
@@ -58,7 +58,7 @@ Widget viewDatabaseTemplate(formClass.Form form, context, index) {
               child: Material(
                 color: Colors.red, // Button color
                 child: InkWell(
-                  key: const Key("delete-record-icon-button"),
+                  key: Key("delete-record-icon-button"+index.toString()),
                   splashColor: Colors.white, // Splash color
                   onTap: () {},
                   child: const SizedBox(
@@ -173,7 +173,7 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                           formClass.Form myform = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => NewRecordForm()))
+                                      builder: (context) => const NewRecordForm()))
                               as formClass.Form;
                           setState(() {
                             widget.database.addForm(myform);
