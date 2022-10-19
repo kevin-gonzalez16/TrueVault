@@ -5,6 +5,7 @@ import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/screens/create_database_screen.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
+import 'package:true_vault/screens/generate_password_dialog.dart';
 
 class NewRecordForm extends StatefulWidget {
   const NewRecordForm({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class NewRecordForm extends StatefulWidget {
 }
 
 class _NewRecordFormState extends State<NewRecordForm> {
+  TextEditingController passwordController = TextEditingController();
   String title = "";
   String username = "";
   String password = "";
@@ -115,9 +117,11 @@ class _NewRecordFormState extends State<NewRecordForm> {
                         ),
                       ),
                     ),
+
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
                       child: TextField(
+                        controller: passwordController,
                         key: const Key("password-input-new-form"),
                         onChanged: (newText) {
                           password = newText;
@@ -128,20 +132,22 @@ class _NewRecordFormState extends State<NewRecordForm> {
                           fillColor: Color.fromRGBO(23, 42, 58, 1.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 3, color: Colors.white),
+                            BorderSide(width: 3, color: Colors.white),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 3, color: Colors.white),
+                            BorderSide(width: 3, color: Colors.white),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                           hintText: 'Password',
                           hintStyle:
-                              TextStyle(fontSize: 18, color: Colors.white),
+                          TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
-                    ),
+              ),
+
+
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
                       child: TextField(
@@ -176,9 +182,34 @@ class _NewRecordFormState extends State<NewRecordForm> {
             Container(
               height: 25.0,
             ),
+
+
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Container(
+                  width: 40.0,
+                ),
+                ClipOval(
+                  child: Material(
+                    color: Color(0xff189AB4), // Button color
+                    child: InkWell(
+                      key: const Key("generate-password-button"),
+                      splashColor: Colors.white, // Splash color
+                      onTap: () async {
+                        password =
+                          await generatePasswordDialog(context);
+                        passwordController.text = password;
+                      },
+                      child: SizedBox(
+                          width: 56,
+                          height: 56,
+                          child: Icon(Icons.vpn_key_outlined,
+                              size: 35, color: Colors.white)),
+                    ),
+                  ),
+                ),
+                Spacer(),
                 ClipOval(
                   child: Material(
                     color: Color(0xff189AB4), // Button color

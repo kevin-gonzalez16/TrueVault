@@ -28,8 +28,6 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
     var padding = MediaQuery.of(context).viewPadding;
     double phoneHeight = height - padding.top - padding.bottom;
 
-    // double width = MediaQuery.of(context).size.width;
-    //double height = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Color.fromRGBO(23, 42, 58, 1.0),
@@ -42,6 +40,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton(
+                key: const Key("view-record-back-button"),
                 onPressed: () {
                   Navigator.pop(context);
                 },
