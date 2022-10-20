@@ -189,6 +189,9 @@ void main() {
         final deleteDatabaseElevatedButton1 =
             find.byValueKey("deleteDatabaseElevatedButton1");
         await driver.tap(deleteDatabaseElevatedButton1);
+        final deleteConfirmationButton =
+            find.byValueKey("DeleteConfirmationButton");
+        await driver.tap(deleteConfirmationButton);
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseButton);
@@ -207,6 +210,9 @@ void main() {
         final deleteDatabaseElevatedButton0 =
             find.byValueKey("deleteDatabaseElevatedButton0");
         await driver.tap(deleteDatabaseElevatedButton0);
+        final deleteConfirmationButton =
+            find.byValueKey("DeleteConfirmationButton");
+        await driver.tap(deleteConfirmationButton);
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseButton);
@@ -257,7 +263,7 @@ void main() {
       expect(await driver.getText(viewRecordButtonText), "Title1");
     });
 
-    test('Be able to create a generated password in a new record', () async{
+    test('Be able to create a generated password in a new record', () async {
       final newRecordIconButton = find.byValueKey('new-record-icon-button');
       await driver.tap(newRecordIconButton);
 
@@ -274,13 +280,16 @@ void main() {
       await driver.enterText("Notes Example");
 
       //test the password generation
-      final generatePasswordButton = find.byValueKey("generate-password-button");
+      final generatePasswordButton =
+          find.byValueKey("generate-password-button");
       await driver.tap(generatePasswordButton);
-      final passwordGeneratorEyeButton = find.byValueKey("password-generator-eye-button");
+      final passwordGeneratorEyeButton =
+          find.byValueKey("password-generator-eye-button");
       await driver.tap(passwordGeneratorEyeButton);
       final generatedPasswordText = find.byValueKey("generated-password-text");
       generatedPasswordTextString = await driver.getText(generatedPasswordText);
-      final passwordGeneratorDoneButton = find.byValueKey("password-generator-done-button");
+      final passwordGeneratorDoneButton =
+          find.byValueKey("password-generator-done-button");
       driver.tap(passwordGeneratorDoneButton);
       final newFormSaveButton = find.byValueKey("new-form-save-button");
       await driver.tap(newFormSaveButton);
@@ -318,7 +327,8 @@ void main() {
       await driver.tap(viewRecordBackButton);
     });
 
-    test('Be able to open a created record form with generated password', () async {
+    test('Be able to open a created record form with generated password',
+        () async {
       //open the form
 
       final viewRecordButton = find.byValueKey("view-record-button1");
@@ -338,7 +348,8 @@ void main() {
 
       // //check that password matches
       final viewFormPassword = find.byValueKey("view-form-password");
-      expect(await driver.getText(viewFormPassword), generatedPasswordTextString);
+      expect(
+          await driver.getText(viewFormPassword), generatedPasswordTextString);
 
       // //check that notes matches
       final viewFormNotes = find.byValueKey("view-form-notes");
