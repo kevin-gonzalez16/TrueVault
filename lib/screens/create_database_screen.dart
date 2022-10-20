@@ -67,7 +67,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                           children: [
                             //  SizedBox(height: 40),
                             TextField(
-                              key:const Key("newDatabaseNameTextField"),
+                              key: const Key("newDatabaseNameTextField"),
                               controller: databaseNameController,
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
@@ -85,7 +85,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                             ),
                             // SizedBox(height: 50),
                             TextField(
-                              key:const Key("newDatabaseLocationTextField"),
+                              key: const Key("newDatabaseLocationTextField"),
                               controller: databaseLocationController,
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
@@ -106,7 +106,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                 height: 80,
                                 width: 250,
                                 child: TextButton(
-                                  key:const Key("createDatabaseButton"),
+                                  key: const Key("createDatabaseButton"),
                                   style: ButtonStyle(
                                       backgroundColor: MaterialStateProperty.all(
                                           Color.fromARGB(200, 24, 154, 180)),
@@ -120,20 +120,45 @@ class _CreateDatabase extends State<CreateDatabase> {
                                                       200, 24, 154, 180))))),
                                   onPressed: () {
                                     setState(() {
-                                      if(databaseLocationController.text == "" || databaseNameController.text == ""){
-                                        //TODO
-                                        //Do not allow empty fields
+                                      var locationCheck =
+                                          databaseLocationController.text
+                                              .replaceAll(' ', '');
+                                      var nameCheck = databaseNameController
+                                          .text
+                                          .replaceAll(' ', '');
+
+                                      var errors = "";
+                                      if (nameCheck.isEmpty) {
+                                        errors += "Name cannot be empty\n";
                                       }
-                                      else{
-                                        Database databaseObj = Database(
-                                        databaseNameController.text,
-                                            databaseLocationController.text,
-                                            "PASSWORD"
+                                      if (locationCheck.isEmpty) {
+                                        errors += "Location cannot be empty\n ";
+                                      }
+                                      if (nameCheck.isEmpty ||
+                                          locationCheck.isEmpty) {
+                                        showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                            content: Text(errors),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'OK'),
+                                                child: const Text('OK'),
+                                              ),
+                                            ],
+                                          ),
                                         );
+                                      } else {
+                                        Database databaseObj = Database(
+                                            databaseNameController.text,
+                                            databaseLocationController.text,
+                                            "PASSWORD");
                                         //TODO
                                         //Redirect the user to the opened database view
-                                        Navigator.pop(context,databaseObj);
-
+                                        //Navigator.pop(context, databaseObj);
+                                        Navigator.pop(context, databaseObj);
                                       }
                                     });
                                   },
