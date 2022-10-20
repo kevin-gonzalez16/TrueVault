@@ -5,6 +5,8 @@ import 'package:true_vault/utils/database.dart';
 import 'package:flutter/services.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 
+import 'package:true_vault/screens/edit_record.dart';
+
 class ViewRecordForm extends StatefulWidget {
   final formClass.Form form;
   const ViewRecordForm({Key? key, required this.form}) : super(key: key);
@@ -19,6 +21,7 @@ String nameShortener(String formName) {
 class _ViewRecordFormState extends State<ViewRecordForm> {
   String password = "Secret";
   bool obscureText = true;
+
   @override
   Widget build(
     BuildContext context,
@@ -275,8 +278,17 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                   child: Material(
                     color: Color(0xff189AB4), // Button color
                     child: InkWell(
+                      key: const Key("edit-form"),
                       splashColor: Colors.white, // Splash color
-                      onTap: () {},
+                      onTap: () async {
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        EditRecordForm(form: widget.form)))
+                            .then((value) => setState(() {}));
+                        ;
+                      },
                       child: SizedBox(
                           width: 56,
                           height: 56,

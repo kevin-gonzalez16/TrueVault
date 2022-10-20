@@ -257,7 +257,7 @@ void main() {
       expect(await driver.getText(viewRecordButtonText), "Title1");
     });
 
-    test('Be able to create a generated password in a new record', () async{
+    test('Be able to create a generated password in a new record', () async {
       final newRecordIconButton = find.byValueKey('new-record-icon-button');
       await driver.tap(newRecordIconButton);
 
@@ -274,13 +274,16 @@ void main() {
       await driver.enterText("Notes Example");
 
       //test the password generation
-      final generatePasswordButton = find.byValueKey("generate-password-button");
+      final generatePasswordButton =
+          find.byValueKey("generate-password-button");
       await driver.tap(generatePasswordButton);
-      final passwordGeneratorEyeButton = find.byValueKey("password-generator-eye-button");
+      final passwordGeneratorEyeButton =
+          find.byValueKey("password-generator-eye-button");
       await driver.tap(passwordGeneratorEyeButton);
       final generatedPasswordText = find.byValueKey("generated-password-text");
       generatedPasswordTextString = await driver.getText(generatedPasswordText);
-      final passwordGeneratorDoneButton = find.byValueKey("password-generator-done-button");
+      final passwordGeneratorDoneButton =
+          find.byValueKey("password-generator-done-button");
       driver.tap(passwordGeneratorDoneButton);
       final newFormSaveButton = find.byValueKey("new-form-save-button");
       await driver.tap(newFormSaveButton);
@@ -318,7 +321,8 @@ void main() {
       await driver.tap(viewRecordBackButton);
     });
 
-    test('Be able to open a created record form with generated password', () async {
+    test('Be able to open a created record form with generated password',
+        () async {
       //open the form
 
       final viewRecordButton = find.byValueKey("view-record-button1");
@@ -338,11 +342,57 @@ void main() {
 
       // //check that password matches
       final viewFormPassword = find.byValueKey("view-form-password");
-      expect(await driver.getText(viewFormPassword), generatedPasswordTextString);
+      expect(
+          await driver.getText(viewFormPassword), generatedPasswordTextString);
 
       // //check that notes matches
       final viewFormNotes = find.byValueKey("view-form-notes");
       expect(await driver.getText(viewFormNotes), "Notes Example");
+    });
+
+    test('Be able to edit a created record', () async {
+      //form is already opened
+
+      //press edit button
+      final editFormButton = find.byValueKey("edit-form");
+      await driver.tap(editFormButton);
+      // final eye = find.byValueKey("eye-icon-button-view-form");
+      // await driver.tap(eye);
+
+      //press title input box and add "Edited"
+      final editTitleField = find.byValueKey("edit-title-text-field");
+      await driver.tap(editTitleField);
+      await driver.enterText("Edited");
+
+      //press username input box and add "Edited"
+      final editUsernameField = find.byValueKey("edit-username-text-field");
+      await driver.tap(editUsernameField);
+      await driver.enterText("Edited Username");
+
+      //press password, delete input box and add "EditedPass"
+      final editPasswordField = find.byValueKey("edit-password-text-field");
+      await driver.tap(editPasswordField);
+      await driver.enterText("Edited Password");
+      //press notes input box and add "Edited"
+      final editNotesField = find.byValueKey("edit-notes-text-field");
+      await driver.tap(editNotesField);
+      await driver.enterText("Edited Notes");
+
+      //Press save button
+      final saveEditsButton = find.byValueKey("save-edits-button");
+      await driver.tap(saveEditsButton);
+
+      //Expect changed title, username, password, and notes when returned to view_record_screen
+
+      final editedTitle = find.byValueKey("view-form-title");
+      final editedUsername = find.byValueKey("view-form-username");
+      final editedPassword = find.byValueKey("view-form-password");
+      final editedNotes = find.byValueKey("view-form-notes");
+
+      expect(await driver.getText(editedTitle), "Edited");
+      expect(await driver.getText(editedUsername), "Edited Username");
+      expect(await driver.getText(editedPassword), "Edited Password");
+      expect(await driver.getText(editedNotes), "Edited Notes");
     });
   });
 }
