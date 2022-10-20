@@ -189,6 +189,9 @@ void main() {
         final deleteDatabaseElevatedButton1 =
             find.byValueKey("deleteDatabaseElevatedButton1");
         await driver.tap(deleteDatabaseElevatedButton1);
+        final deleteConfirmationButton =
+            find.byValueKey("DeleteConfirmationButton");
+        await driver.tap(deleteConfirmationButton);
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseButton);
@@ -207,6 +210,9 @@ void main() {
         final deleteDatabaseElevatedButton0 =
             find.byValueKey("deleteDatabaseElevatedButton0");
         await driver.tap(deleteDatabaseElevatedButton0);
+        final deleteConfirmationButton =
+            find.byValueKey("DeleteConfirmationButton");
+        await driver.tap(deleteConfirmationButton);
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseButton);
