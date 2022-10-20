@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/screens/new_record_form.dart';
 import 'package:true_vault/screens/view_record.dart';
@@ -21,7 +22,8 @@ String nameShortener(String databaseName) {
       : databaseName;
 }
 
-Widget viewDatabaseTemplate(formClass.Form form, context, index) {
+Widget viewDatabaseTemplate(
+    formClass.Form form, context, index, Database database) {
   return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
       child: Row(
@@ -31,7 +33,7 @@ Widget viewDatabaseTemplate(formClass.Form form, context, index) {
               height: 60,
               width: 220,
               child: TextButton(
-                key: Key("view-record-button"+index.toString()),
+                key: Key("view-record-button" + index.toString()),
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
                         const Color.fromRGBO(23, 42, 58, 1.0)),
@@ -48,7 +50,7 @@ Widget viewDatabaseTemplate(formClass.Form form, context, index) {
                 },
                 child: Text(
                   form.formDetails["serviceName"],
-                  key: Key("view-record-button-text"+index.toString()),
+                  key: Key("view-record-button-text" + index.toString()),
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
               )),
@@ -58,9 +60,16 @@ Widget viewDatabaseTemplate(formClass.Form form, context, index) {
               child: Material(
                 color: Colors.red, // Button color
                 child: InkWell(
-                  key: Key("delete-record-icon-button"+index.toString()),
+                  key: Key("delete-record-icon-button" + index.toString()),
                   splashColor: Colors.white, // Splash color
-                  onTap: () {},
+                  onTap: () {
+                    database.removeForm(index);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ViewDatabaseScreen(database: database)));
+                  },
                   child: const SizedBox(
                       width: 50, height: 50, child: Icon(Icons.delete)),
                 ),
@@ -88,7 +97,12 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                   TextButton(
                     key: const Key("chooseRecordBackButton"),
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChooseDatabase(
+                                    databases: [],
+                                  )));
                     },
                     style: TextButton.styleFrom(
                       primary: const Color.fromRGBO(165, 165, 165, 1),
@@ -152,7 +166,10 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                         itemCount: widget.database.forms.length,
                         itemBuilder: (BuildContext test, int index) {
                           return viewDatabaseTemplate(
-                              widget.database.forms[index], context, index);
+                              widget.database.forms[index],
+                              context,
+                              index,
+                              widget.database);
                         },
                       ))),
                     ],
@@ -171,10 +188,10 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                         splashColor: Colors.white, // Splash color
                         onTap: () async {
                           formClass.Form myform = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const NewRecordForm()))
-                              as formClass.Form;
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const NewRecordForm())) as formClass.Form;
                           setState(() {
                             widget.database.addForm(myform);
                           });

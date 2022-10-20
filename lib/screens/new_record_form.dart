@@ -211,9 +211,47 @@ class _NewRecordFormState extends State<NewRecordForm> {
                       key: const Key("new-form-save-button"),
                       splashColor: Colors.white, // Splash color
                       onTap: () async {
-                        formClass.Form newForm = formClass.Form(
-                            [title, username, password, notes, "", ""]);
-                        Navigator.pop(context, newForm);
+                        var titleCheck = title.replaceAll(' ', '');
+                        var usernameCheck = username.replaceAll(' ', '');
+                        var passwordCheck = password.replaceAll(' ', '');
+                        const emptyTitle = 'Title cannot be empty\n ';
+                        const emptyUsername = 'Username cannot be empty\n ';
+                        const emptyPassword = 'Password cannot be empty\n ';
+                        var errors = "";
+                        if (titleCheck.isEmpty) {
+                          errors += emptyTitle;
+                        }
+                        if (usernameCheck.isEmpty) {
+                          errors += emptyUsername;
+                        }
+                        if (passwordCheck.isEmpty) {
+                          errors += emptyPassword;
+                        }
+
+                        if (titleCheck.isEmpty ||
+                            usernameCheck.isEmpty ||
+                            passwordCheck.isEmpty) {
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              content: Text(errors),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+
+                        if (titleCheck.isNotEmpty &&
+                            usernameCheck.isNotEmpty &&
+                            passwordCheck.isNotEmpty) {
+                          formClass.Form newForm = formClass.Form(
+                              [title, username, password, notes, "", ""]);
+                          Navigator.pop(context, newForm);
+                        }
                       },
                       child: SizedBox(
                           width: 56,

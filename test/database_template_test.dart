@@ -30,7 +30,7 @@ void main() {
         .toList();
 
     final recordButtons = databases
-        .map((database) => viewDatabaseTemplate(myform, 0, 0))
+        .map((database) => viewDatabaseTemplate(myform, 0, 0, database))
         .toList();
 
     expect(chooseButtons.length, 3);
