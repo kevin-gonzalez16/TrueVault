@@ -1,26 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/main_screen.dart';
-import 'package:true_vault/utils/database.dart';
-import 'package:true_vault/screens/create_database_screen.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
+import 'package:true_vault/utils/database.dart';
+import 'package:flutter/services.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
-import 'package:true_vault/screens/generate_password_dialog.dart';
 
-class NewRecordForm extends StatefulWidget {
-  const NewRecordForm({Key? key}) : super(key: key);
-
+class EditRecordForm extends StatefulWidget {
+  final formClass.Form form;
+  const EditRecordForm({Key? key, required this.form}) : super(key: key);
   @override
-  State<NewRecordForm> createState() => _NewRecordFormState();
+  _EditRecordFormState createState() => _EditRecordFormState();
 }
 
-class _NewRecordFormState extends State<NewRecordForm> {
-  TextEditingController passwordController = TextEditingController();
+String nameShortener(String formName) {
+  return formName.length > 9 ? formName.substring(0, 9) + "..." : formName;
+}
+
+class _EditRecordFormState extends State<EditRecordForm> {
   String title = "";
   String username = "";
   String password = "";
   String notes = "";
-
+  bool editedTitle = false;
+  bool editedUsername = false;
+  bool editedPassword = false;
+  bool editedNotes = false;
   @override
   Widget build(BuildContext context) {
     double phoneWidth = MediaQuery.of(context).size.width;
@@ -63,10 +68,12 @@ class _NewRecordFormState extends State<NewRecordForm> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 42, 20, 20),
-                      child: TextField(
-                        key: const Key("title-input-new-form"),
+                      child: TextFormField(
+                        key: const Key("edit-title-text-field"),
+                        initialValue: widget.form.formDetails["serviceName"],
                         onChanged: (newText) {
                           setState(() {
+                            editedTitle = true;
                             title = newText;
                           });
                         },
@@ -84,17 +91,16 @@ class _NewRecordFormState extends State<NewRecordForm> {
                                 BorderSide(width: 3, color: Colors.white),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
-                          hintText: "Title",
-                          hintStyle:
-                              TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
-                      child: TextField(
-                        key: const Key("username-input-new-form"),
+                      child: TextFormField(
+                        key: const Key("edit-username-text-field"),
+                        initialValue: widget.form.formDetails["username"],
                         onChanged: (newText) {
+                          editedUsername = true;
                           username = newText;
                         },
                         style: TextStyle(color: Colors.white),
@@ -111,18 +117,16 @@ class _NewRecordFormState extends State<NewRecordForm> {
                                 BorderSide(width: 3, color: Colors.white),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
-                          hintText: "Username",
-                          hintStyle:
-                              TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
-                      child: TextField(
-                        controller: passwordController,
-                        key: const Key("password-input-new-form"),
+                      child: TextFormField(
+                        key: const Key("edit-password-text-field"),
+                        initialValue: widget.form.formDetails["password"],
                         onChanged: (newText) {
+                          editedPassword = true;
                           password = newText;
                         },
                         style: TextStyle(color: Colors.white),
@@ -139,17 +143,16 @@ class _NewRecordFormState extends State<NewRecordForm> {
                                 BorderSide(width: 3, color: Colors.white),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
-                          hintText: 'Password',
-                          hintStyle:
-                              TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
-                      child: TextField(
-                        key: const Key("notes-input-new-form"),
+                      child: TextFormField(
+                        key: const Key("edit-notes-text-field"),
+                        initialValue: widget.form.formDetails["notes"],
                         onChanged: (newText) {
+                          editedNotes = true;
                           notes = newText;
                         },
                         style: TextStyle(color: Colors.white),
@@ -168,9 +171,6 @@ class _NewRecordFormState extends State<NewRecordForm> {
                                 BorderSide(width: 3, color: Colors.white),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
-                          hintText: 'Notes',
-                          hintStyle:
-                              TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -185,35 +185,29 @@ class _NewRecordFormState extends State<NewRecordForm> {
                 Container(
                   width: 40.0,
                 ),
-                ClipOval(
-                  child: Material(
-                    color: Color(0xff189AB4), // Button color
-                    child: InkWell(
-                      key: const Key("generate-password-button"),
-                      splashColor: Colors.white, // Splash color
-                      onTap: () async {
-                        password = await generatePasswordDialog(context);
-                        passwordController.text = password;
-                      },
-                      child: SizedBox(
-                          width: 56,
-                          height: 56,
-                          child: Icon(Icons.vpn_key_outlined,
-                              size: 35, color: Colors.white)),
-                    ),
-                  ),
-                ),
                 Spacer(),
                 ClipOval(
                   child: Material(
                     color: Color(0xff189AB4), // Button color
                     child: InkWell(
-                      key: const Key("new-form-save-button"),
+                      key: const Key("save-edits-button"),
                       splashColor: Colors.white, // Splash color
                       onTap: () async {
-                        formClass.Form newForm = formClass.Form(
-                            [title, username, password, notes, "", ""]);
-                        Navigator.pop(context, newForm);
+                        if (editedTitle) {
+                          widget.form.editForm("serviceName", title);
+                        }
+
+                        if (editedUsername) {
+                          widget.form.editForm("username", username);
+                        }
+                        if (editedPassword) {
+                          widget.form.editForm("password", password);
+                        }
+                        if (editedNotes) {
+                          widget.form.editForm("notes", notes);
+                        }
+
+                        Navigator.of(context, rootNavigator: true).pop();
                       },
                       child: SizedBox(
                           width: 56,
