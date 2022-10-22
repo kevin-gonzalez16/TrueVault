@@ -15,6 +15,7 @@ import 'package:true_vault/screens/login_screen.dart';
 import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/screens/register_screen.dart';
 import 'package:true_vault/utils/database.dart';
+import 'package:true_vault/utils/encryptor.dart';
 
 void main() {
   testWidgets("Logout button takes you to the landing screen",
@@ -29,8 +30,11 @@ void main() {
   testWidgets("Cancel button in Choose Database returns to main screen",
       (WidgetTester tester) async {
     List<Database> databases = [];
-    Database newDatabase = Database("new database1", "/", "SECURE_PASSWORD123");
-    databases.add(newDatabase);
+    Database newDatabase = Database(
+      Encryptor.plainTextToCipher("new database2", "PASSWORD"),
+      Encryptor.plainTextToCipher("/", "PASSWORD"),
+      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
+    );        databases.add(newDatabase);
     await tester
         .pumpWidget(MaterialApp(home: ChooseDatabase(databases: databases)));
     expect(find.text("cancel"), findsOneWidget);
@@ -45,7 +49,11 @@ void main() {
   testWidgets("Cancel button in Delete Database returns to main screen",
       (WidgetTester tester) async {
     List<Database> databases = [];
-    Database newDatabase = Database("new database1", "/", "SECURE_PASSWORD123");
+    Database newDatabase = Database(
+      Encryptor.plainTextToCipher("new database2", "PASSWORD"),
+      Encryptor.plainTextToCipher("/", "PASSWORD"),
+      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
+    );
     databases.add(newDatabase);
     await tester
         .pumpWidget(MaterialApp(home: DeleteDatabase(databases: databases)));

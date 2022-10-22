@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
+import 'package:true_vault/utils/encryptor.dart';
 
 class ChooseDatabase extends StatefulWidget {
   //all of user's databases
@@ -33,7 +34,7 @@ Widget chooseDatabaseTemplate(Database database, int index, context) {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
           child: Text(
-            database.databaseName,
+            Encryptor.cipherToPlainText(database.databaseName, "PASSWORD"),
             style: const TextStyle(color: Colors.white, fontSize: 20),
             key: Key("chooseDatabaseButtonText" + index.toString()),
           )

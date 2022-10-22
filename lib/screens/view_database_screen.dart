@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/screens/new_record_form.dart';
 import 'package:true_vault/screens/view_record.dart';
+import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 
 class ViewDatabaseScreen extends StatefulWidget {
@@ -33,6 +35,7 @@ Widget viewDatabaseTemplate(
               height: 60,
               width: 220,
               child: TextButton(
+
                 key: Key("view-record-button" + index.toString()),
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
@@ -42,14 +45,15 @@ Widget viewDatabaseTemplate(
                             borderRadius: BorderRadius.circular(20.0),
                             side: const BorderSide(
                                 color: Colors.white, width: 2.5)))),
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async{
+                  form = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ViewRecordForm(form: form)));
+                          builder: (context) => ViewRecordForm(form: form))
+                  ) as formClass.Form;
                 },
                 child: Text(
-                  form.formDetails["serviceName"],
+                  Encryptor.cipherToPlainText(form.formDetails["serviceName"], "PASSWORD"),
                   key: Key("view-record-button-text" + index.toString()),
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
@@ -137,9 +141,9 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                             padding: const EdgeInsets.all(15.0),
                             child: Text(
                               nameShortener(
-                                widget.database.databaseName,
+                                Encryptor.cipherToPlainText(widget.database.databaseName, "PASSWORD")
                               ),
-                              key: Key(widget.database.databaseName + "_text"),
+                              key: Key(Encryptor.cipherToPlainText(widget.database.databaseName, "PASSWORD") + "_text"),
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 25),
                             ),

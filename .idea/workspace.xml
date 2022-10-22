@@ -5,9 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d32852c9-ee18-4051-accc-63385da310dc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/choose_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/choose_database_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/create_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/create_database_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/delete_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/delete_database_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/edit_record.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/edit_record.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/new_record_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/new_record_form.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/view_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/view_database_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/view_record.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/view_record.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/database.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/encryptor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/encryptor.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/form.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/database_class_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/database_class_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/database_template_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/database_template_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/form_class_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/form_class_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,26 +70,27 @@
     <property name="settings.editor.selected.configurable" value="emulator" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in encryptor_class_test.dart">
-    <configuration name="encryptor.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/lib/utils/encryptor.dart" />
-      <option name="workingDirectory" value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Encryptor decrypts cipher text" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Encryptor decrypts cipher text" />
-      <option name="testFile" value="$PROJECT_DIR$/test/encryptor_class_test.dart" />
+  <component name="RunManager" selected="Flutter Test.tests in form_class_test.dart">
+    <configuration name="Form can be edited correctly" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Form can be edited correctly" />
+      <option name="testFile" value="$PROJECT_DIR$/test/form_class_test.dart" />
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Encryptor encrypts cipher text" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Encryptor encrypts cipher text" />
-      <option name="testFile" value="$PROJECT_DIR$/test/encryptor_class_test.dart" />
+    <configuration name="Form should be created correctly" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Form should be created correctly" />
+      <option name="testFile" value="$PROJECT_DIR$/test/form_class_test.dart" />
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in encryptor_class_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/encryptor_class_test.dart" />
+    <configuration name="The correct last edit date is returned in the correct format" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="The correct last edit date is returned in the correct format" />
+      <option name="testFile" value="$PROJECT_DIR$/test/form_class_test.dart" />
+      <option name="useRegexp" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tests in form_class_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/form_class_test.dart" />
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
@@ -88,11 +101,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter Test.tests in encryptor_class_test.dart" />
-        <item itemvalue="Flutter Test.Encryptor decrypts cipher text" />
-        <item itemvalue="Flutter Test.Encryptor encrypts cipher text" />
-        <item itemvalue="Dart Command Line App.encryptor.dart" />
+        <item itemvalue="Flutter Test.tests in form_class_test.dart" />
         <item itemvalue="Flutter Test.tests in widget_test.dart" />
+        <item itemvalue="Flutter Test.The correct last edit date is returned in the correct format" />
+        <item itemvalue="Flutter Test.Form can be edited correctly" />
+        <item itemvalue="Flutter Test.Form should be created correctly" />
       </list>
     </recent_temporary>
   </component>

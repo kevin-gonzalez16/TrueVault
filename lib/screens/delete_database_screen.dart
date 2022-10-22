@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/screens/delete_confirmation_form.dart';
+import 'package:true_vault/utils/encryptor.dart';
 
 class DeleteDatabase extends StatefulWidget {
   //all of user's databases
@@ -51,7 +52,7 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
                       borderRadius: BorderRadius.circular(10)),
                 ),
                 child: Text(
-                  database.databaseName,
+                  Encryptor.cipherToPlainText(database.databaseName, "PASSWORD"),
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                   key: Key("deleteDatabaseText" + index.toString()),
                 )),

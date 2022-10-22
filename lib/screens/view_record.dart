@@ -3,6 +3,7 @@ import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:flutter/services.dart';
+import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 
 import 'package:true_vault/screens/edit_record.dart';
@@ -45,7 +46,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
               child: TextButton(
                 key: const Key("view-record-back-button"),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context,widget.form);
                 },
                 style: TextButton.styleFrom(
                   primary: const Color.fromRGBO(165, 165, 165, 1),
@@ -79,7 +80,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                           width: 20.0,
                         ),
                         Text(
-                          nameShortener(widget.form.formDetails["serviceName"]),
+                          nameShortener(Encryptor.cipherToPlainText(widget.form.formDetails["serviceName"], "PASSWORD")
+                          ),
                           key: const Key("view-form-title"),
                           style: TextStyle(
                               fontSize: 30,
@@ -125,7 +127,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                widget.form.formDetails["username"],
+                                Encryptor.cipherToPlainText(widget.form.formDetails["username"], "PASSWORD"),
                                 key: const Key("view-form-username"),
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
@@ -137,7 +139,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               color: Colors.white),
                           onPressed: () async {
                             Clipboard.setData(new ClipboardData(
-                                    text: widget.form.formDetails["username"]))
+                                    text: Encryptor.cipherToPlainText(widget.form.formDetails["username"], "PASSWORD")))
                                 .then((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -176,7 +178,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               child: Text(
                                 obscureText == true
                                     ? '${password.replaceAll(RegExp(r"."), "*")}'
-                                    : widget.form.formDetails["password"],
+                                    : Encryptor.cipherToPlainText(widget.form.formDetails["password"], "PASSWORD"),
                                 key: const Key("view-form-password"),
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
@@ -203,7 +205,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                             onPressed: () async {
                               Clipboard.setData(new ClipboardData(
                                       text:
-                                          widget.form.formDetails["password"]))
+                                      Encryptor.cipherToPlainText(widget.form.formDetails["password"], "PASSWORD")))
                                   .then((_) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -242,7 +244,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  widget.form.formDetails["notes"],
+                                  Encryptor.cipherToPlainText(widget.form.formDetails["notes"], "PASSWORD"),
                                   key: const Key("view-form-notes"),
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white),
@@ -255,7 +257,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               color: Colors.white),
                           onPressed: () async {
                             Clipboard.setData(new ClipboardData(
-                              text: widget.form.formDetails["notes"],
+                              text: Encryptor.cipherToPlainText(widget.form.formDetails["notes"], "PASSWORD"),
                             )).then((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

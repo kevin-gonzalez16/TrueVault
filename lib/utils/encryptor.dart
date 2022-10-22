@@ -1,7 +1,7 @@
 import 'package:encrypt/encrypt.dart';
 
 class Encryptor {
-  static plainTextToCipher(plaintext, key) {
+  static plainTextToCipher(String plaintext, String key) {
     key = padKey(key);
     final securedKey = Key.fromUtf8(key);
     final iv = IV.fromLength(16);
@@ -11,7 +11,7 @@ class Encryptor {
     return encrypted;
   }
 
-  static cipherToPlainText(cipher, key) {
+  static cipherToPlainText(Encrypted cipher, key) {
     key = padKey(key);
     final securedKey = Key.fromUtf8(key);
     final encrypt = Encrypter(AES(securedKey));

@@ -4,6 +4,7 @@ import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/screens/create_database_screen.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
+import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 import 'package:true_vault/screens/generate_password_dialog.dart';
 
@@ -248,8 +249,14 @@ class _NewRecordFormState extends State<NewRecordForm> {
                         if (titleCheck.isNotEmpty &&
                             usernameCheck.isNotEmpty &&
                             passwordCheck.isNotEmpty) {
-                          formClass.Form newForm = formClass.Form(
-                              [title, username, password, notes, "", ""]);
+                          formClass.Form newForm = formClass.Form([
+                            Encryptor.plainTextToCipher(title, "PASSWORD"),
+                            Encryptor.plainTextToCipher(username, "PASSWORD"),
+                            Encryptor.plainTextToCipher(password, "PASSWORD"),
+                            Encryptor.plainTextToCipher(notes, "PASSWORD"),
+                            Encryptor.plainTextToCipher(" ", "PASSWORD"),
+                            Encryptor.plainTextToCipher(" ", "PASSWORD"),
+                          ]);
                           Navigator.pop(context, newForm);
                         }
                       },

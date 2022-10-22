@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/utils/database.dart';
+import 'package:true_vault/utils/encryptor.dart';
 
 class CreateDatabase extends StatefulWidget {
   const CreateDatabase({Key? key}) : super(key: key);
@@ -65,7 +66,6 @@ class _CreateDatabase extends State<CreateDatabase> {
                           alignment: WrapAlignment.center,
                           runSpacing: 100,
                           children: [
-                            //  SizedBox(height: 40),
                             TextField(
                               key: const Key("newDatabaseNameTextField"),
                               controller: databaseNameController,
@@ -83,7 +83,6 @@ class _CreateDatabase extends State<CreateDatabase> {
                                     fontSize: 18, color: Color(0xff989898)),
                               ),
                             ),
-                            // SizedBox(height: 50),
                             TextField(
                               key: const Key("newDatabaseLocationTextField"),
                               controller: databaseLocationController,
@@ -152,9 +151,10 @@ class _CreateDatabase extends State<CreateDatabase> {
                                         );
                                       } else {
                                         Database databaseObj = Database(
-                                            databaseNameController.text,
-                                            databaseLocationController.text,
-                                            "PASSWORD");
+                                          Encryptor.plainTextToCipher(databaseNameController.text, "PASSWORD"),
+                                          Encryptor.plainTextToCipher(databaseLocationController.text, "PASSWORD"),
+                                          Encryptor.plainTextToCipher("PASSWORD", "PASSWORD")
+                                        );
                                         //TODO
                                         //Redirect the user to the opened database view
                                         //Navigator.pop(context, databaseObj);
