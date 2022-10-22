@@ -4,6 +4,7 @@ import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:flutter/services.dart';
+import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 
 class EditRecordForm extends StatefulWidget {
@@ -70,7 +71,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       padding: const EdgeInsets.fromLTRB(20, 42, 20, 20),
                       child: TextFormField(
                         key: const Key("edit-title-text-field"),
-                        initialValue: widget.form.formDetails["serviceName"],
+                        initialValue:Encryptor.cipherToPlainText(widget.form.formDetails["serviceName"], "PASSWORD"),
                         onChanged: (newText) {
                           setState(() {
                             editedTitle = true;
@@ -98,7 +99,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
                       child: TextFormField(
                         key: const Key("edit-username-text-field"),
-                        initialValue: widget.form.formDetails["username"],
+                        initialValue: Encryptor.cipherToPlainText(widget.form.formDetails["username"], "PASSWORD"),
                         onChanged: (newText) {
                           editedUsername = true;
                           username = newText;
@@ -124,7 +125,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
                       child: TextFormField(
                         key: const Key("edit-password-text-field"),
-                        initialValue: widget.form.formDetails["password"],
+                        initialValue: Encryptor.cipherToPlainText(widget.form.formDetails["password"], "PASSWORD"),
                         onChanged: (newText) {
                           editedPassword = true;
                           password = newText;
@@ -150,7 +151,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
                       child: TextFormField(
                         key: const Key("edit-notes-text-field"),
-                        initialValue: widget.form.formDetails["notes"],
+                        initialValue: Encryptor.cipherToPlainText(widget.form.formDetails["notes"], "PASSWORD"),
                         onChanged: (newText) {
                           editedNotes = true;
                           notes = newText;
@@ -194,17 +195,17 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       splashColor: Colors.white, // Splash color
                       onTap: () async {
                         if (editedTitle) {
-                          widget.form.editForm("serviceName", title);
+                          widget.form.editForm("serviceName", Encryptor.plainTextToCipher(title, "PASSWORD"));
                         }
 
                         if (editedUsername) {
-                          widget.form.editForm("username", username);
+                          widget.form.editForm("username", Encryptor.plainTextToCipher(username, "PASSWORD"));
                         }
                         if (editedPassword) {
-                          widget.form.editForm("password", password);
+                          widget.form.editForm("password", Encryptor.plainTextToCipher(password, "PASSWORD"));
                         }
                         if (editedNotes) {
-                          widget.form.editForm("notes", notes);
+                          widget.form.editForm("notes", Encryptor.plainTextToCipher(notes, "PASSWORD"));
                         }
 
                         Navigator.of(context, rootNavigator: true).pop();

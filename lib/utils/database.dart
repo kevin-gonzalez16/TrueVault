@@ -1,11 +1,12 @@
 import 'package:true_vault/utils/form.dart';
+import 'package:encrypt/encrypt.dart';
 
 class Database{
 
   //class variables
-  String databaseName = "";
-  String databaseLocation = "";
-  String databaseMasterPassword = "";
+  Encrypted databaseName;
+  Encrypted databaseLocation;
+  Encrypted databaseMasterPassword;
   List <Form> forms = [];
 
   //constructor
@@ -14,8 +15,8 @@ class Database{
   //adders and setters
   void addForm(Form newForm){forms.add(newForm);}
   void removeForm(int index){forms.removeAt(index);}
-  void renameDB(String newName){databaseName = newName;}
-  void moveDB(String newLocation){databaseLocation = newLocation;}
-  void changeMasterPassword(String newMasterPassword){databaseMasterPassword = newMasterPassword;}
+  void renameDB(Encrypted newName){databaseName = newName;}
+  void moveDB(Encrypted newLocation){databaseLocation = newLocation;}
+  void changeMasterPassword(Encrypted newMasterPassword){databaseMasterPassword = newMasterPassword;}
 
 }
