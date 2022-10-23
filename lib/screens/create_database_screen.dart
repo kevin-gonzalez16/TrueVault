@@ -17,8 +17,8 @@ class _CreateDatabase extends State<CreateDatabase> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    double phoneWidth = MediaQuery.of(context).size.width; //411
+    double phoneHeight = MediaQuery.of(context).size.height; //683
     return Scaffold(
       resizeToAvoidBottomInset: false, // set it to false
 
@@ -28,8 +28,8 @@ class _CreateDatabase extends State<CreateDatabase> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
-              height: height - 75,
-              width: width - 75,
+              height: phoneHeight/1.12,
+              width: phoneWidth/1.22,
               child: Container(
                   decoration: const BoxDecoration(
                     color: Color.fromRGBO(239, 239, 239, 1.0),
@@ -100,10 +100,9 @@ class _CreateDatabase extends State<CreateDatabase> {
                                     fontSize: 18, color: Color(0xff989898)),
                               ),
                             ),
-                            // SizedBox(height: 180), // give it width
                             SizedBox(
-                                height: 80,
-                                width: 250,
+                                height: phoneHeight/8.537,
+                                width: phoneWidth/1.644,
                                 child: TextButton(
                                   key: const Key("createDatabaseButton"),
                                   style: ButtonStyle(

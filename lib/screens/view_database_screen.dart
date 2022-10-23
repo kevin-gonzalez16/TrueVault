@@ -9,6 +9,9 @@ import 'package:true_vault/screens/view_record.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 
+double phoneWidth = 0;
+double phoneHeight = 0;
+
 class ViewDatabaseScreen extends StatefulWidget {
   final Database database;
   const ViewDatabaseScreen({Key? key, required this.database})
@@ -32,8 +35,8 @@ Widget viewDatabaseTemplate(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-              height: 60,
-              width: 220,
+              height: phoneHeight/11.383,
+              width: phoneWidth/1.868,
               child: TextButton(
 
                 key: Key("view-record-button" + index.toString()),
@@ -87,6 +90,8 @@ Widget viewDatabaseTemplate(
 class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
   @override
   Widget build(BuildContext context) {
+    phoneWidth = MediaQuery.of(context).size.width; //411
+    phoneHeight = MediaQuery.of(context).size.height; //683
     return Scaffold(
         resizeToAvoidBottomInset: false, // set it to false
         backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
@@ -122,8 +127,8 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Container(
-                  width: 325.0,
-                  height: 150.0,
+                  width: phoneWidth/1.265,
+                  height: phoneHeight/4.55,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: Color(0xff189AB4),
@@ -132,10 +137,10 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                       alignment: Alignment.centerLeft,
                       child: Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.donut_large_rounded,
                             color: Colors.white,
-                            size: 90.0,
+                            size: phoneWidth/4.56,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -154,8 +159,8 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
               child: Container(
-                  width: 325.0,
-                  height: 375.0,
+                  width: phoneWidth/1.265,
+                  height: phoneHeight/1.821,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: Color(0xff189AB4),

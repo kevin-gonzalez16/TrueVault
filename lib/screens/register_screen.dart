@@ -63,18 +63,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double phoneWidth = MediaQuery.of(context).size.width; //411
+    double phoneHeight = MediaQuery.of(context).size.height; //683
     return Scaffold(
         resizeToAvoidBottomInset: false, // set it to false
         backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
         body: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 60.0,
-            ),
-            Container(
-                width: 325.0,
-                height: 150.0,
+                width: phoneWidth/1.265,
+                height: phoneHeight/4.55,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   color: Color(0xff189AB4),
@@ -83,13 +83,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: [
-                        Container(
-                          width: 20.0,
-                        ),
                         Icon(
                           Icons.donut_large_rounded,
                           color: Colors.white,
-                          size: 90.0,
+                          size: phoneWidth/4.56,
                         ),
                       ],
                     ))),
@@ -132,9 +129,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            // Container(
-            //   height: 30.0,
-            // ),
             Padding(
               padding: const EdgeInsets.fromLTRB(10,0,10,10),
               child: TextField(

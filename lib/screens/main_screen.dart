@@ -19,6 +19,8 @@ List<Database>databases = [];
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
+    double phoneWidth = MediaQuery.of(context).size.width; //411
+    double phoneHeight = MediaQuery.of(context).size.height; //683
     return Scaffold(
         resizeToAvoidBottomInset: false, // set it to false
         backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
@@ -44,8 +46,8 @@ class _MainScreenState extends State<MainScreen> {
               ],
             ),
             Container(
-                width: 325.0,
-                height: 125.0,
+                width: phoneWidth/1.265,
+                height: phoneHeight/4.55,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   color: Color(0xff189AB4),
@@ -60,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
                         Icon(
                           Icons.donut_large_rounded,
                           color: Colors.white,
-                          size: 90.0,
+                          size: phoneWidth/4.56,
                         ),
                       ],
                     ))),
@@ -70,8 +72,8 @@ class _MainScreenState extends State<MainScreen> {
               height: 40.0,
             ),
             Container(
-              width: 290.0,
-              height: 60.0,
+              width: phoneWidth/1.417,
+              height: phoneHeight/11.383,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(50)),
                 color: Color(0xff189AB4),
@@ -89,8 +91,8 @@ class _MainScreenState extends State<MainScreen> {
                       width: 65.0,
                     ),
                     SizedBox(
-                        height: 60,
-                        width: 220,
+                        height: phoneHeight/11.383,
+                        width: phoneWidth/1.868,
                         child: TextButton(
                           key: const Key("new-database-button"),
                           style: ButtonStyle(
@@ -156,8 +158,8 @@ class _MainScreenState extends State<MainScreen> {
                       width: 65.0,
                     ),
                     SizedBox(
-                        height: 60,
-                        width: 220,
+                        height: phoneHeight/11.383,
+                        width: phoneWidth/1.868,
                         child: TextButton(
                           key: const Key("choose-database-button"),
                           style: ButtonStyle(
@@ -220,8 +222,8 @@ class _MainScreenState extends State<MainScreen> {
                       width: 65.0,
                     ),
                     SizedBox(
-                        height: 60,
-                        width: 220,
+                        height: phoneHeight/11.383,
+                        width: phoneWidth/1.868,
                         child: TextButton(
                           key: const Key("delete-database-button"),
                           style: ButtonStyle(
