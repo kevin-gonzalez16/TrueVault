@@ -58,8 +58,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
               ),
             ),
             Container(
-                width: 325.0,
-                height: 150.0,
+                width: phoneWidth/1.265,
+                height: phoneHeight/4.55,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   color: Color(0xff189AB4),
@@ -68,13 +68,10 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: [
-                        Container(
-                          width: 20.0,
-                        ),
                         Icon(
                           Icons.donut_large_rounded,
                           color: Colors.white,
-                          size: 90.0,
+                          size: phoneWidth/4.56,
                         ),
                         Container(
                           width: 20.0,
@@ -91,10 +88,10 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                       ],
                     ))),
             Container(
-              height: 40.0,
+              height: 30.0,
             ),
             Container(
-                width: 325.0,
+                width: phoneWidth/1.265,
                 height: phoneHeight / 1.9,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -117,8 +114,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                         Container(
                             margin: EdgeInsets.fromLTRB(25, 0, 0, 15),
                             padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            width: 210,
-                            height: 60,
+                            width: phoneWidth/1.957,
+                            height: phoneHeight/11.383,
                             decoration: BoxDecoration(
                                 color: Color.fromRGBO(23, 42, 58, 1.0),
                                 border:
@@ -166,8 +163,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                         Container(
                             margin: EdgeInsets.fromLTRB(25, 0, 0, 15),
                             padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            width: 210,
-                            height: 60,
+                            width: phoneWidth/1.957,
+                            height: phoneHeight/11.383,
                             decoration: BoxDecoration(
                                 color: Color.fromRGBO(23, 42, 58, 1.0),
                                 border:
@@ -233,8 +230,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 0, 0, 20),
                           padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                          width: 210,
-                          height: 95,
+                          width: phoneWidth/1.957,
+                          height: phoneHeight/7.189,
                           decoration: BoxDecoration(
                               color: Color.fromRGBO(23, 42, 58, 1.0),
                               border: Border.all(color: Colors.white, width: 3),

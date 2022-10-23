@@ -54,7 +54,7 @@ class _NewRecordFormState extends State<NewRecordForm> {
               ),
             ),
             Container(
-                width: 325.0,
+                width: phoneWidth/1.265,
                 height: phoneHeight / 1.3,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),

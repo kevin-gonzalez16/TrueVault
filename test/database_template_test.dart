@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/delete_database_screen.dart';
@@ -6,7 +5,6 @@ import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 import 'package:true_vault/utils/encryptor.dart';
-
 
 void main() {
   test('Template function creates a button for each database', () {
@@ -31,7 +29,7 @@ void main() {
     databases.add(newDatabase);
     databases.add(newDatabase1);
     databases.add(newDatabase2);
-    formClass.Form myform = formClass.Form([
+    formClass.Form myForm = formClass.Form([
       Encryptor.plainTextToCipher("Discord", "PASSWORD"),
       Encryptor.plainTextToCipher("username", "PASSWORD"),
       Encryptor.plainTextToCipher("password", "PASSWORD"),
@@ -40,7 +38,6 @@ void main() {
       Encryptor.plainTextToCipher("icon.jpeg", "PASSWORD"),
     ]);
 
-    //final chooseButtons = databases.map((database) => chooseDatabaseTemplate(database)).toList();
     final chooseButtons = [];
     chooseButtons.add(chooseDatabaseTemplate(databases[0], 0, 0));
     chooseButtons.add(chooseDatabaseTemplate(databases[1], 1, 0));
@@ -51,7 +48,7 @@ void main() {
         .toList();
 
     final recordButtons = databases
-        .map((database) => viewDatabaseTemplate(myform, 0, 0, database))
+        .map((database) => viewDatabaseTemplate(myForm, 0, 0, database))
         .toList();
 
     expect(chooseButtons.length, 3);

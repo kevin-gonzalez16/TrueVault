@@ -28,6 +28,8 @@ Future<String> generatePasswordDialog(BuildContext context) async {
       makeComposedCharacters([upper,lower,digit,space,special]
       ));
   bool obscureText = true;
+  double phoneWidth = MediaQuery.of(context).size.width; //411
+  double phoneHeight = MediaQuery.of(context).size.height; //683
   return await showDialog(
       context: context,
       builder: (context) {
@@ -48,8 +50,8 @@ Future<String> generatePasswordDialog(BuildContext context) async {
                         children: [
                           Container(
                               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                              width: 210,
-                              height: 60,
+                              width: phoneWidth/1.957,
+                              height: phoneHeight/11.383,
                               decoration: BoxDecoration(
                                   color: const Color.fromRGBO(23, 42, 58, 1.0),
                                   border:
@@ -122,8 +124,8 @@ Future<String> generatePasswordDialog(BuildContext context) async {
                               },
                             ),
                             SizedBox(
-                              width: 45,
-                              height: 45,
+                              width: 50,
+                              height: 50,
                               child: TextField(
                                 controller: sizeController,
                                 keyboardType: TextInputType.number,

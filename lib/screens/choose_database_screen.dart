@@ -46,8 +46,8 @@ Widget chooseDatabaseTemplate(Database database, int index, context) {
 class _ChooseDatabaseState extends State<ChooseDatabase> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    double phoneWidth = MediaQuery.of(context).size.width; //411
+    double phoneHeight = MediaQuery.of(context).size.height; //683
     return Scaffold(
         backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
         body: Center(
@@ -57,8 +57,8 @@ class _ChooseDatabaseState extends State<ChooseDatabase> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SizedBox(
-                  height: height - 75,
-                  width: width - 75,
+                  height: phoneHeight/1.12,
+                  width: phoneWidth/1.22,
                   child: Container(
                       child: Column(
                         children: [
