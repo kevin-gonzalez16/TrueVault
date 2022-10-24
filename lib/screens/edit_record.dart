@@ -6,6 +6,7 @@ import 'package:true_vault/utils/database.dart';
 import 'package:flutter/services.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
+import 'package:true_vault/utils/encryptor.dart';
 
 class EditRecordForm extends StatefulWidget {
   final formClass.Form form;
@@ -59,7 +60,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
               ),
             ),
             Container(
-                width: phoneWidth/1.265,
+                width: phoneWidth / 1.265,
                 height: phoneHeight / 1.3,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -67,11 +68,20 @@ class _EditRecordFormState extends State<EditRecordForm> {
                 ),
                 child: Column(
                   children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(45, 42, 0, 0),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Title",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 42, 20, 20),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                       child: TextFormField(
                         key: const Key("edit-title-text-field"),
-                        initialValue:Encryptor.cipherToPlainText(widget.form.formDetails["serviceName"], "PASSWORD"),
+                        initialValue: Encryptor.cipherToPlainText(
+                            widget.form.formDetails["serviceName"], "PASSWORD"),
                         onChanged: (newText) {
                           setState(() {
                             editedTitle = true;
@@ -95,11 +105,20 @@ class _EditRecordFormState extends State<EditRecordForm> {
                         ),
                       ),
                     ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(45, 0, 0, 0),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Username",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                       child: TextFormField(
                         key: const Key("edit-username-text-field"),
-                        initialValue: Encryptor.cipherToPlainText(widget.form.formDetails["username"], "PASSWORD"),
+                        initialValue: Encryptor.cipherToPlainText(
+                            widget.form.formDetails["username"], "PASSWORD"),
                         onChanged: (newText) {
                           editedUsername = true;
                           username = newText;
@@ -121,11 +140,20 @@ class _EditRecordFormState extends State<EditRecordForm> {
                         ),
                       ),
                     ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(45, 0, 0, 0),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Password",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                       child: TextFormField(
                         key: const Key("edit-password-text-field"),
-                        initialValue: Encryptor.cipherToPlainText(widget.form.formDetails["password"], "PASSWORD"),
+                        initialValue: Encryptor.cipherToPlainText(
+                            widget.form.formDetails["password"], "PASSWORD"),
                         onChanged: (newText) {
                           editedPassword = true;
                           password = newText;
@@ -147,11 +175,20 @@ class _EditRecordFormState extends State<EditRecordForm> {
                         ),
                       ),
                     ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(45, 0, 0, 0),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Notes",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                       child: TextFormField(
                         key: const Key("edit-notes-text-field"),
-                        initialValue: Encryptor.cipherToPlainText(widget.form.formDetails["notes"], "PASSWORD"),
+                        initialValue: Encryptor.cipherToPlainText(
+                            widget.form.formDetails["notes"], "PASSWORD"),
                         onChanged: (newText) {
                           editedNotes = true;
                           notes = newText;
@@ -193,22 +230,91 @@ class _EditRecordFormState extends State<EditRecordForm> {
                     child: InkWell(
                       key: const Key("save-edits-button"),
                       splashColor: Colors.white, // Splash color
-                      onTap: () async {
+                      onTap: () {
+                        var titleCheck = Encryptor.cipherToPlainText(
+                                widget.form.formDetails["serviceName"],
+                                "PASSWORD")
+                            .replaceAll(' ', '');
+                        var usernameCheck = Encryptor.cipherToPlainText(
+                                widget.form.formDetails["username"], "PASSWORD")
+                            .replaceAll(' ', '');
+                        var passwordCheck = Encryptor.cipherToPlainText(
+                                widget.form.formDetails["password"], "PASSWORD")
+                            .replaceAll(' ', '');
+                        var notesCheck = Encryptor.cipherToPlainText(
+                                widget.form.formDetails["notes"], "PASSWORD")
+                            .replaceAll(' ', '');
+
                         if (editedTitle) {
-                          widget.form.editForm("serviceName", Encryptor.plainTextToCipher(title, "PASSWORD"));
+                          titleCheck = title;
                         }
-
                         if (editedUsername) {
-                          widget.form.editForm("username", Encryptor.plainTextToCipher(username, "PASSWORD"));
-                        }
-                        if (editedPassword) {
-                          widget.form.editForm("password", Encryptor.plainTextToCipher(password, "PASSWORD"));
-                        }
-                        if (editedNotes) {
-                          widget.form.editForm("notes", Encryptor.plainTextToCipher(notes, "PASSWORD"));
+                          usernameCheck = username;
                         }
 
-                        Navigator.of(context, rootNavigator: true).pop();
+                        if (editedPassword) {
+                          passwordCheck = password;
+                        }
+
+                        if (notes.isEmpty) {
+                          notes = " ";
+                        }
+
+                        const emptyTitle = 'Title cannot be empty\n ';
+                        const emptyUsername = 'Username cannot be empty\n ';
+                        const emptyPassword = 'Password cannot be empty\n ';
+                        var errors = "";
+
+                        if (titleCheck.isEmpty) {
+                          errors += emptyTitle;
+                        }
+                        if (usernameCheck.isEmpty) {
+                          errors += emptyUsername;
+                        }
+                        if (passwordCheck.isEmpty) {
+                          errors += emptyPassword;
+                        }
+
+                        if (titleCheck.isNotEmpty &&
+                            usernameCheck.isNotEmpty &&
+                            passwordCheck.isNotEmpty) {
+                          if (editedTitle) {
+                            widget.form.editForm("serviceName",
+                                Encryptor.plainTextToCipher(title, "PASSWORD"));
+                          }
+
+                          if (editedUsername) {
+                            widget.form.editForm(
+                                "username",
+                                Encryptor.plainTextToCipher(
+                                    username, "PASSWORD"));
+                          }
+                          if (editedPassword) {
+                            widget.form.editForm(
+                                "password",
+                                Encryptor.plainTextToCipher(
+                                    password, "PASSWORD"));
+                          }
+                          if (editedNotes) {
+                            widget.form.editForm("notes",
+                                Encryptor.plainTextToCipher(notes, "PASSWORD"));
+                          }
+
+                          Navigator.of(context, rootNavigator: true).pop();
+                        } else {
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              content: Text(errors),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
                       },
                       child: SizedBox(
                           width: 56,

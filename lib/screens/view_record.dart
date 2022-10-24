@@ -46,7 +46,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
               child: TextButton(
                 key: const Key("view-record-back-button"),
                 onPressed: () {
-                  Navigator.pop(context,widget.form);
+                  Navigator.pop(context, widget.form);
                 },
                 style: TextButton.styleFrom(
                   primary: const Color.fromRGBO(165, 165, 165, 1),
@@ -58,8 +58,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
               ),
             ),
             Container(
-                width: phoneWidth/1.265,
-                height: phoneHeight/4.55,
+                width: phoneWidth / 1.265,
+                height: phoneHeight / 4.55,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   color: Color(0xff189AB4),
@@ -71,14 +71,15 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                         Icon(
                           Icons.donut_large_rounded,
                           color: Colors.white,
-                          size: phoneWidth/4.56,
+                          size: phoneWidth / 4.56,
                         ),
                         Container(
                           width: 20.0,
                         ),
                         Text(
-                          nameShortener(Encryptor.cipherToPlainText(widget.form.formDetails["serviceName"], "PASSWORD")
-                          ),
+                          nameShortener(Encryptor.cipherToPlainText(
+                              widget.form.formDetails["serviceName"],
+                              "PASSWORD")),
                           key: const Key("view-form-title"),
                           style: TextStyle(
                               fontSize: 30,
@@ -91,7 +92,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
               height: 30.0,
             ),
             Container(
-                width: phoneWidth/1.265,
+                width: phoneWidth / 1.265,
                 height: phoneHeight / 1.9,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -104,7 +105,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                       margin: EdgeInsets.fromLTRB(45, 15, 0, 0),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "username",
+                        "Username",
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
@@ -114,8 +115,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                         Container(
                             margin: EdgeInsets.fromLTRB(25, 0, 0, 15),
                             padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            width: phoneWidth/1.957,
-                            height: phoneHeight/11.383,
+                            width: phoneWidth / 1.957,
+                            height: phoneHeight / 11.383,
                             decoration: BoxDecoration(
                                 color: Color.fromRGBO(23, 42, 58, 1.0),
                                 border:
@@ -124,7 +125,9 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                Encryptor.cipherToPlainText(widget.form.formDetails["username"], "PASSWORD"),
+                                Encryptor.cipherToPlainText(
+                                    widget.form.formDetails["username"],
+                                    "PASSWORD"),
                                 key: const Key("view-form-username"),
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
@@ -136,7 +139,9 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               color: Colors.white),
                           onPressed: () async {
                             Clipboard.setData(new ClipboardData(
-                                    text: Encryptor.cipherToPlainText(widget.form.formDetails["username"], "PASSWORD")))
+                                    text: Encryptor.cipherToPlainText(
+                                        widget.form.formDetails["username"],
+                                        "PASSWORD")))
                                 .then((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -163,8 +168,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                         Container(
                             margin: EdgeInsets.fromLTRB(25, 0, 0, 15),
                             padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            width: phoneWidth/1.957,
-                            height: phoneHeight/11.383,
+                            width: phoneWidth / 1.957,
+                            height: phoneHeight / 11.383,
                             decoration: BoxDecoration(
                                 color: Color.fromRGBO(23, 42, 58, 1.0),
                                 border:
@@ -175,7 +180,9 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               child: Text(
                                 obscureText == true
                                     ? '${password.replaceAll(RegExp(r"."), "*")}'
-                                    : Encryptor.cipherToPlainText(widget.form.formDetails["password"], "PASSWORD"),
+                                    : Encryptor.cipherToPlainText(
+                                        widget.form.formDetails["password"],
+                                        "PASSWORD"),
                                 key: const Key("view-form-password"),
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
@@ -201,8 +208,9 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                                 color: Colors.white),
                             onPressed: () async {
                               Clipboard.setData(new ClipboardData(
-                                      text:
-                                      Encryptor.cipherToPlainText(widget.form.formDetails["password"], "PASSWORD")))
+                                      text: Encryptor.cipherToPlainText(
+                                          widget.form.formDetails["password"],
+                                          "PASSWORD")))
                                   .then((_) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -230,8 +238,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 0, 0, 20),
                           padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                          width: phoneWidth/1.957,
-                          height: phoneHeight/7.189,
+                          width: phoneWidth / 1.957,
+                          height: phoneHeight / 7.189,
                           decoration: BoxDecoration(
                               color: Color.fromRGBO(23, 42, 58, 1.0),
                               border: Border.all(color: Colors.white, width: 3),
@@ -241,7 +249,9 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  Encryptor.cipherToPlainText(widget.form.formDetails["notes"], "PASSWORD"),
+                                  Encryptor.cipherToPlainText(
+                                      widget.form.formDetails["notes"],
+                                      "PASSWORD"),
                                   key: const Key("view-form-notes"),
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white),
@@ -254,7 +264,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               color: Colors.white),
                           onPressed: () async {
                             Clipboard.setData(new ClipboardData(
-                              text: Encryptor.cipherToPlainText(widget.form.formDetails["notes"], "PASSWORD"),
+                              text: Encryptor.cipherToPlainText(
+                                  widget.form.formDetails["notes"], "PASSWORD"),
                             )).then((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
