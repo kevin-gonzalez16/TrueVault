@@ -35,10 +35,9 @@ Widget viewDatabaseTemplate(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-              height: phoneHeight/11.383,
-              width: phoneWidth/1.868,
+              height: phoneHeight / 11.383,
+              width: phoneWidth / 1.868,
               child: TextButton(
-
                 key: Key("view-record-button" + index.toString()),
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
@@ -48,15 +47,16 @@ Widget viewDatabaseTemplate(
                             borderRadius: BorderRadius.circular(20.0),
                             side: const BorderSide(
                                 color: Colors.white, width: 2.5)))),
-                onPressed: () async{
+                onPressed: () async {
                   form = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ViewRecordForm(form: form))
-                  ) as formClass.Form;
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewRecordForm(form: form)))
+                      as formClass.Form;
                 },
                 child: Text(
-                  Encryptor.cipherToPlainText(form.formDetails["serviceName"], "PASSWORD"),
+                  Encryptor.cipherToPlainText(
+                      form.formDetails["serviceName"], "PASSWORD"),
                   key: Key("view-record-button-text" + index.toString()),
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
@@ -127,8 +127,8 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Container(
-                  width: phoneWidth/1.265,
-                  height: phoneHeight/4.55,
+                  width: phoneWidth / 1.265,
+                  height: phoneHeight / 4.55,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: Color(0xff189AB4),
@@ -140,15 +140,17 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                           Icon(
                             Icons.donut_large_rounded,
                             color: Colors.white,
-                            size: phoneWidth/4.56,
+                            size: phoneWidth / 4.56,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Text(
-                              nameShortener(
-                                Encryptor.cipherToPlainText(widget.database.databaseName, "PASSWORD")
-                              ),
-                              key: Key(Encryptor.cipherToPlainText(widget.database.databaseName, "PASSWORD") + "_text"),
+                              nameShortener(Encryptor.cipherToPlainText(
+                                  widget.database.databaseName, "PASSWORD")),
+                              key: Key(Encryptor.cipherToPlainText(
+                                      widget.database.databaseName,
+                                      "PASSWORD") +
+                                  "_text"),
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 25),
                             ),
@@ -159,8 +161,8 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
               child: Container(
-                  width: phoneWidth/1.265,
-                  height: phoneHeight/1.821,
+                  width: phoneWidth / 1.265,
+                  height: phoneHeight / 1.821,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: Color(0xff189AB4),
