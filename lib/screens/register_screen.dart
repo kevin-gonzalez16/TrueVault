@@ -22,6 +22,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool _hasPassword1UppercaseCharacter = false;
   bool _hasPassword1LowercaseCharacter = false;
   bool match = true;
+  bool _match = true;
+  bool _isEmpty = true;
+  bool empty = false;
   bool isValidPassword = false;
   bool notValid = true;
 
@@ -32,6 +35,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final upperCaseRegex = RegExp(r'[A-Z]');
 
     setState(() {
+      password.length > 0 ? _isEmpty = false : _isEmpty = true;
+      //log(_isEmpty.toString());
+
       _isPassword8Characters = false;
       if (password.length >= 8) _isPassword8Characters = true;
 
@@ -49,15 +55,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (upperCaseRegex.hasMatch(password))
         _hasPassword1UppercaseCharacter = true;
 
-      match = createMasterPasswordTextEditingController.text ==
+      _match = createMasterPasswordTextEditingController.text ==
           confirmMasterPasswordTextEditingController.text;
 
       isValidPassword = _isPassword8Characters &&
           _hasPassword1Number &&
           _hasPassword1SpecialCharacter &&
           _hasPassword1UppercaseCharacter &&
-          _hasPassword1LowercaseCharacter &&
-          match;
+          _hasPassword1LowercaseCharacter;
     });
   }
 
@@ -70,11 +75,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
         body: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-                width: phoneWidth/1.265,
-                height: phoneHeight/4.55,
+                width: phoneWidth / 1.265,
+                height: phoneHeight / 4.55,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   color: Color(0xff189AB4),
@@ -86,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Icon(
                           Icons.donut_large_rounded,
                           color: Colors.white,
-                          size: phoneWidth/4.56,
+                          size: phoneWidth / 4.56,
                         ),
                       ],
                     ))),
@@ -94,11 +99,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 60.0,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10,0,10,30.0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 30.0),
               child: TextField(
                 key: const Key("register-text-field-1"),
                 controller: createMasterPasswordTextEditingController,
-                onChanged: (password) => onPasswordChanged(password),
+                onChanged: (password) {
+                  onPasswordChanged(password);
+                  if (!_isEmpty) {
+                    if (_match) {
+                      match = true;
+                    } else {
+                      match = false;
+                    }
+                    if (isValidPassword) {
+                      notValid = true;
+                    } else if (!isValidPassword) {
+                      notValid = false;
+                    }
+
+                    empty = false;
+                  } else {
+                    empty = true;
+                  }
+                },
                 obscureText: !_isVisible,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
@@ -118,7 +141,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   fillColor: Color(0xffc9c9c9),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(width: 3, color: Color(0xffC9C9C9))),
+                      borderSide:
+                          BorderSide(width: 3, color: Color(0xffC9C9C9))),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.black)),
@@ -130,11 +154,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10,0,10,10),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               child: TextField(
                 key: const Key("register-text-field-2"),
                 controller: confirmMasterPasswordTextEditingController,
-                onChanged: (password) => onPasswordChanged(password),
+                onChanged: (password) {
+                  onPasswordChanged(password);
+                  if (!_isEmpty) {
+                    if (_match) {
+                      match = true;
+                    } else {
+                      match = false;
+                    }
+                    if (isValidPassword) {
+                      notValid = true;
+                    } else if (!isValidPassword) {
+                      notValid = false;
+                    }
+                    empty = false;
+                  } else {
+                    empty = true;
+                  }
+                },
                 obscureText: !_isVisible,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
@@ -154,10 +195,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   fillColor: Color(0xffc9c9c9),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(width: 3, color: Color(0xffC9C9C9))),
+                      borderSide:
+                          BorderSide(width: 3, color: Color(0xffC9C9C9))),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(width: 3, color: Color(0xffC9C9C9))),
+                      borderSide:
+                          BorderSide(width: 3, color: Color(0xffC9C9C9))),
                   hintText: "Confirm Master Password",
                   hintStyle: TextStyle(fontSize: 18, color: Color(0xff989898)),
                   contentPadding:
@@ -182,9 +225,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(
               height: 10,
             ),
-
             Padding(
-              padding: const EdgeInsets.fromLTRB(10.0,0,0,5),
+              padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 5),
               child: Row(
                 children: [
                   AnimatedContainer(
@@ -216,7 +258,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10.0,0,0,5),
+              padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 5),
               child: Row(
                 children: [
                   AnimatedContainer(
@@ -248,7 +290,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10.0,0,0,5),
+              padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 5),
               child: Row(
                 children: [
                   AnimatedContainer(
@@ -280,7 +322,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10.0,0,0,5),
+              padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 5),
               child: Row(
                 children: [
                   AnimatedContainer(
@@ -312,7 +354,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10.0,0,0,0),
+              padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
               child: Row(
                 children: [
                   AnimatedContainer(
@@ -355,14 +397,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 color: Color(0xff189AB4),
                 onPressed: () {
                   setState(() {
-                    if (isValidPassword) {
-                      match = true;
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MainScreen()));
-                    } else if (!isValidPassword) {
-                      notValid = false;
+                    if (!_isEmpty) {
+                      if (_match) {
+                        match = true;
+                      } else {
+                        match = false;
+                      }
+                      if (isValidPassword) {
+                        notValid = true;
+                      } else if (!isValidPassword) {
+                        notValid = false;
+                      }
+
+                      if (isValidPassword && match) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainScreen()));
+                      }
+                      empty = false;
+                    } else {
+                      empty = true;
                     }
                   });
                 }),
