@@ -106,14 +106,16 @@ class _MainScreenState extends State<MainScreen> {
                                           color: Color.fromARGB(
                                               200, 24, 154, 180))))),
                           onPressed: () async{
-                            Database newDatabaseObject = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CreateDatabase()),
-                            ) as Database;
-                            setState((){
-                              databases.add(newDatabaseObject);
-                            });
+                            try{
+                              Database newDatabaseObject = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CreateDatabase()),
+                              ) as Database;
+                              setState((){
+                                databases.add(newDatabaseObject);
+                              });
+                            }catch(e){}
                           },
                           child: const Text(
                             'New Database',
@@ -131,14 +133,16 @@ class _MainScreenState extends State<MainScreen> {
                           key: const Key("new-database-icon-button"),
                           splashColor: Colors.white, // Splash color
                           onTap: () async{
-                            Database newDatabaseObject = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CreateDatabase()),
-                            ) as Database;
-                            setState((){
-                              databases.add(newDatabaseObject);
-                            });
+                            try{
+                              Database newDatabaseObject = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CreateDatabase()),
+                              ) as Database;
+                              setState((){
+                                databases.add(newDatabaseObject);
+                              });
+                            }catch(e){}
                           },
                           child: SizedBox(
                               width: 56, height: 56, child: Icon(Icons.add)),
@@ -237,14 +241,16 @@ class _MainScreenState extends State<MainScreen> {
                                           color: Color.fromARGB(
                                               200, 24, 154, 180))))),
                           onPressed: () async{
-                            int indexToDelete = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DeleteDatabase(databases: databases,)),
-                            ) as int;
-                            setState((){
-                              databases.removeAt(indexToDelete);
-                            });
+                            try{
+                              int indexToDelete = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DeleteDatabase(databases: databases,)),
+                              ) as int;
+                              setState((){
+                                databases.removeAt(indexToDelete);
+                              });
+                            }catch(e){}
                           },
                           child: const Text(
                             'Delete Database',
@@ -262,14 +268,16 @@ class _MainScreenState extends State<MainScreen> {
                           key: const Key("delete-database-icon-button"),
                           splashColor: Colors.white, // Splash color
                           onTap: () async{
-                            int indexToDelete = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DeleteDatabase(databases: databases,)),
-                            ) as int;
-                            setState((){
-                              databases.removeAt(indexToDelete);
-                            });
+                            try{
+                              int indexToDelete = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DeleteDatabase(databases: databases,)),
+                              ) as int;
+                              setState((){
+                                databases.removeAt(indexToDelete);
+                              });
+                            }catch(e){}
                           },
                           child: SizedBox(
                               width: 56, height: 56, child: Icon(Icons.delete)),

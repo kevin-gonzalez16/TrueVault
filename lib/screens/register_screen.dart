@@ -116,7 +116,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     } else if (!isValidPassword) {
                       notValid = false;
                     }
-
                     empty = false;
                   } else {
                     empty = true;
@@ -206,6 +205,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 ),
+              ),
+            ),
+            Text(
+              !empty ? "" : "Please enter a password",
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.red,
               ),
             ),
             Text(

@@ -193,8 +193,10 @@ class _NewRecordFormState extends State<NewRecordForm> {
                       key: const Key("generate-password-button"),
                       splashColor: Colors.white, // Splash color
                       onTap: () async {
-                        password = await generatePasswordDialog(context);
-                        passwordController.text = password;
+                        try{
+                          password = await generatePasswordDialog(context);
+                          passwordController.text = password;
+                        }catch(e){}
                       },
                       child: SizedBox(
                           width: 56,

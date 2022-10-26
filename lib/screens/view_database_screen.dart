@@ -48,11 +48,13 @@ Widget viewDatabaseTemplate(
                             side: const BorderSide(
                                 color: Colors.white, width: 2.5)))),
                 onPressed: () async {
-                  form = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewRecordForm(form: form)))
-                      as formClass.Form;
+                  try{
+                    form = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewRecordForm(form: form)))
+                    as formClass.Form;
+                  }catch(e){}
                 },
                 child: Text(
                   Encryptor.cipherToPlainText(
@@ -198,14 +200,16 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                         key: const Key("new-record-icon-button"),
                         splashColor: Colors.white, // Splash color
                         onTap: () async {
-                          formClass.Form myform = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const NewRecordForm())) as formClass.Form;
-                          setState(() {
-                            widget.database.addForm(myform);
-                          });
+                          try{
+                            formClass.Form myform = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const NewRecordForm())) as formClass.Form;
+                            setState(() {
+                              widget.database.addForm(myform);
+                            });
+                          }catch(e){}
                         },
                         child: const SizedBox(
                             width: 56,
