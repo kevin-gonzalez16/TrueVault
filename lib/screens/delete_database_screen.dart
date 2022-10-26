@@ -23,11 +23,13 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
         ElevatedButton(
             key: Key("deleteDatabaseElevatedButton" + index.toString()),
             onPressed: () async {
-              bool deleteDatabase =
-                  await DeleteConfirmationScreen(context) as bool;
-              if (deleteDatabase) {
-                Navigator.pop(context, index);
-              }
+              try{
+                bool deleteDatabase =
+                await DeleteConfirmationScreen(context) as bool;
+                if (deleteDatabase) {
+                  Navigator.pop(context, index);
+                }
+              }catch(e){}
             },
             style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
@@ -40,11 +42,13 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
             child: TextButton(
                 key: Key("deleteDatabaseTextButton" + index.toString()),
                 onPressed: () async {
-                  bool deleteDatabase =
-                      await DeleteConfirmationScreen(context) as bool;
-                  if (deleteDatabase) {
-                    Navigator.pop(context, index);
-                  }
+                  try{
+                    bool deleteDatabase =
+                    await DeleteConfirmationScreen(context) as bool;
+                    if (deleteDatabase) {
+                      Navigator.pop(context, index);
+                    }
+                  }catch(e){}
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(24, 154, 180, 1),

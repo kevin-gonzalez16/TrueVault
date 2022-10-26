@@ -297,7 +297,6 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                                     builder: (context) =>
                                         EditRecordForm(form: widget.form)))
                             .then((value) => setState(() {}));
-                        ;
                       },
                       child: SizedBox(
                           width: 56,
