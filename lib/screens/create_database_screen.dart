@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
+import 'package:true_vault/screens/landing_screen.dart';
 import 'package:true_vault/screens/main_screen.dart';
+import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
 
@@ -28,8 +30,8 @@ class _CreateDatabase extends State<CreateDatabase> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
-              height: phoneHeight/1.12,
-              width: phoneWidth/1.22,
+              height: phoneHeight / 1.12,
+              width: phoneWidth / 1.22,
               child: Container(
                   decoration: const BoxDecoration(
                     color: Color.fromRGBO(239, 239, 239, 1.0),
@@ -101,8 +103,8 @@ class _CreateDatabase extends State<CreateDatabase> {
                               ),
                             ),
                             SizedBox(
-                                height: phoneHeight/8.537,
-                                width: phoneWidth/1.644,
+                                height: phoneHeight / 8.537,
+                                width: phoneWidth / 1.644,
                                 child: TextButton(
                                   key: const Key("createDatabaseButton"),
                                   style: ButtonStyle(
@@ -150,14 +152,25 @@ class _CreateDatabase extends State<CreateDatabase> {
                                         );
                                       } else {
                                         Database databaseObj = Database(
-                                          Encryptor.plainTextToCipher(databaseNameController.text, "PASSWORD"),
-                                          Encryptor.plainTextToCipher(databaseLocationController.text, "PASSWORD"),
-                                          Encryptor.plainTextToCipher("PASSWORD", "PASSWORD")
-                                        );
+                                            Encryptor.plainTextToCipher(
+                                                databaseNameController.text,
+                                                "PASSWORD"),
+                                            Encryptor.plainTextToCipher(
+                                                databaseLocationController.text,
+                                                "PASSWORD"),
+                                            Encryptor.plainTextToCipher(
+                                                "PASSWORD", "PASSWORD"));
                                         //TODO
                                         //Redirect the user to the opened database view
-                                        //Navigator.pop(context, databaseObj);
                                         Navigator.pop(context, databaseObj);
+
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ViewDatabaseScreen(
+                                                        database:
+                                                            databaseObj)));
                                       }
                                     });
                                   },
