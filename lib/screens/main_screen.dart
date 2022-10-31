@@ -242,14 +242,16 @@ class _MainScreenState extends State<MainScreen> {
                                               200, 24, 154, 180))))),
                           onPressed: () async{
                             try{
-                              int indexToDelete = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DeleteDatabase(databases: databases,)),
-                              ) as int;
-                              setState((){
-                                databases.removeAt(indexToDelete);
-                              });
+                              while(true){
+                                int indexToDelete = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DeleteDatabase(databases: databases,)),
+                                ) as int;
+                                setState((){
+                                  databases.removeAt(indexToDelete);
+                                });
+                              }
                             }catch(e){}
                           },
                           child: const Text(
@@ -268,16 +270,18 @@ class _MainScreenState extends State<MainScreen> {
                           key: const Key("delete-database-icon-button"),
                           splashColor: Colors.white, // Splash color
                           onTap: () async{
-                            try{
-                              int indexToDelete = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DeleteDatabase(databases: databases,)),
-                              ) as int;
-                              setState((){
-                                databases.removeAt(indexToDelete);
-                              });
-                            }catch(e){}
+                            while(true){
+                              try{
+                                int indexToDelete = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DeleteDatabase(databases: databases,)),
+                                ) as int;
+                                setState((){
+                                  databases.removeAt(indexToDelete);
+                                });
+                              }catch(e){}
+                            }
                           },
                           child: SizedBox(
                               width: 56, height: 56, child: Icon(Icons.delete)),

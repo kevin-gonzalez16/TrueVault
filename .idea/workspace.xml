@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d32852c9-ee18-4051-accc-63385da310dc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/create_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/create_database_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/delete_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/delete_database_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/main_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/new_record_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/new_record_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/register_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/register_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/view_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/view_database_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/view_record.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/view_record.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_driver/app_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test_driver/app_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,10 +59,10 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="emulator" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RunManager" selected="Flutter.main.dart">
+  <component name="RunManager" selected="Flutter Test.tests in test">
     <configuration name="Template function creates a button for each database" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Template function creates a button for each database" />
       <option name="testFile" value="$PROJECT_DIR$/test/database_template_test.dart" />

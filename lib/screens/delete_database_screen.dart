@@ -11,7 +11,6 @@ class DeleteDatabase extends StatefulWidget {
   @override
   State<DeleteDatabase> createState() => _DeleteDatabaseState();
 }
-
 //Template to list over the database
 Widget deleteDatabaseTemplate(Database database, context, index) {
   //Individual delete buttons
@@ -25,9 +24,9 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
             onPressed: () async {
               try{
                 bool deleteDatabase =
-                await DeleteConfirmationScreen(context) as bool;
+                await DeleteConfirmationScreen(context);
                 if (deleteDatabase) {
-                  Navigator.pop(context, index);
+                 Navigator.pop(context, index);
                 }
               }catch(e){}
             },
@@ -44,7 +43,7 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
                 onPressed: () async {
                   try{
                     bool deleteDatabase =
-                    await DeleteConfirmationScreen(context) as bool;
+                    await DeleteConfirmationScreen(context);
                     if (deleteDatabase) {
                       Navigator.pop(context, index);
                     }
@@ -134,10 +133,9 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
                                 child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           itemCount: databases.length,
-                          itemBuilder: (BuildContext test, int index) {
-                            return deleteDatabaseTemplate(
-                                databases[index], context, index);
-                          },
+                          itemBuilder: (context, int index) =>
+                            deleteDatabaseTemplate(
+                                databases[index], context, index),
                         ))),
                       ],
                     ),

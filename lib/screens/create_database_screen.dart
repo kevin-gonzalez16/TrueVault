@@ -160,8 +160,6 @@ class _CreateDatabase extends State<CreateDatabase> {
                                                 "PASSWORD"),
                                             Encryptor.plainTextToCipher(
                                                 "PASSWORD", "PASSWORD"));
-                                        //TODO
-                                        //Redirect the user to the opened database view
                                         Navigator.pop(context, databaseObj);
 
                                         Navigator.push(

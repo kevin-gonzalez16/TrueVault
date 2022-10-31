@@ -208,6 +208,7 @@ void main() {
         final deleteConfirmationButton =
             find.byValueKey("DeleteConfirmationButton");
         await driver.tap(deleteConfirmationButton);
+        await driver.tap(deleteDatabaseCancelButton);
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseButton);
@@ -229,6 +230,7 @@ void main() {
         final deleteConfirmationButton =
             find.byValueKey("DeleteConfirmationButton");
         await driver.tap(deleteConfirmationButton);
+        await driver.tap(deleteDatabaseCancelButton);
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseButton);
