@@ -5,6 +5,7 @@ import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
+import 'package:true_vault/screens/empty_input_dialog.dart';
 
 class CreateDatabase extends StatefulWidget {
   const CreateDatabase({Key? key}) : super(key: key);
@@ -136,20 +137,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                       }
                                       if (nameCheck.isEmpty ||
                                           locationCheck.isEmpty) {
-                                        showDialog<String>(
-                                          context: context,
-                                          builder: (BuildContext context) =>
-                                              AlertDialog(
-                                            content: Text(errors),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'OK'),
-                                                child: const Text('OK'),
-                                              ),
-                                            ],
-                                          ),
-                                        );
+                                        emptyInputDialog(context, errors);
                                       } else {
                                         Database databaseObj = Database(
                                             Encryptor.plainTextToCipher(

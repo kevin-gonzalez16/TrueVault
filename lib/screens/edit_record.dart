@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 import 'package:true_vault/utils/encryptor.dart';
+import 'package:true_vault/screens/empty_input_dialog.dart';
 
 class EditRecordForm extends StatefulWidget {
   final formClass.Form form;
@@ -322,18 +323,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
 
                           Navigator.of(context, rootNavigator: true).pop();
                         } else {
-                          showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              content: Text(errors),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            ),
-                          );
+                          emptyInputDialog(context, errors);
                         }
                       },
                       child: SizedBox(
