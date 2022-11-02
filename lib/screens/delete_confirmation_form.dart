@@ -11,8 +11,26 @@ Future<bool> DeleteConfirmationScreen(BuildContext context) async {
           return AlertDialog(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            content: Text("Are you sure you want to delete this database?"),
-            title: Text('Database Deletion'),
+            content: const Text(
+              "Are you sure you want to delete this database?",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.black,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.cancel_outlined,
+                  color: Colors.red,
+                  size: 90.0,
+                )
+              ],
+            ),
+            // const Text('Database Deletion'),
             actions: <Widget>[
               Container(
                 alignment: Alignment.topCenter,
@@ -29,6 +47,9 @@ Future<bool> DeleteConfirmationScreen(BuildContext context) async {
                     ),
                   ),
                 ),
+              ),
+              Container(
+                height: 30.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

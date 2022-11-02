@@ -7,6 +7,7 @@ import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 import 'package:true_vault/screens/generate_password_dialog.dart';
+import 'package:true_vault/screens/empty_input_dialog.dart';
 
 class NewRecordForm extends StatefulWidget {
   const NewRecordForm({Key? key}) : super(key: key);
@@ -253,18 +254,7 @@ class _NewRecordFormState extends State<NewRecordForm> {
                         if (titleCheck.isEmpty ||
                             usernameCheck.isEmpty ||
                             passwordCheck.isEmpty) {
-                          showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              content: Text(errors),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            ),
-                          );
+                          emptyInputDialog(context, errors);
                         }
                         if (notes.isEmpty) {
                           notes = " ";
