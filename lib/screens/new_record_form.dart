@@ -16,6 +16,7 @@ class NewRecordForm extends StatefulWidget {
 }
 
 class _NewRecordFormState extends State<NewRecordForm> {
+  bool obscureText = true;
   TextEditingController passwordController = TextEditingController();
   String title = "";
   String username = "";
@@ -120,30 +121,48 @@ class _NewRecordFormState extends State<NewRecordForm> {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
-                      child: TextField(
-                        controller: passwordController,
-                        key: const Key("password-input-new-form"),
-                        onChanged: (newText) {
-                          password = newText;
-                        },
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color.fromRGBO(23, 42, 58, 1.0),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(25.0),
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: TextField(
+                              controller: passwordController,
+                              obscureText: obscureText,
+                              key: const Key("password-input-new-form"),
+                              onChanged: (newText) {
+                                password = newText;
+                              },
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Color.fromRGBO(23, 42, 58, 1.0),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(width: 3, color: Colors.white),
+                                  borderRadius: BorderRadius.circular(25.0),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(width: 3, color: Colors.white),
+                                  borderRadius: BorderRadius.circular(25.0),
+                                ),
+                                hintText: 'Password',
+                                hintStyle: TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              ),
+                            ),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(25.0),
+                          IconButton(
+                            key: const Key("eye-icon-button-new-record-form"),
+                            padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                            icon: const Icon(Icons.remove_red_eye_outlined,
+                                color: Colors.white),
+                            onPressed: () {
+                              setState(() {
+                                obscureText = !obscureText;
+                              });
+                            },
                           ),
-                          hintText: 'Password',
-                          hintStyle:
-                              TextStyle(fontSize: 18, color: Colors.white),
-                        ),
+                        ],
                       ),
                     ),
                     Padding(
@@ -193,10 +212,10 @@ class _NewRecordFormState extends State<NewRecordForm> {
                       key: const Key("generate-password-button"),
                       splashColor: Colors.white, // Splash color
                       onTap: () async {
-                        try{
+                        try {
                           password = await generatePasswordDialog(context);
                           passwordController.text = password;
-                        }catch(e){}
+                        } catch (e) {}
                       },
                       child: SizedBox(
                           width: 56,
