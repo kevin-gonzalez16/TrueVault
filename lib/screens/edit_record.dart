@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:true_vault/screens/choose_database_screen.dart';
-import 'package:true_vault/screens/main_screen.dart';
-import 'package:true_vault/screens/view_database_screen.dart';
-import 'package:true_vault/utils/database.dart';
-import 'package:flutter/services.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
-import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/screens/empty_input_dialog.dart';
 
 class EditRecordForm extends StatefulWidget {

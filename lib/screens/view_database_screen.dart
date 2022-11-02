@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
@@ -48,13 +45,13 @@ Widget viewDatabaseTemplate(
                             side: const BorderSide(
                                 color: Colors.white, width: 2.5)))),
                 onPressed: () async {
-                  try{
+                  try {
                     form = await Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ViewRecordForm(form: form)))
-                    as formClass.Form;
-                  }catch(e){}
+                            builder: (context) =>
+                                ViewRecordForm(form: form))) as formClass.Form;
+                  } catch (e) {}
                 },
                 child: Text(
                   Encryptor.cipherToPlainText(
@@ -200,16 +197,17 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                         key: const Key("new-record-icon-button"),
                         splashColor: Colors.white, // Splash color
                         onTap: () async {
-                          try{
+                          try {
                             formClass.Form myform = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                    const NewRecordForm())) as formClass.Form;
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const NewRecordForm()))
+                                as formClass.Form;
                             setState(() {
                               widget.database.addForm(myform);
                             });
-                          }catch(e){}
+                          } catch (e) {}
                         },
                         child: const SizedBox(
                             width: 56,

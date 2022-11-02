@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/landing_screen.dart';
-import 'package:true_vault/screens/login_screen.dart';
-import 'package:true_vault/screens/register_screen.dart';
+
 import 'dart:async';
-import 'package:true_vault/screens/main_screen.dart';
-import 'package:true_vault/screens/view_database_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
