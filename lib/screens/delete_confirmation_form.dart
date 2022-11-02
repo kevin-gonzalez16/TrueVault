@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 Future<bool> DeleteConfirmationScreen(BuildContext context) async {
+  String check = "false";
+
   return await showDialog(
       context: context,
       builder: (context) {
@@ -9,8 +12,24 @@ Future<bool> DeleteConfirmationScreen(BuildContext context) async {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             content: Text("Are you sure you want to delete this database?"),
-            title: const Text('Database Deletion'),
+            title: Text('Database Deletion'),
             actions: <Widget>[
+              Container(
+                alignment: Alignment.topCenter,
+                child: SizedBox(
+                  width: 225.0,
+                  child: TextField(
+                    key: Key("text-field-database-deletion-password"),
+                    onChanged: (text) {
+                      check = text;
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter Password',
+                    ),
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -25,14 +44,20 @@ Future<bool> DeleteConfirmationScreen(BuildContext context) async {
                   ),
                   FlatButton(
                     key: Key("DeleteConfirmationButton"),
-                    onPressed: () => Navigator.of(context).pop(true),
+                    onPressed: () {
+                      if (check == "PASSWORD") {
+                        Navigator.of(context).pop(true);
+                      } else {
+                        //display incorrect password message
+                      }
+                    },
                     child: Text(
                       'Delete',
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w700),
                     ),
                     color: Colors.red[300],
-                  )
+                  ),
                 ],
               )
             ],

@@ -20,6 +20,7 @@ String nameShortener(String formName) {
 }
 
 class _EditRecordFormState extends State<EditRecordForm> {
+  bool obscureText = true;
   String title = "";
   String username = "";
   String password = "";
@@ -149,32 +150,51 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child: TextFormField(
-                        key: const Key("edit-password-text-field"),
-                        initialValue: Encryptor.cipherToPlainText(
-                            widget.form.formDetails["password"], "PASSWORD"),
-                        onChanged: (newText) {
-                          editedPassword = true;
-                          password = newText;
-                        },
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color.fromRGBO(23, 42, 58, 1.0),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                        ),
-                      ),
-                    ),
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: TextFormField(
+                                key: const Key("edit-password-text-field"),
+                                obscureText: obscureText,
+                                initialValue: Encryptor.cipherToPlainText(
+                                    widget.form.formDetails["password"],
+                                    "PASSWORD"),
+                                onChanged: (newText) {
+                                  editedPassword = true;
+                                  password = newText;
+                                },
+                                style: TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Color.fromRGBO(23, 42, 58, 1.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 3, color: Colors.white),
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 3, color: Colors.white),
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              key:
+                                  const Key("eye-icon-button-edit-record-form"),
+                              padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                              icon: const Icon(Icons.remove_red_eye_outlined,
+                                  color: Colors.white),
+                              onPressed: () {
+                                setState(() {
+                                  obscureText = !obscureText;
+                                });
+                              },
+                            ),
+                          ],
+                        )),
                     Container(
                       margin: EdgeInsets.fromLTRB(45, 0, 0, 0),
                       alignment: Alignment.centerLeft,

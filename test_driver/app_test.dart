@@ -198,6 +198,8 @@ void main() {
         expect(await driver.getText(chooseDatabaseButtonText), "Open Database");
       });
       test('delete-database button works', () async {
+        final databaseDeletionConfirmationPassword =
+            find.byValueKey("text-field-database-deletion-password");
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseButton);
@@ -207,10 +209,13 @@ void main() {
         await driver.tap(deleteDatabaseElevatedButton1);
         final deleteConfirmationButton =
             find.byValueKey("DeleteConfirmationButton");
+        await driver.tap(databaseDeletionConfirmationPassword);
+        await driver.enterText("PASSWORD"); //hard coded for now
         await driver.tap(deleteConfirmationButton);
         await driver.tap(deleteDatabaseCancelButton);
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
+
         await driver.tap(deleteDatabaseButton);
         final deleteDatabaseText0 = find.byValueKey("deleteDatabaseText0");
         expect(await driver.getText(deleteDatabaseText0), "Database Name");
@@ -220,6 +225,8 @@ void main() {
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
       });
       test('delete-database-icon button works', () async {
+        final databaseDeletionConfirmationPassword =
+            find.byValueKey("text-field-database-deletion-password");
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
         await driver.tap(deleteDatabaseIconButton);
@@ -229,6 +236,8 @@ void main() {
         await driver.tap(deleteDatabaseElevatedButton0);
         final deleteConfirmationButton =
             find.byValueKey("DeleteConfirmationButton");
+        await driver.tap(databaseDeletionConfirmationPassword);
+        await driver.enterText("PASSWORD"); //hard coded for now
         await driver.tap(deleteConfirmationButton);
         await driver.tap(deleteDatabaseCancelButton);
         expect(
@@ -254,6 +263,8 @@ void main() {
     });
 
     test('Be able to create a new record form inside a database', () async {
+      final eyeIconEditRecordForm =
+          find.byValueKey("eye-icon-button-new-record-form");
       //open database we previously created
       await driver.tap(chooseDatabaseButton);
       final chooseDatabaseButton2 = find.byValueKey('chooseDatabaseButton0');
@@ -271,6 +282,8 @@ void main() {
       final passwordInputNewForm = find.byValueKey('password-input-new-form');
       await driver.tap(passwordInputNewForm);
       await driver.enterText("myPASSWORD1");
+      await driver.tap(eyeIconEditRecordForm);
+
       final notesInputNewForm = find.byValueKey('notes-input-new-form');
       await driver.tap(notesInputNewForm);
       await driver.enterText("Notes Example");

@@ -11,6 +11,7 @@ class DeleteDatabase extends StatefulWidget {
   @override
   State<DeleteDatabase> createState() => _DeleteDatabaseState();
 }
+
 //Template to list over the database
 Widget deleteDatabaseTemplate(Database database, context, index) {
   //Individual delete buttons
@@ -22,13 +23,12 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
         ElevatedButton(
             key: Key("deleteDatabaseElevatedButton" + index.toString()),
             onPressed: () async {
-              try{
-                bool deleteDatabase =
-                await DeleteConfirmationScreen(context);
+              try {
+                bool deleteDatabase = await DeleteConfirmationScreen(context);
                 if (deleteDatabase) {
-                 Navigator.pop(context, index);
+                  Navigator.pop(context, index);
                 }
-              }catch(e){}
+              } catch (e) {}
             },
             style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
@@ -41,13 +41,13 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
             child: TextButton(
                 key: Key("deleteDatabaseTextButton" + index.toString()),
                 onPressed: () async {
-                  try{
+                  try {
                     bool deleteDatabase =
-                    await DeleteConfirmationScreen(context);
+                        await DeleteConfirmationScreen(context);
                     if (deleteDatabase) {
                       Navigator.pop(context, index);
                     }
-                  }catch(e){}
+                  } catch (e) {}
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
@@ -55,7 +55,8 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
                       borderRadius: BorderRadius.circular(10)),
                 ),
                 child: Text(
-                  Encryptor.cipherToPlainText(database.databaseName, "PASSWORD"),
+                  Encryptor.cipherToPlainText(
+                      database.databaseName, "PASSWORD"),
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                   key: Key("deleteDatabaseText" + index.toString()),
                 )),
@@ -72,6 +73,7 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
     double phoneWidth = MediaQuery.of(context).size.width; //411
     double phoneHeight = MediaQuery.of(context).size.height; //683
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
       body: Center(
         child: Column(
@@ -80,8 +82,8 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: SizedBox(
-                height: phoneHeight/1.12,
-                width: phoneWidth/1.22,
+                height: phoneHeight / 1.12,
+                width: phoneWidth / 1.22,
                 child: Container(
                     child: Column(
                       children: [
@@ -134,8 +136,8 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
                           scrollDirection: Axis.vertical,
                           itemCount: databases.length,
                           itemBuilder: (context, int index) =>
-                            deleteDatabaseTemplate(
-                                databases[index], context, index),
+                              deleteDatabaseTemplate(
+                                  databases[index], context, index),
                         ))),
                       ],
                     ),
