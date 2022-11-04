@@ -275,9 +275,9 @@ class _EditRecordFormState extends State<EditRecordForm> {
                           notes = " ";
                         }
 
-                        const emptyTitle = 'Title cannot be empty\n ';
-                        const emptyUsername = 'Username cannot be empty\n ';
-                        const emptyPassword = 'Password cannot be empty\n ';
+                        const emptyTitle = 'Title cannot be empty\n';
+                        const emptyUsername = 'Username cannot be empty\n';
+                        const emptyPassword = 'Password cannot be empty\n';
                         var errors = "";
 
                         if (titleCheck.isEmpty) {

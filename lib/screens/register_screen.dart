@@ -399,6 +399,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Text(
                   'Create Account',
                   style: TextStyle(color: Color(0xff989898)),
+                  key: const Key("register-screen-button-text"),
                 ),
                 color: Color(0xff189AB4),
                 onPressed: () {

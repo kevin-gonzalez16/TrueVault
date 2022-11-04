@@ -38,6 +38,7 @@ class _NewRecordFormState extends State<NewRecordForm> {
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton(
+                key: const Key("new-record-back-button"),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -232,9 +233,9 @@ class _NewRecordFormState extends State<NewRecordForm> {
                         var titleCheck = title.replaceAll(' ', '');
                         var usernameCheck = username.replaceAll(' ', '');
                         var passwordCheck = password.replaceAll(' ', '');
-                        const emptyTitle = 'Title cannot be empty\n ';
-                        const emptyUsername = 'Username cannot be empty\n ';
-                        const emptyPassword = 'Password cannot be empty\n ';
+                        const emptyTitle = 'Title cannot be empty\n';
+                        const emptyUsername = 'Username cannot be empty\n';
+                        const emptyPassword = 'Password cannot be empty\n';
                         var errors = "";
                         if (titleCheck.isEmpty) {
                           errors += emptyTitle;

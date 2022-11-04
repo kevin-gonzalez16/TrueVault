@@ -18,6 +18,7 @@ Future<bool> DeleteConfirmationScreen(BuildContext context) async {
                 color: Colors.black,
               ),
               textAlign: TextAlign.center,
+              key: Key("deleteConfirmationTextPrompt"),
             ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,

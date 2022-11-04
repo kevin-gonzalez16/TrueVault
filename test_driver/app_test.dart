@@ -250,185 +250,476 @@ void main() {
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
       });
+      test('Login Password Works', () async {
+        await driver.tap(logoutButton);
+        expect(await driver.getText(landingScreenRegisterButtonText), "Register");
+        expect(await driver.getText(landingScreenLoginButtonText), "Login");
+        await driver.tap(landingScreenLoginButton);
+        await driver.tap(loginTextField);
+        await driver.enterText("PASSWORD");
+        await driver.tap(loginScreenButton);
+        expect(await driver.getText(newDatabaseButtonText), "New Database");
+      });
+
+      test('Be able to create a new record form inside a database', () async {
+        final eyeIconEditRecordForm =
+        find.byValueKey("eye-icon-button-new-record-form");
+        //open database we previously created
+        await driver.tap(chooseDatabaseButton);
+        final chooseDatabaseButton2 = find.byValueKey('chooseDatabaseButton0');
+        await driver.tap(chooseDatabaseButton2);
+        //create a form
+        final newRecordIconButton = find.byValueKey('new-record-icon-button');
+        await driver.tap(newRecordIconButton);
+
+        final titleInputNewForm = find.byValueKey('title-input-new-form');
+        await driver.tap(titleInputNewForm);
+        await driver.enterText("Title1");
+        final usernameInputNewForm = find.byValueKey('username-input-new-form');
+        await driver.tap(usernameInputNewForm);
+        await driver.enterText("Username Example");
+        final passwordInputNewForm = find.byValueKey('password-input-new-form');
+        await driver.tap(passwordInputNewForm);
+        await driver.enterText("myPASSWORD1");
+        await driver.tap(eyeIconEditRecordForm);
+
+        final notesInputNewForm = find.byValueKey('notes-input-new-form');
+        await driver.tap(notesInputNewForm);
+        await driver.enterText("Notes Example");
+        final newFormSaveButton = find.byValueKey("new-form-save-button");
+        await driver.tap(newFormSaveButton);
+        final viewRecordButtonText = find.byValueKey("view-record-button-text0");
+        expect(await driver.getText(viewRecordButtonText), "Title1");
+      });
+
+      test('Be able to create a generated password in a new record', () async {
+        final newRecordIconButton = find.byValueKey('new-record-icon-button');
+        await driver.tap(newRecordIconButton);
+
+        final titleInputNewForm = find.byValueKey('title-input-new-form');
+        await driver.tap(titleInputNewForm);
+        await driver.enterText("Test");
+
+        final usernameInputNewForm = find.byValueKey('username-input-new-form');
+        await driver.tap(usernameInputNewForm);
+        await driver.enterText("Username Example");
+
+        final notesInputNewForm = find.byValueKey('notes-input-new-form');
+        await driver.tap(notesInputNewForm);
+        await driver.enterText("Notes Example");
+
+        //test the password generation
+        final generatePasswordButton =
+        find.byValueKey("generate-password-button");
+        await driver.tap(generatePasswordButton);
+        final passwordGeneratorEyeButton =
+        find.byValueKey("password-generator-eye-button");
+        await driver.tap(passwordGeneratorEyeButton);
+        final generatedPasswordText = find.byValueKey("generated-password-text");
+        generatedPasswordTextString = await driver.getText(generatedPasswordText);
+        final passwordGeneratorDoneButton =
+        find.byValueKey("password-generator-done-button");
+        driver.tap(passwordGeneratorDoneButton);
+        final newFormSaveButton = find.byValueKey("new-form-save-button");
+        await driver.tap(newFormSaveButton);
+        final viewRecordButtonText = find.byValueKey("view-record-button-text1");
+        expect(await driver.getText(viewRecordButtonText), "Test");
+      });
+
+      test('Be able to open a created record form inside a database', () async {
+        //open the form
+
+        final viewRecordButton = find.byValueKey("view-record-button0");
+        await driver.tap(viewRecordButton);
+
+        //press eye icon to view password
+        final eyeIconViewForm = find.byValueKey("eye-icon-button-view-form");
+        await driver.tap(eyeIconViewForm);
+
+        //check that title matches
+        final viewFormTitle = find.byValueKey("view-form-title");
+        expect(await driver.getText(viewFormTitle), "Title1");
+
+        // //check that username matches
+        final viewFormUsername = find.byValueKey("view-form-username");
+        expect(await driver.getText(viewFormUsername), "Username Example");
+
+        // //check that password matches
+        final viewFormPassword = find.byValueKey("view-form-password");
+        expect(await driver.getText(viewFormPassword), "myPASSWORD1");
+
+        // //check that notes matches
+        final viewFormNotes = find.byValueKey("view-form-notes");
+        expect(await driver.getText(viewFormNotes), "Notes Example");
+
+        final viewRecordBackButton = find.byValueKey("view-record-back-button");
+        await driver.tap(viewRecordBackButton);
+      });
+
+      test('Be able to open a created record form with generated password',
+              () async {
+            //open the form
+
+            final viewRecordButton = find.byValueKey("view-record-button1");
+            await driver.tap(viewRecordButton);
+
+            //press eye icon to view password
+            final eyeIconViewForm = find.byValueKey("eye-icon-button-view-form");
+            await driver.tap(eyeIconViewForm);
+
+            //check that title matches
+            final viewFormTitle = find.byValueKey("view-form-title");
+            expect(await driver.getText(viewFormTitle), "Test");
+
+            // //check that username matches
+            final viewFormUsername = find.byValueKey("view-form-username");
+            expect(await driver.getText(viewFormUsername), "Username Example");
+
+            // //check that password matches
+            final viewFormPassword = find.byValueKey("view-form-password");
+            expect(
+                await driver.getText(viewFormPassword), generatedPasswordTextString);
+
+            // //check that notes matches
+            final viewFormNotes = find.byValueKey("view-form-notes");
+            expect(await driver.getText(viewFormNotes), "Notes Example");
+          });
+
+      test('Be able to edit a created record', () async {
+        //form is already opened
+
+        //press edit button
+        final editFormButton = find.byValueKey("edit-form");
+        await driver.tap(editFormButton);
+        // final eye = find.byValueKey("eye-icon-button-view-form");
+        // await driver.tap(eye);
+
+        //press title input box and add "Edited"
+        final editTitleField = find.byValueKey("edit-title-text-field");
+        await driver.tap(editTitleField);
+        await driver.enterText("Edited");
+
+        //press username input box and add "Edited"
+        final editUsernameField = find.byValueKey("edit-username-text-field");
+        await driver.tap(editUsernameField);
+        await driver.enterText("Edited Username");
+
+        //press password, delete input box and add "EditedPass"
+        final editPasswordField = find.byValueKey("edit-password-text-field");
+        await driver.tap(editPasswordField);
+        await driver.enterText("Edited Password");
+        //press notes input box and add "Edited"
+        final editNotesField = find.byValueKey("edit-notes-text-field");
+        await driver.tap(editNotesField);
+        await driver.enterText("Edited Notes");
+
+        //Press save button
+        final saveEditsButton = find.byValueKey("save-edits-button");
+        await driver.tap(saveEditsButton);
+
+        //Expect changed title, username, password, and notes when returned to view_record_screen
+
+        final editedTitle = find.byValueKey("view-form-title");
+        final editedUsername = find.byValueKey("view-form-username");
+        final editedPassword = find.byValueKey("view-form-password");
+        final editedNotes = find.byValueKey("view-form-notes");
+
+        expect(await driver.getText(editedTitle), "Edited");
+        expect(await driver.getText(editedUsername), "Edited Username");
+        expect(await driver.getText(editedPassword), "Edited Password");
+        expect(await driver.getText(editedNotes), "Edited Notes");
+      });
     });
-    test('Login Password Works', () async {
-      await driver.tap(logoutButton);
-      expect(await driver.getText(landingScreenRegisterButtonText), "Register");
-      expect(await driver.getText(landingScreenLoginButtonText), "Login");
-      await driver.tap(landingScreenLoginButton);
-      await driver.tap(loginTextField);
-      await driver.enterText("PASSWORD");
-      await driver.tap(loginScreenButton);
-      expect(await driver.getText(newDatabaseButtonText), "New Database");
+
+    group('Sad Paths', () {
+      test('Return to welcome screen', () async{
+        final viewRecordBackButton = find.byValueKey("view-record-back-button");
+        await driver.tap(viewRecordBackButton);
+
+        final chooseRecordBackButton = find.byValueKey("chooseRecordBackButton");
+        await driver.tap(chooseRecordBackButton);
+
+        final chooseDatabaseCancelButton = find.byValueKey("chooseDatabaseCancelButton");
+        await driver.tap(chooseDatabaseCancelButton);
+
+        final logoutButton = find.byValueKey("logoutButton");
+        await driver.tap(logoutButton);
+
+        final landingScreenLoginButtonText = find.byValueKey("landingScreenLoginButtonText");
+        expect(await driver.getText(landingScreenLoginButtonText),"Login");
+
+      });
+
+      test("Register screen rejects passwords", () async{
+        await driver.tap(landingScreenRegisterButton);
+
+        //Testing password length less than 8
+        await driver.tap(registerTextField1);
+        await driver.enterText("mypass");
+        await driver.tap(registerTextField2);
+        await driver.enterText("mypass");
+        await driver.tap(registerLoginButton);
+        final registerScreenButtonText = find.byValueKey("register-screen-button-text");
+        expect(await driver.getText(registerScreenButtonText), "Create Account");
+
+        //testing passwords with no symbols
+        await driver.tap(registerTextField1);
+        await driver.enterText("mypass123");
+        await driver.tap(registerTextField2);
+        await driver.enterText("mypass123");
+        await driver.tap(registerLoginButton);
+        expect(await driver.getText(registerScreenButtonText), "Create Account");
+
+        //testing passwords with no lowercase
+        await driver.tap(registerTextField1);
+        await driver.enterText("MYPASS123");
+        await driver.tap(registerTextField2);
+        await driver.enterText("MYPASS123");
+        await driver.tap(registerLoginButton);
+        expect(await driver.getText(registerScreenButtonText), "Create Account");
+
+        //testing passwords with only symbols
+        await driver.tap(registerTextField1);
+        await driver.enterText("!@#!@!");
+        await driver.tap(registerTextField2);
+        await driver.enterText("!@#!@!");
+        await driver.tap(registerLoginButton);
+        expect(await driver.getText(registerScreenButtonText), "Create Account");
+
+        //testing non matching good passwords
+        await driver.tap(registerTextField1);
+        await driver.enterText("myPASSWORD1!");
+        await driver.tap(registerTextField2);
+        await driver.enterText("myPASSWORD1#");
+        await driver.tap(registerLoginButton);
+        expect(await driver.getText(registerScreenButtonText), "Create Account");
+
+        //testing non matching good passwords
+        await driver.tap(registerTextField1);
+        await driver.enterText("myPASSWORD1!");
+        await driver.tap(registerTextField2);
+        await driver.enterText("myPASSWORD1!");
+        await driver.tap(registerLoginButton);
+      });
+
+      test("Reject empty fields in new database screen", () async{
+        await driver.tap(newDatabaseButton);
+        final emptyInputDialogText = find.byValueKey("emptyInputDialogText");
+        final emptyInputDialogOkButton = find.byValueKey("emptyInputDialogOkButton");
+
+        //test both empty fields
+        await driver.tap(createDatabaseButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Name cannot be empty\nLocation cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+        //test empty name
+        await driver.tap(newDatabaseLocationTextField);
+        await driver.enterText("New Database Location");
+        await driver.tap(createDatabaseButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Name cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+
+        await driver.tap(newDatabaseLocationTextField);
+        await driver.enterText("");
+
+        //test empty location
+        await driver.tap(newDatabaseNameTextField);
+        await driver.enterText("Database Name");
+        await driver.tap(createDatabaseButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Location cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+      });
+
+      test("Reject empty fields in new record screen", () async{
+
+        final emptyInputDialogText = find.byValueKey("emptyInputDialogText");
+        final emptyInputDialogOkButton = find.byValueKey("emptyInputDialogOkButton");
+        final newFormSaveButton = find.byValueKey("new-form-save-button");
+
+        //create a database (already tested)
+        await driver.tap(newDatabaseNameTextField);
+        await driver.enterText("Database Name");
+        await driver.tap(newDatabaseLocationTextField);
+        await driver.enterText("New Database Location");
+        await driver.tap(createDatabaseButton);
+
+        //create a new record screen
+        final newRecordIconButton = find.byValueKey('new-record-icon-button');
+        await driver.tap(newRecordIconButton);
+
+        //reject all empty fields
+        await driver.tap(newFormSaveButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Title cannot be empty\nUsername cannot be empty\nPassword cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+        //reject no password
+        final titleInputNewForm = find.byValueKey('title-input-new-form');
+        await driver.tap(titleInputNewForm);
+        await driver.enterText("Title1");
+
+        final usernameInputNewForm = find.byValueKey('username-input-new-form');
+        await driver.tap(usernameInputNewForm);
+        await driver.enterText("Username Example");
+
+        await driver.tap(newFormSaveButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Password cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+        //reject no username
+        final passwordInputNewForm = find.byValueKey('password-input-new-form');
+        await driver.tap(passwordInputNewForm);
+        await driver.enterText("myPASSWORD1");
+
+        await driver.tap(usernameInputNewForm);
+        await driver.enterText("");
+
+        await driver.tap(newFormSaveButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Username cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+        //reject no title
+        await driver.tap(usernameInputNewForm);
+        await driver.enterText("Username Example");
+        await driver.tap(titleInputNewForm);
+        await driver.enterText("");
+        await driver.tap(newFormSaveButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Title cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+        final newRecordBackButton = find.byValueKey("new-record-back-button");
+        driver.tap(newRecordBackButton);
+        final chooseRecordBackButton =
+        find.byValueKey('chooseRecordBackButton');
+        driver.tap(chooseRecordBackButton);
+
+      });
+
+      test("Reject empty fields in edit record screen", ()async{
+
+        final emptyInputDialogText = find.byValueKey("emptyInputDialogText");
+        final emptyInputDialogOkButton = find.byValueKey("emptyInputDialogOkButton");
+
+        final chooseDatabaseButton2 = find.byValueKey('chooseDatabaseButton0');
+        await driver.tap(chooseDatabaseButton2);
+        final viewRecordButton = find.byValueKey("view-record-button1");
+        await driver.tap(viewRecordButton);
+        final editFormButton = find.byValueKey("edit-form");
+        await driver.tap(editFormButton);
+
+        //reject all empty fields
+        final editTitleField = find.byValueKey("edit-title-text-field");
+        await driver.tap(editTitleField);
+        await driver.enterText("");
+
+        final editUsernameField = find.byValueKey("edit-username-text-field");
+        await driver.tap(editUsernameField);
+        await driver.enterText("");
+
+        final editPasswordField = find.byValueKey("edit-password-text-field");
+        await driver.tap(editPasswordField);
+        await driver.enterText("");
+
+        final saveEditsButton = find.byValueKey("save-edits-button");
+        await driver.tap(saveEditsButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Title cannot be empty\nUsername cannot be empty\nPassword cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+        //reject no password
+        await driver.tap(editTitleField);
+        await driver.enterText("Edited Title");
+
+        await driver.tap(editUsernameField);
+        await driver.enterText("Edited Username");
+
+        await driver.tap(saveEditsButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Password cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+        //reject no title
+        await driver.tap(editTitleField);
+        await driver.enterText("");
+
+        await driver.tap(editPasswordField);
+        await driver.enterText("Edited Password");
+
+        await driver.tap(saveEditsButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Title cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+        //reject no username
+        await driver.tap(editTitleField);
+        await driver.enterText("Edited Title");
+
+        await driver.tap(editUsernameField);
+        await driver.enterText("");
+
+        await driver.tap(saveEditsButton);
+        expect(await driver.getText(emptyInputDialogText),
+            "Username cannot be empty\n");
+        await driver.tap(emptyInputDialogOkButton);
+
+        await driver.tap(editUsernameField);
+        await driver.enterText("Edited Username");
+        await driver.tap(saveEditsButton);
+
+      });
+      test("Reject wrong password in delete database screen", () async{
+        final viewRecordBackButton = find.byValueKey("view-record-back-button");
+        await driver.tap(viewRecordBackButton);
+        final chooseRecordBackButton =
+        find.byValueKey('chooseRecordBackButton');
+        await driver.tap(chooseRecordBackButton);
+        final chooseDatabaseCancelButton = find.byValueKey("chooseDatabaseCancelButton");
+        await driver.tap(chooseDatabaseCancelButton);
+        await driver.tap(deleteDatabaseButton);
+
+        final deleteDatabaseElevatedButton0 = find.byValueKey("deleteDatabaseElevatedButton0");
+        await driver.tap(deleteDatabaseElevatedButton0);
+        final databaseDeletionConfirmationPassword =
+        find.byValueKey("text-field-database-deletion-password");
+        await driver.tap(databaseDeletionConfirmationPassword);
+        await driver.enterText("WRONG PASSWORD");
+        final deleteConfirmationButton =
+        find.byValueKey("DeleteConfirmationButton");
+        await driver.tap(deleteConfirmationButton);
+
+        final deleteConfirmationTextPrompt = find.byValueKey("deleteConfirmationTextPrompt");
+        expect(await driver.getText(deleteConfirmationTextPrompt),
+            "Are you sure you want to delete this database?");
+
+        await driver.tap(databaseDeletionConfirmationPassword);
+        await driver.enterText("PASSWORD");
+        await driver.tap(deleteConfirmationButton);
+
+        final deleteDatabaseCancelButton = find.byValueKey("deleteDatabaseCancelButton");
+        final logoutButton = find.byValueKey("logoutButton");
+
+        await driver.tap(deleteDatabaseCancelButton);
+        await driver.tap(logoutButton);
+      });
+      test("Login screen rejects wrong password", () async{
+        await driver.tap(landingScreenLoginButton);
+        await driver.tap(loginTextField);
+        await driver.enterText("NOT A PASSWORD");
+        await driver.tap(loginScreenButton);
+        final loginButtonText = find.byValueKey("loginButtonText");
+        expect(await driver.getText(loginButtonText), "Log in");
+      });
+
+
     });
 
-    test('Be able to create a new record form inside a database', () async {
-      final eyeIconEditRecordForm =
-          find.byValueKey("eye-icon-button-new-record-form");
-      //open database we previously created
-      await driver.tap(chooseDatabaseButton);
-      final chooseDatabaseButton2 = find.byValueKey('chooseDatabaseButton0');
-      await driver.tap(chooseDatabaseButton2);
-      //create a form
-      final newRecordIconButton = find.byValueKey('new-record-icon-button');
-      await driver.tap(newRecordIconButton);
-
-      final titleInputNewForm = find.byValueKey('title-input-new-form');
-      await driver.tap(titleInputNewForm);
-      await driver.enterText("Title1");
-      final usernameInputNewForm = find.byValueKey('username-input-new-form');
-      await driver.tap(usernameInputNewForm);
-      await driver.enterText("Username Example");
-      final passwordInputNewForm = find.byValueKey('password-input-new-form');
-      await driver.tap(passwordInputNewForm);
-      await driver.enterText("myPASSWORD1");
-      await driver.tap(eyeIconEditRecordForm);
-
-      final notesInputNewForm = find.byValueKey('notes-input-new-form');
-      await driver.tap(notesInputNewForm);
-      await driver.enterText("Notes Example");
-      final newFormSaveButton = find.byValueKey("new-form-save-button");
-      await driver.tap(newFormSaveButton);
-      final viewRecordButtonText = find.byValueKey("view-record-button-text0");
-      expect(await driver.getText(viewRecordButtonText), "Title1");
-    });
-
-    test('Be able to create a generated password in a new record', () async {
-      final newRecordIconButton = find.byValueKey('new-record-icon-button');
-      await driver.tap(newRecordIconButton);
-
-      final titleInputNewForm = find.byValueKey('title-input-new-form');
-      await driver.tap(titleInputNewForm);
-      await driver.enterText("Test");
-
-      final usernameInputNewForm = find.byValueKey('username-input-new-form');
-      await driver.tap(usernameInputNewForm);
-      await driver.enterText("Username Example");
-
-      final notesInputNewForm = find.byValueKey('notes-input-new-form');
-      await driver.tap(notesInputNewForm);
-      await driver.enterText("Notes Example");
-
-      //test the password generation
-      final generatePasswordButton =
-          find.byValueKey("generate-password-button");
-      await driver.tap(generatePasswordButton);
-      final passwordGeneratorEyeButton =
-          find.byValueKey("password-generator-eye-button");
-      await driver.tap(passwordGeneratorEyeButton);
-      final generatedPasswordText = find.byValueKey("generated-password-text");
-      generatedPasswordTextString = await driver.getText(generatedPasswordText);
-      final passwordGeneratorDoneButton =
-          find.byValueKey("password-generator-done-button");
-      driver.tap(passwordGeneratorDoneButton);
-      final newFormSaveButton = find.byValueKey("new-form-save-button");
-      await driver.tap(newFormSaveButton);
-      final viewRecordButtonText = find.byValueKey("view-record-button-text1");
-      expect(await driver.getText(viewRecordButtonText), "Test");
-    });
-
-    test('Be able to open a created record form inside a database', () async {
-      //open the form
-
-      final viewRecordButton = find.byValueKey("view-record-button0");
-      await driver.tap(viewRecordButton);
-
-      //press eye icon to view password
-      final eyeIconViewForm = find.byValueKey("eye-icon-button-view-form");
-      await driver.tap(eyeIconViewForm);
-
-      //check that title matches
-      final viewFormTitle = find.byValueKey("view-form-title");
-      expect(await driver.getText(viewFormTitle), "Title1");
-
-      // //check that username matches
-      final viewFormUsername = find.byValueKey("view-form-username");
-      expect(await driver.getText(viewFormUsername), "Username Example");
-
-      // //check that password matches
-      final viewFormPassword = find.byValueKey("view-form-password");
-      expect(await driver.getText(viewFormPassword), "myPASSWORD1");
-
-      // //check that notes matches
-      final viewFormNotes = find.byValueKey("view-form-notes");
-      expect(await driver.getText(viewFormNotes), "Notes Example");
-
-      final viewRecordBackButton = find.byValueKey("view-record-back-button");
-      await driver.tap(viewRecordBackButton);
-    });
-
-    test('Be able to open a created record form with generated password',
-        () async {
-      //open the form
-
-      final viewRecordButton = find.byValueKey("view-record-button1");
-      await driver.tap(viewRecordButton);
-
-      //press eye icon to view password
-      final eyeIconViewForm = find.byValueKey("eye-icon-button-view-form");
-      await driver.tap(eyeIconViewForm);
-
-      //check that title matches
-      final viewFormTitle = find.byValueKey("view-form-title");
-      expect(await driver.getText(viewFormTitle), "Test");
-
-      // //check that username matches
-      final viewFormUsername = find.byValueKey("view-form-username");
-      expect(await driver.getText(viewFormUsername), "Username Example");
-
-      // //check that password matches
-      final viewFormPassword = find.byValueKey("view-form-password");
-      expect(
-          await driver.getText(viewFormPassword), generatedPasswordTextString);
-
-      // //check that notes matches
-      final viewFormNotes = find.byValueKey("view-form-notes");
-      expect(await driver.getText(viewFormNotes), "Notes Example");
-    });
-
-    test('Be able to edit a created record', () async {
-      //form is already opened
-
-      //press edit button
-      final editFormButton = find.byValueKey("edit-form");
-      await driver.tap(editFormButton);
-      // final eye = find.byValueKey("eye-icon-button-view-form");
-      // await driver.tap(eye);
-
-      //press title input box and add "Edited"
-      final editTitleField = find.byValueKey("edit-title-text-field");
-      await driver.tap(editTitleField);
-      await driver.enterText("Edited");
-
-      //press username input box and add "Edited"
-      final editUsernameField = find.byValueKey("edit-username-text-field");
-      await driver.tap(editUsernameField);
-      await driver.enterText("Edited Username");
-
-      //press password, delete input box and add "EditedPass"
-      final editPasswordField = find.byValueKey("edit-password-text-field");
-      await driver.tap(editPasswordField);
-      await driver.enterText("Edited Password");
-      //press notes input box and add "Edited"
-      final editNotesField = find.byValueKey("edit-notes-text-field");
-      await driver.tap(editNotesField);
-      await driver.enterText("Edited Notes");
-
-      //Press save button
-      final saveEditsButton = find.byValueKey("save-edits-button");
-      await driver.tap(saveEditsButton);
-
-      //Expect changed title, username, password, and notes when returned to view_record_screen
-
-      final editedTitle = find.byValueKey("view-form-title");
-      final editedUsername = find.byValueKey("view-form-username");
-      final editedPassword = find.byValueKey("view-form-password");
-      final editedNotes = find.byValueKey("view-form-notes");
-
-      expect(await driver.getText(editedTitle), "Edited");
-      expect(await driver.getText(editedUsername), "Edited Username");
-      expect(await driver.getText(editedPassword), "Edited Password");
-      expect(await driver.getText(editedNotes), "Edited Notes");
-    });
   });
 }
