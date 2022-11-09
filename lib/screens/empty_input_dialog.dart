@@ -14,6 +14,7 @@ void emptyInputDialog(BuildContext context, String errors) async {
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
+              key: const Key("emptyInputDialogText"),
             ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -32,6 +33,7 @@ void emptyInputDialog(BuildContext context, String errors) async {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FlatButton(
+                    key: const Key("emptyInputDialogOkButton"),
                     onPressed: () => Navigator.of(context).pop(false),
                     child: Text(
                       'Ok',

@@ -131,7 +131,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                         errors += "Name cannot be empty\n";
                                       }
                                       if (locationCheck.isEmpty) {
-                                        errors += "Location cannot be empty\n ";
+                                        errors += "Location cannot be empty\n";
                                       }
                                       if (nameCheck.isEmpty ||
                                           locationCheck.isEmpty) {

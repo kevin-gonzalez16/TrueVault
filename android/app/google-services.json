@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "305167882862",
+    "project_id": "truevault-d0b99",
+    "storage_bucket": "truevault-d0b99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305167882862:android:b2a4f8278b3261c896a47f",
+        "android_client_info": {
+          "package_name": "com.truevault.true_vault"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305167882862-hksj42anc2t35cvvhcdrlqq4idffprb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2vWKKgVikVRD4fK2071uyBQyeXUrB2NM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "305167882862-hksj42anc2t35cvvhcdrlqq4idffprb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

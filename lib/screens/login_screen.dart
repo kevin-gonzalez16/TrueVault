@@ -67,9 +67,10 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             RaisedButton(
                 key: const Key("login-screen-button"),
-                child: Text(
+                child: const Text(
                   'Log in',
                   style: TextStyle(color: Color(0xff989898)),
+                  key: Key("loginButtonText"),
                 ),
                 color: Color(0xff189AB4),
                 //  color: Color(0xff189AB4),
