@@ -5,22 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d32852c9-ee18-4051-accc-63385da310dc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/create_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/create_database_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/delete_confirmation_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/delete_confirmation_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/edit_record.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/edit_record.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/empty_input_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/empty_input_dialog.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/login_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/new_record_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/new_record_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/register_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/register_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_driver/app_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test_driver/app_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/main_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +62,7 @@
       <recent name="$PROJECT_DIR$/android/app" />
     </key>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in test">
+  <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="Template function creates a button for each database" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Template function creates a button for each database" />
       <option name="testFile" value="$PROJECT_DIR$/test/database_template_test.dart" />
