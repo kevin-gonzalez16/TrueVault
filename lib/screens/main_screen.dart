@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/create_database_screen.dart';
 import 'package:true_vault/screens/delete_database_screen.dart';
+import 'package:true_vault/screens/view_database_screen.dart';
+import 'package:true_vault/screens/view_record.dart';
 import 'package:true_vault/utils/database.dart';
+import 'package:true_vault/utils/encryptor.dart';
 
 import 'landing_screen.dart';
 
@@ -15,6 +18,8 @@ class MainScreen extends StatefulWidget {
 }
 
 List<Database>databases = [];
+int databaseIndex = 0;
+int recordIndex = 0;
 
 class _MainScreenState extends State<MainScreen> {
   @override
@@ -45,40 +50,139 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ],
             ),
-            Container(
-                width: phoneWidth/1.265,
-                height: phoneHeight/4.55,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  color: Color(0xff189AB4),
-                ),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 20.0,
+            GestureDetector(
+              //Swiper for database
+              onHorizontalDragEnd: (dragEndDetails){
+                //Swipe right gesture
+                if (dragEndDetails.primaryVelocity! < 0) {
+                  setState(() {
+                    if(databaseIndex == databases.length-1){
+                      databaseIndex = 0;
+                      recordIndex = 0;
+                    }
+                    else{
+                      databaseIndex = databaseIndex + 1;
+                      recordIndex = 0;
+                    }
+                  });
+                }
+                //swipe left gesture
+                else if(dragEndDetails.primaryVelocity! > 0){
+                  setState(() {
+                    if(databaseIndex == 0){
+                      databaseIndex = databases.length - 1;
+                      recordIndex = 0;
+                    }
+                    else{
+                      databaseIndex = databaseIndex - 1;
+                      recordIndex = 0;
+                    }
+                  });
+                }
+              },
+              child: Container(
+                  width: phoneWidth/1.265,
+                  height: phoneHeight/4.55,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    color: Color(0xff189AB4),
+                  ),
+                  child: Row(
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 10.0,
+                              ),
+                              Icon(
+                                Icons.donut_large_rounded,
+                                color: Colors.white,
+                                size: phoneWidth/4.56,
+                              ),
+                            ],
+                          )
+                      ),
+                      Container(
+                        width: 10.0,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child:Text(
+                          databases.isEmpty ? " " :
+                          Encryptor.cipherToPlainText(databases[databaseIndex].databaseName, "PASSWORD"),
+                          style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                         ),
-                        Icon(
-                          Icons.donut_large_rounded,
-                          color: Colors.white,
-                          size: phoneWidth/4.56,
-                        ),
-                      ],
-                    ))),
-
+                      )
+                    ],
+                  )
+              ),
+              onTap: (){
+                if(databases.isNotEmpty) {
+                  Navigator.push(context,MaterialPageRoute(
+                      builder: (context) => ViewDatabaseScreen(database: databases[databaseIndex])),
+                  );
+                }
+              },
+            ),
             ////////////
             Container(
               height: 40.0,
             ),
-            Container(
-              width: phoneWidth/1.417,
-              height: phoneHeight/11.383,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(50)),
-                color: Color(0xff189AB4),
+            GestureDetector(
+              //Swiper for records
+              onHorizontalDragEnd: (dragEndDetails){
+                //swipe right gesture
+                if (dragEndDetails.primaryVelocity! < 0) {
+                  setState(() {
+                    if(recordIndex == databases[databaseIndex].forms.length-1){
+                      recordIndex = 0;
+                    }
+                    else{
+                      recordIndex = recordIndex + 1;
+                    }
+                  });
+                }
+                //swipe left gesture
+                else if(dragEndDetails.primaryVelocity! > 0){
+                  setState(() {
+                    if(recordIndex == 0){
+                      recordIndex = databases[databaseIndex].forms.length - 1;
+                    }
+                    else{
+                      recordIndex = recordIndex - 1;
+                    }
+                  });
+                }
+              },
+              child:
+              Container(
+                width: phoneWidth/1.417,
+                height: phoneHeight/11.383,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                  color: Color(0xff189AB4),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:[
+                    Text(
+                      databases.isEmpty  ? " " : databases[databaseIndex].forms.isEmpty ? " " : Encryptor.cipherToPlainText(databases[databaseIndex].forms[recordIndex].formDetails["serviceName"], "PASSWORD"),
+                      style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
+              onTap: (){
+                if(databases.isNotEmpty && databases[databaseIndex].forms.isNotEmpty){
+                  Navigator.push(context,MaterialPageRoute(
+                      builder: (context) => ViewRecordForm(form: databases[databaseIndex].forms[recordIndex])),
+                  );
+                }
+              },
             ),
+
 
             Container(
               height: 40.0,
