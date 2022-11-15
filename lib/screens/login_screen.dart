@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
-import 'package:true_vault/services/auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -77,15 +75,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Color(0xff189AB4),
                 //  color: Color(0xff189AB4),
                 onPressed: () async{
-                  // if ("PASSWORD" == passwordController.text) {
-                  //   Navigator.pushReplacement(context,
-                  //       MaterialPageRoute(builder: (context) => MainScreen()));
-                  // }
-                  await Firebase.initializeApp();
-                  AuthService test = AuthService();
-                  dynamic result = await test.registerWithEmailAndPassword("email@gmail.com", "password123");
-                  //dynamic result = await test.signInWithEmailAndPassword("email@gmail.com", "password123");
-                  print(result);
+                  if ("PASSWORD" == passwordController.text) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => MainScreen()));
+                  }
                   setState(() {});
                 }),
           ],
