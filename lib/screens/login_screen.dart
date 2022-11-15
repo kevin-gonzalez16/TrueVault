@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 color: Color(0xff189AB4),
                 //  color: Color(0xff189AB4),
-                onPressed: () {
+                onPressed: () async{
                   if ("PASSWORD" == passwordController.text) {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => MainScreen()));
