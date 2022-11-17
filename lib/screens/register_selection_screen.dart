@@ -32,18 +32,21 @@ class _RegisterSelectionScreenState extends State<RegisterSelectionScreen> {
             child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  key: const Key("return-button-register-selection-screen"),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    key: const Key("return-button-register-selection-screen"),
 
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                  //replace with our own icon data.
-                )
-              ],
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    //replace with our own icon data.
+                  )
+                ],
+              ),
             ),
             SizedBox(height: phoneHeight / 7),
             Row(

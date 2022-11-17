@@ -83,22 +83,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  key: const Key("return-button-register-screen"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                  //replace with our own icon data.
-                )
-              ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    key: const Key("return-button-register-screen"),
+
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    //replace with our own icon data.
+                  )
+                ],
+              ),
             ),
             SizedBox(height: phoneHeight / 8),
-            Container(
-              height: 60.0,
-            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 0, 30, 30.0),
               child: TextField(
