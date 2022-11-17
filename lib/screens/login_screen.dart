@@ -16,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
 
   bool showMessage = false;
-
+  bool _isVisible = false;
   recieveResponseFromTimer() {
     if (!mounted) return;
 
@@ -46,16 +46,19 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Center(
             child: Column(
           children: [
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                  //replace with our own icon data.
-                )
-              ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    //replace with our own icon data.
+                  )
+                ],
+              ),
             ),
             Container(
               height: 20.0,
@@ -102,9 +105,23 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
               child: TextField(
+                obscureText: !_isVisible,
                 key: const Key("login-password-text-field"),
                 controller: passwordController,
                 decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isVisible = !_isVisible;
+                      });
+                    },
+                    icon: _isVisible
+                        ? Icon(
+                            Icons.visibility,
+                            color: Colors.black,
+                          )
+                        : Icon(Icons.visibility_off, color: Colors.grey),
+                  ),
                   filled: true,
                   fillColor: Color(0xffc9c9c9),
                   focusedBorder: OutlineInputBorder(
