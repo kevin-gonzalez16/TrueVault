@@ -63,7 +63,7 @@ class AuthService {
       dynamic userAttempt = result.user;
 
       //need to create a new document for the user with the uid
-      //await DatabaseService(userAttempt.uid).createUserDocument();
+      await DatabaseService(userAttempt.uid).createUserDocument();
 
       //return the user casted as a true vault user
       return trueVaultUserFromFirebaseUser(userAttempt);

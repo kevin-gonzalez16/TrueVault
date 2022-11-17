@@ -34,7 +34,8 @@ void main() {
       Encryptor.plainTextToCipher("new database2", "PASSWORD"),
       Encryptor.plainTextToCipher("/", "PASSWORD"),
       Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
-    );        databases.add(newDatabase);
+    );
+    databases.add(newDatabase);
     await tester
         .pumpWidget(MaterialApp(home: ChooseDatabase(databases: databases)));
     expect(find.text("cancel"), findsOneWidget);
@@ -76,47 +77,5 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text("New Database"), findsOneWidget);
-  });
-
-  testWidgets("Correct password redirects you to the main screen",
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
-    expect(find.text("Master Password"), findsOneWidget);
-
-    await tester.enterText(find.byType(TextField), "PASSWORD");
-    await tester.tap(find.byType(RaisedButton));
-
-    await tester.pumpAndSettle();
-
-    expect(find.text("New Database"), findsOneWidget);
-    expect(find.text("Open Database"), findsOneWidget);
-    expect(find.text("Delete Database"), findsOneWidget);
-  });
-
-  testWidgets("Incorrect password keeps you in the login screen",
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
-    expect(find.text("Master Password"), findsOneWidget);
-
-    await tester.enterText(find.byType(TextField), "NOT_PASSWORD");
-    await tester.tap(find.byType(RaisedButton));
-
-    await tester.pumpAndSettle();
-
-    expect(find.text("New Database"), findsNothing);
-    expect(find.text("Open Database"), findsNothing);
-    expect(find.text("Delete Database"), findsNothing);
-  });
-
-  testWidgets("Landing screen Login button takes to Login screen",
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LandingScreen()));
-    expect(find.text("Register"), findsOneWidget);
-    expect(find.text("Login"), findsOneWidget);
-
-    await tester.tap(find.byKey(const Key("landingScreenLoginButton")));
-
-    await tester.pumpAndSettle();
-    expect(find.text("Master Password"), findsOneWidget);
   });
 }

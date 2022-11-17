@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:true_vault/screens/landing_screen.dart';
+import 'package:true_vault/screens/login_screen.dart';
 import 'package:true_vault/screens/main_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:true_vault/services/auth.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  final TextEditingController email;
+  RegisterScreen({Key? key, required this.email}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController createMasterPasswordTextEditingController =
+  TextEditingController createPasswordTextEditingController =
       TextEditingController();
 
-  TextEditingController confirmMasterPasswordTextEditingController =
+  TextEditingController confirmPasswordTextEditingController =
       TextEditingController();
 
   bool _isVisible = false;
+
   bool _isPassword8Characters = false;
   bool _hasPassword1Number = false;
   bool _hasPassword1SpecialCharacter = false;
@@ -55,8 +61,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (upperCaseRegex.hasMatch(password))
         _hasPassword1UppercaseCharacter = true;
 
-      _match = createMasterPasswordTextEditingController.text ==
-          confirmMasterPasswordTextEditingController.text;
+      _match = createPasswordTextEditingController.text ==
+          confirmPasswordTextEditingController.text;
 
       isValidPassword = _isPassword8Characters &&
           _hasPassword1Number &&
@@ -75,34 +81,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
         backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
         body: Center(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-                width: phoneWidth / 1.265,
-                height: phoneHeight / 4.55,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  color: Color(0xff189AB4),
-                ),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.donut_large_rounded,
-                          color: Colors.white,
-                          size: phoneWidth / 4.56,
-                        ),
-                      ],
-                    ))),
+            Row(
+              children: [
+                IconButton(
+                  key: const Key("return-button-register-screen"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                  //replace with our own icon data.
+                )
+              ],
+            ),
+            SizedBox(height: phoneHeight / 8),
             Container(
               height: 60.0,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 30.0),
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 30.0),
               child: TextField(
                 key: const Key("register-text-field-1"),
-                controller: createMasterPasswordTextEditingController,
+                controller: createPasswordTextEditingController,
                 onChanged: (password) {
                   onPasswordChanged(password);
                   if (!_isEmpty) {
@@ -145,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.black)),
-                  hintText: "Create Master Password",
+                  hintText: "Create Password",
                   hintStyle: TextStyle(fontSize: 18, color: Color(0xff989898)),
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -153,10 +154,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
               child: TextField(
                 key: const Key("register-text-field-2"),
-                controller: confirmMasterPasswordTextEditingController,
+                controller: confirmPasswordTextEditingController,
                 onChanged: (password) {
                   onPasswordChanged(password);
                   if (!_isEmpty) {
@@ -200,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(15.0),
                       borderSide:
                           BorderSide(width: 3, color: Color(0xffC9C9C9))),
-                  hintText: "Confirm Master Password",
+                  hintText: "Confirm Password",
                   hintStyle: TextStyle(fontSize: 18, color: Color(0xff989898)),
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -402,31 +403,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   key: const Key("register-screen-button-text"),
                 ),
                 color: Color(0xff189AB4),
-                onPressed: () {
-                  setState(() {
-                    if (!_isEmpty) {
-                      if (_match) {
-                        match = true;
-                      } else {
-                        match = false;
-                      }
-                      if (isValidPassword) {
-                        notValid = true;
-                      } else if (!isValidPassword) {
-                        notValid = false;
-                      }
-
-                      if (isValidPassword && match) {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MainScreen()));
-                      }
-                      empty = false;
+                onPressed: () async {
+                  if (!_isEmpty) {
+                    if (_match) {
+                      match = true;
                     } else {
-                      empty = true;
+                      match = false;
                     }
-                  });
+                    if (isValidPassword) {
+                      notValid = true;
+                    } else if (!isValidPassword) {
+                      notValid = false;
+                    }
+
+                    if (isValidPassword && match) {
+                      await Firebase.initializeApp();
+                      AuthService test = AuthService();
+                      dynamic result = await test.registerWithEmailAndPassword(
+                          widget.email.text,
+                          confirmPasswordTextEditingController.text);
+
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LandingScreen()));
+                    }
+                    empty = false;
+                  } else {
+                    empty = true;
+                  }
+                  setState(() {});
                 }),
           ],
         )));
