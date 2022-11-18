@@ -4,18 +4,15 @@ class Database{
 
   //class variables
   String databaseName;
-  String databaseLocation;
-  String databaseMasterPassword;
+  String databaseID;
   List <Form> forms = [];
 
   //constructor
-  Database(this.databaseName, this.databaseLocation, this.databaseMasterPassword);
+  Database(this.databaseName, this.databaseID);
 
   //adders and setters
   void addForm(Form newForm){forms.add(newForm);}
   void removeForm(int index){forms.removeAt(index);}
   void renameDB(String newName){databaseName = newName;}
-  void moveDB(String newLocation){databaseLocation = newLocation;}
-  void changeMasterPassword(String newMasterPassword){databaseMasterPassword = newMasterPassword;}
 
 }

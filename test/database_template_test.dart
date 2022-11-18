@@ -12,18 +12,15 @@ void main() {
     Database newDatabase = Database(
       Encryptor.plainTextToCipher("new database", "PASSWORD"),
       Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
     );
 
     Database newDatabase1 = Database(
       Encryptor.plainTextToCipher("new database2", "PASSWORD"),
       Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
     );
     Database newDatabase2 = Database(
       Encryptor.plainTextToCipher("new database3", "PASSWORD"),
       Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
     );
 
     databases.add(newDatabase);
