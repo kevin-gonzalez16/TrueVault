@@ -1,7 +1,10 @@
+import 'package:true_vault/utils/database.dart';
+
 class TrueVaultUser {
   String uID;
+  List<Database> databases;
 
-  TrueVaultUser(this.uID);
+  TrueVaultUser(this.uID, this.databases);
 }
 /*
 Class User

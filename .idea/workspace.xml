@@ -6,11 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="d32852c9-ee18-4051-accc-63385da310dc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/login_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/services/auth.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/auth.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/services/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/database.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/credential.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/credential.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/credential.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/database.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/encryptor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/encryptor.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/form.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/user.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/encryptor_class_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/encryptor_class_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,16 +69,10 @@
       <recent name="$PROJECT_DIR$/android/app" />
     </key>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in auth_service_test.dart">
-    <configuration name="auth.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/lib/services/auth.dart" />
+  <component name="RunManager" selected="Flutter Test.tests in test">
+    <configuration name="encryptor.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/lib/utils/encryptor.dart" />
       <option name="workingDirectory" value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Throw null on non existing user sign in" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Throw null on non existing user sign in" />
-      <option name="testFile" value="$PROJECT_DIR$/test/auth_class_test.dart" />
-      <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="tests in auth_class_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -88,6 +85,11 @@
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="tests in encryptor_class_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/encryptor_class_test.dart" />
+      <option name="useRegexp" value="false" />
+      <method v="2" />
+    </configuration>
     <configuration name="tests in test" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testDir" value="$PROJECT_DIR$/test" />
       <option name="useRegexp" value="false" />
@@ -95,11 +97,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.tests in test" />
+        <item itemvalue="Flutter Test.tests in encryptor_class_test.dart" />
+        <item itemvalue="Dart Command Line App.encryptor.dart" />
         <item itemvalue="Flutter Test.tests in auth_service_test.dart" />
         <item itemvalue="Flutter Test.tests in auth_class_test.dart" />
-        <item itemvalue="Flutter Test.Throw null on non existing user sign in" />
-        <item itemvalue="Dart Command Line App.auth.dart" />
-        <item itemvalue="Flutter Test.tests in test" />
       </list>
     </recent_temporary>
   </component>
