@@ -46,8 +46,7 @@ class DatabaseService {
       //first get the database name
       //database.data() returns a map of string keys to dynamic values
       Database newDatabase = Database(database.data()['databaseName'],
-          "databaseLocation",
-          "databaseMasterPassword"); //These might have to be removed
+      database.id);
 
       //formsCollection hold all the forms in a specific database
       var formsCollection = await
@@ -81,9 +80,29 @@ class DatabaseService {
 
   Future<void> createUserDocument() async {}
 
-  Future<void> addDatabase() async {}
+  Future<void> addDatabase(String databaseName) async {
 
-  Future<void> addRecord() async {}
+    //Get the Collection of Databases for the specific user
+    await FirebaseFirestore.instance.collection("records") //Root Directory
+        .doc(uid) //Unique User Document
+        .collection("Databases") //accessing the Database collections
+        .add({"databaseName":databaseName}); //Adding a new DB document
+  }
+
+  Future<void> addRecord(String databaseID, List<String>recordInfo) async {
+
+    await FirebaseFirestore.instance.collection("records") //Root Directory
+        .doc(uid) //Unique user document
+        .collection("Databases") //Accessing the Database collections
+        .doc(databaseID) //Access the specific database
+        .collection("Forms") //Access the Forms collection for that DB
+        .add({ //add the form
+          "serviceName":recordInfo[0],
+          "username" : recordInfo[1],
+          "password" : recordInfo[2],
+          "notes" : recordInfo[3]
+    });
+  }
 
   Future<void> removeDatabase() async {}
 

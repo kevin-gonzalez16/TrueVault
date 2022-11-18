@@ -8,13 +8,11 @@ void main(){
   test("Database should be created correctly", (){
     Database newDatabase = Database(
         Encryptor.plainTextToCipher("new database", "PASSWORD"),
-        Encryptor.plainTextToCipher("/", "PASSWORD"),
-        Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
+        Encryptor.plainTextToCipher("DATABASE ID", "PASSWORD"),
     );
 
     expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD"), "new database");
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseLocation, "PASSWORD"), "/");
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseMasterPassword, "PASSWORD"), "SECURE_PASSWORD123");
+    expect(Encryptor.cipherToPlainText(newDatabase.databaseID, "PASSWORD"), "DATABASE ID");
     expect(newDatabase.forms.length, 0);
   });
 
@@ -23,7 +21,6 @@ void main(){
     Database newDatabase = Database(
       Encryptor.plainTextToCipher("new database", "PASSWORD"),
       Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
     );
     expect(newDatabase.forms.length, 0);
 
@@ -77,7 +74,6 @@ void main(){
     Database newDatabase = Database(
       Encryptor.plainTextToCipher("new database", "PASSWORD"),
       Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
     );
     newDatabase.addForm(Form([
       Encryptor.plainTextToCipher("Discord", "PASSWORD"),
@@ -121,7 +117,6 @@ void main(){
     Database newDatabase = Database(
       Encryptor.plainTextToCipher("new database", "PASSWORD"),
       Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
     );
     expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD"), "new database");
 
@@ -134,35 +129,4 @@ void main(){
 
   });
 
-  test("Database can be moved correctly", (){
-    Database newDatabase = Database(
-      Encryptor.plainTextToCipher("new database", "PASSWORD"),
-      Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
-    );
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseLocation, "PASSWORD"), "/");
-
-    newDatabase.moveDB(Encryptor.plainTextToCipher("/home/databases/", "PASSWORD"));
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseLocation, "PASSWORD"), "/home/databases/");
-
-    newDatabase.moveDB(Encryptor.plainTextToCipher("/home/", "PASSWORD"));
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseLocation, "PASSWORD"), "/home/");
-
-  });
-
-  test("Database password can be changed correctly", (){
-    Database newDatabase = Database(
-      Encryptor.plainTextToCipher("new database", "PASSWORD"),
-      Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
-    );
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseMasterPassword, "PASSWORD"), "SECURE_PASSWORD123");
-
-    newDatabase.changeMasterPassword(Encryptor.plainTextToCipher("QWERTY1234", "PASSWORD"));
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseMasterPassword, "PASSWORD"), "QWERTY1234");
-
-    newDatabase.changeMasterPassword(Encryptor.plainTextToCipher("MyDogsName+TheStreetIGrewUp", "PASSWORD"));
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseMasterPassword,"PASSWORD"), "MyDogsName+TheStreetIGrewUp");
-
-  });
 }

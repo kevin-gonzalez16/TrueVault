@@ -33,7 +33,6 @@ void main() {
     Database newDatabase = Database(
       Encryptor.plainTextToCipher("new database2", "PASSWORD"),
       Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
     );
     databases.add(newDatabase);
     await tester
@@ -53,7 +52,6 @@ void main() {
     Database newDatabase = Database(
       Encryptor.plainTextToCipher("new database2", "PASSWORD"),
       Encryptor.plainTextToCipher("/", "PASSWORD"),
-      Encryptor.plainTextToCipher("SECURE_PASSWORD123", "PASSWORD"),
     );
     databases.add(newDatabase);
     await tester

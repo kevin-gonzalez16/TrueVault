@@ -142,10 +142,9 @@ class _CreateDatabase extends State<CreateDatabase> {
                                                 databaseNameController.text,
                                                 "PASSWORD"),
                                             Encryptor.plainTextToCipher(
-                                                databaseLocationController.text,
+                                                "DB ID GOES HERE",
                                                 "PASSWORD"),
-                                            Encryptor.plainTextToCipher(
-                                                "PASSWORD", "PASSWORD"));
+                                        );
                                         Navigator.pop(context, databaseObj);
 
                                         Navigator.push(
