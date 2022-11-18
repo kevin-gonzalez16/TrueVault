@@ -1,23 +1,23 @@
 import 'package:encrypt/encrypt.dart';
 
 class Encryptor {
-  static plainTextToCipher(String plaintext, String key) {
+  static String plainTextToCipher(String plaintext, String key) {
     key = padKey(key);
     final securedKey = Key.fromUtf8(key);
     final iv = IV.fromLength(16);
     final encrypt = Encrypter(AES(securedKey));
 
     final encrypted = encrypt.encrypt(plaintext, iv: iv);
-    return encrypted;
+    return encrypted.base64;
   }
 
-  static cipherToPlainText(Encrypted cipher, key) {
+  static String cipherToPlainText(String cipher, key) {
     key = padKey(key);
     final securedKey = Key.fromUtf8(key);
     final encrypt = Encrypter(AES(securedKey));
     final iv = IV.fromLength(16);
 
-    final decrypted = encrypt.decrypt(cipher, iv: iv);
+    final decrypted = encrypt.decrypt64(cipher, iv: iv);
     return decrypted;
   }
 

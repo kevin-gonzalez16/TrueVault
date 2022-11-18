@@ -21,7 +21,7 @@ class Form{
     passed and maps it by location,so make sure the order is correct.
     Also the list must be <String> if its <dynamic> it will error.
   */
-  Form(List<Encrypted>details){
+  Form(List<String>details){
 
     Iterable keys = formDetails.keys;
     int index = 0;
@@ -48,9 +48,8 @@ class Form{
     Make sure the first parameter exactly matches one of
     the details in the map. Otherwise it will make a new entry.
   */
-  void editForm(String detail, Encrypted newDetail){
+  void editForm(String detail, String newDetail){
     formDetails[detail] = newDetail;
     lastEdited = DateTime.now();
-
   }
 }

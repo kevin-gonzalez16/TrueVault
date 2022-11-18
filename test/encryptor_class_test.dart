@@ -14,7 +14,7 @@ void main() {
     String shortKey = "shortKey";
     String plaintext = "This should not be the same";
     encrypted = Encryptor.plainTextToCipher(plaintext, shortKey);
-    expect(encrypted.base64, isNot(plaintext));
+    expect(encrypted, isNot(plaintext));
   });
 
   test("Encryptor decrypts cipher text", () {

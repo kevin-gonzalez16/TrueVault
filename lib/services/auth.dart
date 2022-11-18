@@ -1,18 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:true_vault/services/database.dart';
+import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/user.dart';
 
 class AuthService {
+
   //make a firebase authentication instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //Create a custom-user instance from firebase user
+  Future<TrueVaultUser> trueVaultUserFromFirebaseUser(User user) async{
 
-  TrueVaultUser trueVaultUserFromFirebaseUser(User user) {
+    //Fetch the databases from the user unique ID
+    DatabaseService databaseService = DatabaseService(user.uid);
+    List<Database> databases = await databaseService.returnRecords();
+
     //return a true vault user from a firebase user
-    //passing the firebase user unique id
-
-    return TrueVaultUser(user.uid);
+    //passing the firebase user unique id and its databases
+    return TrueVaultUser(user.uid, databases);
   }
 
   //sign in with email and password
@@ -61,9 +66,6 @@ class AuthService {
 
       //extract user from sign up result
       dynamic userAttempt = result.user;
-
-      //need to create a new document for the user with the uid
-      await DatabaseService(userAttempt.uid).createUserDocument();
 
       //return the user casted as a true vault user
       return trueVaultUserFromFirebaseUser(userAttempt);
