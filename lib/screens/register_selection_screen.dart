@@ -20,6 +20,7 @@ class _RegisterSelectionScreenState extends State<RegisterSelectionScreen> {
   }
 
   bool phoneEmailSelection = true; //phone false, email true
+  bool validInput = true;
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +127,17 @@ class _RegisterSelectionScreenState extends State<RegisterSelectionScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(50, 0, 50, 103.5),
                         child: TextFormField(
+                          onChanged: (value){
+                            RegExp validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                            if (!validEmail.hasMatch(value)){
+                              setState(() {
+                                validInput = false;
+                              });
+                            }
+                            else{
+                              validInput = true;
+                            }
+                          },
                             key: const Key(
                                 "email-text-field-register-selection-screen"),
                             controller: emailTextEditingController,
@@ -135,18 +147,19 @@ class _RegisterSelectionScreenState extends State<RegisterSelectionScreen> {
                               fillColor: Color(0xffc9c9c9),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    width: 3, color: Color(0xffC9C9C9)),
+                                    width: 3, color: validInput ? Color(0xffC9C9C9) : Colors.redAccent),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    width: 3, color: Color(0xffC9C9C9)),
+                                    width: 3, color:validInput ? Color(0xffC9C9C9) : Colors.redAccent),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               hintText: 'Email Address',
                               hintStyle: TextStyle(
                                   fontSize: 18, color: Color(0xff989898)),
-                            )),
+                            )
+                        ),
                       ),
                     ],
                   ),
@@ -156,12 +169,21 @@ class _RegisterSelectionScreenState extends State<RegisterSelectionScreen> {
                   aspectRatio: 9 / 2,
                   child: TextButton(
                     key: const Key("next-button-register-selection-screen"),
-                    onPressed: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterScreen(
-                                  email: emailTextEditingController)))
+                    onPressed: (){
+                      RegExp validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                      if (!validEmail.hasMatch(emailTextEditingController.text)){
+                        setState(() {
+                          validInput = false;
+                        });
+                      }
+                      else{
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterScreen(
+                                    email: emailTextEditingController)));
+                      }
+
                     },
                     child: const Text(
                       "Next",
@@ -175,6 +197,7 @@ class _RegisterSelectionScreenState extends State<RegisterSelectionScreen> {
                     ),
                   )),
             ),
+            //Text("Not a valid test")
           ],
         )));
   }

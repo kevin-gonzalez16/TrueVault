@@ -5,6 +5,7 @@ import 'package:true_vault/screens/new_record_form.dart';
 import 'package:true_vault/screens/view_record.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
+import 'package:true_vault/screens/delete_record_confirmation.dart';
 
 double phoneWidth = 0;
 double phoneHeight = 0;
@@ -68,13 +69,18 @@ Widget viewDatabaseTemplate(
                 child: InkWell(
                   key: Key("delete-record-icon-button" + index.toString()),
                   splashColor: Colors.white, // Splash color
-                  onTap: () {
-                    database.removeForm(index);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                ViewDatabaseScreen(database: database)));
+                  onTap: () async{
+                    try {
+                      bool deleteDatabase = await DeleteConfirmationScreen(context);
+                      if (deleteDatabase) {
+                        database.removeForm(index);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ViewDatabaseScreen(database: database)));                      }
+                    } catch (e) {}
+
                   },
                   child: const SizedBox(
                       width: 50, height: 50, child: Icon(Icons.delete)),
