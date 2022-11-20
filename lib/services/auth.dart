@@ -4,13 +4,11 @@ import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/user.dart';
 
 class AuthService {
-
   //make a firebase authentication instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //Create a custom-user instance from firebase user
-  Future<TrueVaultUser> trueVaultUserFromFirebaseUser(User user) async{
-
+  Future<TrueVaultUser> trueVaultUserFromFirebaseUser(User user) async {
     //Fetch the databases from the user unique ID
     DatabaseService databaseService = DatabaseService(user.uid);
     List<Database> databases = await databaseService.returnRecords();

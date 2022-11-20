@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
+import 'package:true_vault/services/database.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/screens/empty_input_dialog.dart';
@@ -11,6 +13,12 @@ class CreateDatabase extends StatefulWidget {
   @override
   State<CreateDatabase> createState() => _CreateDatabase();
 }
+
+final FirebaseAuth auth = FirebaseAuth.instance;
+final User user = auth.currentUser!;
+final myUid = user.uid;
+
+final DatabaseService test = DatabaseService(myUid);
 
 class _CreateDatabase extends State<CreateDatabase> {
   TextEditingController databaseNameController = TextEditingController();
@@ -138,13 +146,16 @@ class _CreateDatabase extends State<CreateDatabase> {
                                         emptyInputDialog(context, errors);
                                       } else {
                                         Database databaseObj = Database(
-                                            Encryptor.plainTextToCipher(
-                                                databaseNameController.text,
-                                                "PASSWORD"),
-                                            Encryptor.plainTextToCipher(
-                                                "DB ID GOES HERE",
-                                                "PASSWORD"),
+                                          Encryptor.plainTextToCipher(
+                                              databaseNameController.text,
+                                              "PASSWORD"),
+                                          Encryptor.plainTextToCipher(
+                                              "DB ID GOES HERE", "PASSWORD"),
                                         );
+
+                                        test.addDatabase(
+                                            databaseNameController.text);
+
                                         Navigator.pop(context, databaseObj);
 
                                         Navigator.push(
