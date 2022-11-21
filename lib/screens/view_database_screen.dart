@@ -78,7 +78,8 @@ Widget viewDatabaseTemplate(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    ViewDatabaseScreen(database: database)));                      }
+                                    ViewDatabaseScreen(database: database)));
+                      }
                     } catch (e) {}
 
                   },
@@ -111,12 +112,7 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                   TextButton(
                     key: const Key("chooseRecordBackButton"),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ChooseDatabase(
-                                    databases: [],
-                                  )));
+                      Navigator.pop(context);
                     },
                     style: TextButton.styleFrom(
                       primary: const Color.fromRGBO(165, 165, 165, 1),

@@ -6,18 +6,18 @@ import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/screens/view_record.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
+import 'package:true_vault/utils/user.dart';
 
 import 'landing_screen.dart';
 
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final TrueVaultUser currentUser;
+  const MainScreen({Key? key, required this.currentUser}) : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
-
-List<Database>databases = [];
 int databaseIndex = 0;
 int recordIndex = 0;
 
@@ -43,9 +43,13 @@ class _MainScreenState extends State<MainScreen> {
                     child: const Text("Logout",
                       style: TextStyle(color:Colors.grey),
                     ),
-                    onPressed: ()=>{
+                    onPressed: (){
+                    setState(() {
+                      databaseIndex = 0;
+                      recordIndex = 0;
+                    });
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => const LandingScreen()))
+                          MaterialPageRoute(builder: (context) => const LandingScreen()));
                     },
                 ),
               ],
@@ -56,27 +60,17 @@ class _MainScreenState extends State<MainScreen> {
                 //Swipe right gesture
                 if (dragEndDetails.primaryVelocity! < 0) {
                   setState(() {
-                    if(databaseIndex == databases.length-1){
-                      databaseIndex = 0;
-                      recordIndex = 0;
-                    }
-                    else{
-                      databaseIndex = databaseIndex + 1;
-                      recordIndex = 0;
-                    }
+                    databaseIndex += 1;
+                    recordIndex = 0;
+                    databaseIndex = databaseIndex >= widget.currentUser.databases.length ? 0 : databaseIndex;
                   });
                 }
                 //swipe left gesture
                 else if(dragEndDetails.primaryVelocity! > 0){
                   setState(() {
-                    if(databaseIndex == 0){
-                      databaseIndex = databases.length - 1;
-                      recordIndex = 0;
-                    }
-                    else{
-                      databaseIndex = databaseIndex - 1;
-                      recordIndex = 0;
-                    }
+                    databaseIndex -= 1;
+                    recordIndex = 0;
+                    databaseIndex = databaseIndex < 0 ? widget.currentUser.databases.length - 1 : databaseIndex;
                   });
                 }
               },
@@ -110,8 +104,8 @@ class _MainScreenState extends State<MainScreen> {
                       Align(
                         alignment: Alignment.centerRight,
                         child:Text(
-                          databases.isEmpty ? " " :
-                          Encryptor.cipherToPlainText(databases[databaseIndex].databaseName, "PASSWORD"),
+                          widget.currentUser.databases.isEmpty ? " " :
+                          Encryptor.cipherToPlainText(widget.currentUser.databases[databaseIndex].databaseName, "PASSWORD"),
                           style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       )
@@ -119,9 +113,9 @@ class _MainScreenState extends State<MainScreen> {
                   )
               ),
               onTap: (){
-                if(databases.isNotEmpty) {
+                if(widget.currentUser.databases.isNotEmpty) {
                   Navigator.push(context,MaterialPageRoute(
-                      builder: (context) => ViewDatabaseScreen(database: databases[databaseIndex])),
+                      builder: (context) => ViewDatabaseScreen(database: widget.currentUser.databases[databaseIndex])),
                   );
                 }
               },
@@ -136,22 +130,24 @@ class _MainScreenState extends State<MainScreen> {
                 //swipe right gesture
                 if (dragEndDetails.primaryVelocity! < 0) {
                   setState(() {
-                    if(recordIndex == databases[databaseIndex].forms.length-1){
+                    recordIndex += 1;
+                    if (widget.currentUser.databases.isEmpty){
                       recordIndex = 0;
                     }
                     else{
-                      recordIndex = recordIndex + 1;
+                      recordIndex =  recordIndex >= widget.currentUser.databases[databaseIndex].forms.length ? 0 : recordIndex;
                     }
                   });
                 }
                 //swipe left gesture
                 else if(dragEndDetails.primaryVelocity! > 0){
                   setState(() {
-                    if(recordIndex == 0){
-                      recordIndex = databases[databaseIndex].forms.length - 1;
+                    recordIndex -= 0;
+                    if(widget.currentUser.databases.isEmpty){
+                      recordIndex = 0;
                     }
                     else{
-                      recordIndex = recordIndex - 1;
+                      recordIndex = recordIndex < 0 ? widget.currentUser.databases[databaseIndex].forms.length - 1 : recordIndex;
                     }
                   });
                 }
@@ -168,16 +164,16 @@ class _MainScreenState extends State<MainScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:[
                     Text(
-                      databases.isEmpty  ? " " : databases[databaseIndex].forms.isEmpty ? " " : Encryptor.cipherToPlainText(databases[databaseIndex].forms[recordIndex].formDetails["serviceName"], "PASSWORD"),
+                      widget.currentUser.databases.isEmpty  ? " " : widget.currentUser.databases[databaseIndex].forms.isEmpty ? " " : Encryptor.cipherToPlainText(widget.currentUser.databases[databaseIndex].forms[recordIndex].formDetails["serviceName"], "PASSWORD"),
                       style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
               onTap: (){
-                if(databases.isNotEmpty && databases[databaseIndex].forms.isNotEmpty){
+                if(widget.currentUser.databases.isNotEmpty && widget.currentUser.databases[databaseIndex].forms.isNotEmpty){
                   Navigator.push(context,MaterialPageRoute(
-                      builder: (context) => ViewRecordForm(form: databases[databaseIndex].forms[recordIndex])),
+                      builder: (context) => ViewRecordForm(form: widget.currentUser.databases[databaseIndex].forms[recordIndex])),
                   );
                 }
               },
@@ -214,10 +210,10 @@ class _MainScreenState extends State<MainScreen> {
                               Database newDatabaseObject = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CreateDatabase()),
+                                    builder: (context) => CreateDatabase(currentUser: widget.currentUser,)),
                               ) as Database;
                               setState((){
-                                databases.add(newDatabaseObject);
+                                widget.currentUser.databases.add(newDatabaseObject);
                               });
                             }catch(e){}
                           },
@@ -241,10 +237,10 @@ class _MainScreenState extends State<MainScreen> {
                               Database newDatabaseObject = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CreateDatabase()),
+                                    builder: (context) => CreateDatabase(currentUser: widget.currentUser,)),
                               ) as Database;
                               setState((){
-                                databases.add(newDatabaseObject);
+                                widget.currentUser.databases.add(newDatabaseObject);
                               });
                             }catch(e){}
                           },
@@ -284,7 +280,7 @@ class _MainScreenState extends State<MainScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChooseDatabase(databases: databases,)),
+                                  builder: (context) => ChooseDatabase(databases: widget.currentUser.databases,currentUser: widget.currentUser,)),
                             );
                           },
                           child: const Text(
@@ -307,7 +303,7 @@ class _MainScreenState extends State<MainScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChooseDatabase(databases: databases,)),
+                                  builder: (context) => ChooseDatabase(databases: widget.currentUser.databases, currentUser: widget.currentUser,)),
                             );
                           },
                           child: SizedBox(
@@ -350,10 +346,10 @@ class _MainScreenState extends State<MainScreen> {
                                 int indexToDelete = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DeleteDatabase(databases: databases,)),
+                                      builder: (context) => DeleteDatabase(databases: widget.currentUser.databases,currentUser: widget.currentUser,)),
                                 ) as int;
                                 setState((){
-                                  databases.removeAt(indexToDelete);
+                                  widget.currentUser.databases.removeAt(indexToDelete);
                                 });
                               }
                             }catch(e){}
@@ -379,10 +375,10 @@ class _MainScreenState extends State<MainScreen> {
                                 int indexToDelete = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DeleteDatabase(databases: databases,)),
+                                      builder: (context) => DeleteDatabase(databases: widget.currentUser.databases,currentUser: widget.currentUser,)),
                                 ) as int;
                                 setState((){
-                                  databases.removeAt(indexToDelete);
+                                  widget.currentUser.databases.removeAt(indexToDelete);
                                 });
                               }catch(e){}
                             }

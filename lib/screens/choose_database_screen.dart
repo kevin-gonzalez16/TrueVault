@@ -3,11 +3,13 @@ import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
+import 'package:true_vault/utils/user.dart';
 
 class ChooseDatabase extends StatefulWidget {
   //all of user's databases
   final List<Database> databases;
-  const ChooseDatabase({Key? key, required this.databases}) : super(key: key);
+  final TrueVaultUser currentUser;
+  const ChooseDatabase({Key? key, required this.databases, required this.currentUser}) : super(key: key);
   @override
   State<ChooseDatabase> createState() => _ChooseDatabaseState();
 }
@@ -72,7 +74,7 @@ class _ChooseDatabaseState extends State<ChooseDatabase> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const MainScreen()),
+                                            MainScreen(currentUser: widget.currentUser,)),
                                   );
                                 },
                                 style: TextButton.styleFrom(
@@ -111,10 +113,10 @@ class _ChooseDatabaseState extends State<ChooseDatabase> {
                               child: SizedBox(
                                   child: ListView.builder(
                             scrollDirection: Axis.vertical,
-                            itemCount: databases.length,
+                            itemCount: widget.databases.length,
                             itemBuilder: (BuildContext test, int index) {
                               return chooseDatabaseTemplate(
-                                  databases[index], index, context);
+                                  widget.databases[index], index, context);
                             },
                           ))),
                         ],

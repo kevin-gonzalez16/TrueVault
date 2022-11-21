@@ -165,8 +165,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 //  color: Color(0xff189AB4),
                 onPressed: () async {
                   await Firebase.initializeApp();
-                  AuthService test = AuthService();
-                  dynamic result = await test.signInWithEmailAndPassword(
+                  AuthService auth = AuthService();
+                  dynamic result = await auth.signInWithEmailAndPassword(
                       emailController.text, passwordController.text);
 
                   if (result == null) {
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     setTimer();
                   } else {
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => MainScreen()));
+                        MaterialPageRoute(builder: (context) => MainScreen(currentUser: result)));
                   }
                   setState(() {});
                 }),

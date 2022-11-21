@@ -3,11 +3,13 @@ import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/screens/delete_confirmation_form.dart';
 import 'package:true_vault/utils/encryptor.dart';
+import 'package:true_vault/utils/user.dart';
 
 class DeleteDatabase extends StatefulWidget {
   //all of user's databases
   final List<Database> databases;
-  const DeleteDatabase({Key? key, required this.databases}) : super(key: key);
+  final TrueVaultUser currentUser;
+  const DeleteDatabase({Key? key, required this.databases, required this.currentUser}) : super(key: key);
   @override
   State<DeleteDatabase> createState() => _DeleteDatabaseState();
 }
@@ -96,7 +98,7 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const MainScreen()),
+                                      builder: (context) => MainScreen(currentUser: widget.currentUser,)),
                                 )
                               },
                               style: TextButton.styleFrom(
@@ -134,10 +136,10 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
                             child: SizedBox(
                                 child: ListView.builder(
                           scrollDirection: Axis.vertical,
-                          itemCount: databases.length,
+                          itemCount: widget.databases.length,
                           itemBuilder: (context, int index) =>
                               deleteDatabaseTemplate(
-                                  databases[index], context, index),
+                                  widget.databases[index], context, index),
                         ))),
                       ],
                     ),
