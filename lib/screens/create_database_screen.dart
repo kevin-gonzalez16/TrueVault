@@ -6,19 +6,15 @@ import 'package:true_vault/services/database.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/screens/empty_input_dialog.dart';
+import 'package:true_vault/utils/user.dart';
 
 class CreateDatabase extends StatefulWidget {
-  const CreateDatabase({Key? key}) : super(key: key);
+  final TrueVaultUser currentUser;
+  const CreateDatabase({Key? key, required this.currentUser}) : super(key: key);
 
   @override
   State<CreateDatabase> createState() => _CreateDatabase();
 }
-
-final FirebaseAuth auth = FirebaseAuth.instance;
-final User user = auth.currentUser!;
-final myUid = user.uid;
-
-final DatabaseService test = DatabaseService(myUid);
 
 class _CreateDatabase extends State<CreateDatabase> {
   TextEditingController databaseNameController = TextEditingController();
@@ -57,7 +53,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const MainScreen()));
+                                          MainScreen(currentUser: widget.currentUser,)));
                             },
                             style: TextButton.styleFrom(
                               primary: const Color.fromRGBO(165, 165, 165, 1),
@@ -126,7 +122,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                                   color: Color.fromARGB(
                                                       200, 24, 154, 180))))),
                                   onPressed: () {
-                                    setState(() {
+                                    setState(() async{
                                       var locationCheck =
                                           databaseLocationController.text
                                               .replaceAll(' ', '');
@@ -145,16 +141,19 @@ class _CreateDatabase extends State<CreateDatabase> {
                                           locationCheck.isEmpty) {
                                         emptyInputDialog(context, errors);
                                       } else {
+
+                                        final DatabaseService test = DatabaseService(widget.currentUser.uID);
+
+                                        String newDB = await test.addDatabase(
+                                            Encryptor.plainTextToCipher(databaseNameController.text,"PASSWORD"));
+
                                         Database databaseObj = Database(
                                           Encryptor.plainTextToCipher(
                                               databaseNameController.text,
                                               "PASSWORD"),
                                           Encryptor.plainTextToCipher(
-                                              "DB ID GOES HERE", "PASSWORD"),
+                                              newDB, "PASSWORD"),
                                         );
-
-                                        test.addDatabase(
-                                            databaseNameController.text);
 
                                         Navigator.pop(context, databaseObj);
 

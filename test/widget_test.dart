@@ -16,11 +16,13 @@ import 'package:true_vault/screens/main_screen.dart';
 import 'package:true_vault/screens/register_screen.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
+import 'package:true_vault/utils/user.dart';
 
 void main() {
   testWidgets("Logout button takes you to the landing screen",
       (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: MainScreen()));
+    TrueVaultUser test = TrueVaultUser("uID", []);
+    await tester.pumpWidget(MaterialApp(home: MainScreen(currentUser: test)));
     expect(find.text("Logout"), findsOneWidget);
     await tester.tap(find.byKey(const Key("logoutButton")));
     await tester.pumpAndSettle();
@@ -29,6 +31,7 @@ void main() {
   });
   testWidgets("Cancel button in Choose Database returns to main screen",
       (WidgetTester tester) async {
+    TrueVaultUser test = TrueVaultUser("uID", []);
     List<Database> databases = [];
     Database newDatabase = Database(
       Encryptor.plainTextToCipher("new database2", "PASSWORD"),
@@ -36,7 +39,7 @@ void main() {
     );
     databases.add(newDatabase);
     await tester
-        .pumpWidget(MaterialApp(home: ChooseDatabase(databases: databases)));
+        .pumpWidget(MaterialApp(home: ChooseDatabase(databases: databases,currentUser: test,)));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -48,6 +51,7 @@ void main() {
 
   testWidgets("Cancel button in Delete Database returns to main screen",
       (WidgetTester tester) async {
+    TrueVaultUser test = TrueVaultUser("uID", []);
     List<Database> databases = [];
     Database newDatabase = Database(
       Encryptor.plainTextToCipher("new database2", "PASSWORD"),
@@ -55,7 +59,7 @@ void main() {
     );
     databases.add(newDatabase);
     await tester
-        .pumpWidget(MaterialApp(home: DeleteDatabase(databases: databases)));
+        .pumpWidget(MaterialApp(home: DeleteDatabase(databases: databases, currentUser: test,)));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -67,7 +71,8 @@ void main() {
 
   testWidgets("Cancel button in Create Database returns to main screen",
       (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: CreateDatabase()));
+    TrueVaultUser test = TrueVaultUser("uID", []);
+    await tester.pumpWidget(MaterialApp(home: CreateDatabase(currentUser:test)));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 

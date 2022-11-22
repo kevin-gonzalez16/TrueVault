@@ -80,13 +80,14 @@ class DatabaseService {
 
   Future<void> createUserDocument() async {}
 
-  Future<void> addDatabase(String databaseName) async {
+  Future<String> addDatabase(String databaseName) async {
 
     //Get the Collection of Databases for the specific user
-    await FirebaseFirestore.instance.collection("records") //Root Directory
+    dynamic newDB = await FirebaseFirestore.instance.collection("records") //Root Directory
         .doc(uid) //Unique User Document
         .collection("Databases") //accessing the Database collections
         .add({"databaseName":databaseName}); //Adding a new DB document
+    return newDB.id;
   }
 
   Future<void> addRecord(String databaseID, List<String>recordInfo) async {
