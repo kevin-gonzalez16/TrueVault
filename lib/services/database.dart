@@ -105,7 +105,13 @@ class DatabaseService {
     });
   }
 
-  Future<void> removeDatabase() async {}
+  Future<void> removeDatabase(String databaseID) async {
+
+    await FirebaseFirestore.instance.collection("records") //Root Directory
+        .doc(uid) //Unique user document
+        .collection("Databases") //Accessing the Database collections
+        .doc(databaseID).delete(); //Delete the specific database
+  }
 
   Future<void> removeRecord() async {}
 
