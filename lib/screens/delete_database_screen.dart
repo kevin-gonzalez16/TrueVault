@@ -4,18 +4,28 @@ import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/screens/delete_confirmation_form.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:true_vault/services/database.dart';
+import 'package:true_vault/utils/user.dart';
 
 class DeleteDatabase extends StatefulWidget {
   //all of user's databases
   final List<Database> databases;
   final TrueVaultUser currentUser;
-  const DeleteDatabase({Key? key, required this.databases, required this.currentUser}) : super(key: key);
+  final String password;
+  const DeleteDatabase(
+      {Key? key,
+      required this.databases,
+      required this.currentUser,
+      required this.password})
+      : super(key: key);
   @override
   State<DeleteDatabase> createState() => _DeleteDatabaseState();
 }
 
 //Template to list over the database
-Widget deleteDatabaseTemplate(Database database, context, index) {
+Widget deleteDatabaseTemplate(
+    Database database, context, index, password, deleteDatabaseInstance) {
   //Individual delete buttons
   return Padding(
     padding: const EdgeInsets.fromLTRB(0, 3, 8, 10),
@@ -26,9 +36,14 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
             key: Key("deleteDatabaseElevatedButton" + index.toString()),
             onPressed: () async {
               try {
-                bool deleteDatabase = await DeleteConfirmationScreen(context);
+                bool deleteDatabase =
+                    await DeleteConfirmationScreen(context, password);
                 if (deleteDatabase) {
                   Navigator.pop(context, index);
+                  //trash icon
+                  //delete from firebase database
+                  await deleteDatabaseInstance
+                      .removeDatabase(database.databaseID);
                 }
               } catch (e) {}
             },
@@ -45,9 +60,13 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
                 onPressed: () async {
                   try {
                     bool deleteDatabase =
-                        await DeleteConfirmationScreen(context);
+                        await DeleteConfirmationScreen(context, password);
                     if (deleteDatabase) {
                       Navigator.pop(context, index);
+                      //database button
+                      //delete from firebase database
+                      await deleteDatabaseInstance
+                          .removeDatabase(database.databaseID);
                     }
                   } catch (e) {}
                 },
@@ -72,6 +91,8 @@ Widget deleteDatabaseTemplate(Database database, context, index) {
 class _DeleteDatabaseState extends State<DeleteDatabase> {
   @override
   Widget build(BuildContext context) {
+    DatabaseService deleteDatabaseInstance =
+        DatabaseService(widget.currentUser.uID);
     double phoneWidth = MediaQuery.of(context).size.width; //411
     double phoneHeight = MediaQuery.of(context).size.height; //683
     return Scaffold(
@@ -98,7 +119,9 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MainScreen(currentUser: widget.currentUser,)),
+                                      builder: (context) => MainScreen(
+                                          currentUser: widget.currentUser,
+                                          password: widget.password)),
                                 )
                               },
                               style: TextButton.styleFrom(
@@ -139,7 +162,11 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
                           itemCount: widget.databases.length,
                           itemBuilder: (context, int index) =>
                               deleteDatabaseTemplate(
-                                  widget.databases[index], context, index),
+                                  widget.databases[index],
+                                  context,
+                                  index,
+                                  widget.password,
+                                  deleteDatabaseInstance),
                         ))),
                       ],
                     ),

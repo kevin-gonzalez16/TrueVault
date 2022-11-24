@@ -22,7 +22,8 @@ void main() {
   testWidgets("Logout button takes you to the landing screen",
       (WidgetTester tester) async {
     TrueVaultUser test = TrueVaultUser("uID", []);
-    await tester.pumpWidget(MaterialApp(home: MainScreen(currentUser: test)));
+    await tester.pumpWidget(
+        MaterialApp(home: MainScreen(currentUser: test, password: "")));
     expect(find.text("Logout"), findsOneWidget);
     await tester.tap(find.byKey(const Key("logoutButton")));
     await tester.pumpAndSettle();
@@ -38,8 +39,9 @@ void main() {
       Encryptor.plainTextToCipher("/", "PASSWORD"),
     );
     databases.add(newDatabase);
-    await tester
-        .pumpWidget(MaterialApp(home: ChooseDatabase(databases: databases,currentUser: test,)));
+    await tester.pumpWidget(MaterialApp(
+        home: ChooseDatabase(
+            databases: databases, currentUser: test, password: "")));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -58,8 +60,9 @@ void main() {
       Encryptor.plainTextToCipher("/", "PASSWORD"),
     );
     databases.add(newDatabase);
-    await tester
-        .pumpWidget(MaterialApp(home: DeleteDatabase(databases: databases, currentUser: test,)));
+    await tester.pumpWidget(MaterialApp(
+        home: DeleteDatabase(
+            databases: databases, currentUser: test, password: "")));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -72,7 +75,11 @@ void main() {
   testWidgets("Cancel button in Create Database returns to main screen",
       (WidgetTester tester) async {
     TrueVaultUser test = TrueVaultUser("uID", []);
-    await tester.pumpWidget(MaterialApp(home: CreateDatabase(currentUser:test)));
+    await tester.pumpWidget(MaterialApp(
+        home: CreateDatabase(
+      currentUser: test,
+      password: "",
+    )));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 

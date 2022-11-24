@@ -324,7 +324,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     width: 10,
                   ),
-                  Text("Contains at least 1 special charcter",
+                  Text("Contains at least 1 special character",
                       style: TextStyle(color: Color(0xff189AB4)))
                 ],
               ),

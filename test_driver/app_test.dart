@@ -116,7 +116,6 @@ void main() {
         expect(await driver.getText(newDatabaseButtonText), "New Database");
       });
       test('new-database-icon button works', () async {
-
         final chooseDatabaseButton0 = find.byValueKey('Database 1_text');
         final chooseDatabaseButton1 = find.byValueKey('Database 2_text');
         final chooseRecordBackButton =
@@ -161,13 +160,9 @@ void main() {
         //Checking for created databases
         final chooseDatabaseButton0 =
             find.byValueKey('chooseDatabaseButtonText0');
-        final chooseDatabaseButton1 =
-            find.byValueKey('chooseDatabaseButtonText1');
+
         expect(await driver.getText(chooseDatabaseButton0), "Database Name");
-        expect(await driver.getText(chooseDatabaseButton1), "Database 1");
-        final chooseDatabaseButton2 =
-            find.byValueKey('chooseDatabaseButtonText2');
-        expect(await driver.getText(chooseDatabaseButton2), "Database 2");
+
         //
         await driver.tap(chooseDatabaseCancelButton);
         expect(await driver.getText(chooseDatabaseButtonText), "Open Database");
@@ -218,7 +213,7 @@ void main() {
         final deleteConfirmationButton =
             find.byValueKey("DeleteConfirmationButton");
         await driver.tap(databaseDeletionConfirmationPassword);
-        await driver.enterText("PASSWORD"); //hard coded for now
+        await driver.enterText("Mypassword1!");
         await driver.tap(deleteConfirmationButton);
         await driver.tap(deleteDatabaseCancelButton);
         expect(
@@ -237,7 +232,9 @@ void main() {
             find.byValueKey("text-field-database-deletion-password");
         expect(
             await driver.getText(deleteDatabaseButtonText), "Delete Database");
+
         await driver.tap(deleteDatabaseIconButton);
+
         //Testing for actual database deletion
         final deleteDatabaseElevatedButton0 =
             find.byValueKey("deleteDatabaseElevatedButton0");
@@ -245,14 +242,19 @@ void main() {
         final deleteConfirmationButton =
             find.byValueKey("DeleteConfirmationButton");
         await driver.tap(databaseDeletionConfirmationPassword);
-        await driver.enterText("PASSWORD"); //hard coded for now
+
+        await driver.enterText("Mypassword1!"); //hard coded for now
         await driver.tap(deleteConfirmationButton);
-        await driver.tap(deleteDatabaseCancelButton);
-        expect(
-            await driver.getText(deleteDatabaseButtonText), "Delete Database");
+
+        await driver.tap(deleteDatabaseCancelButton); //not doing
+        expect(await driver.getText(deleteDatabaseButtonText),
+            "Delete Database"); //failing
+
         await driver.tap(deleteDatabaseButton);
+
         final deleteDatabaseText0 = find.byValueKey("deleteDatabaseText0");
         expect(await driver.getText(deleteDatabaseText0), "Database 2");
+
         //
         await driver.tap(deleteDatabaseCancelButton);
         expect(
@@ -583,7 +585,7 @@ void main() {
 
         //create a database (already tested)
         await driver.tap(newDatabaseNameTextField);
-        await driver.enterText("Database Name");
+        await driver.enterText("MyDatabaseName");
         await driver.tap(newDatabaseLocationTextField);
         await driver.enterText("New Database Location");
         await driver.tap(createDatabaseButton);
@@ -741,9 +743,16 @@ void main() {
             find.byValueKey("deleteConfirmationTextPrompt");
         expect(await driver.getText(deleteConfirmationTextPrompt),
             "Are you sure you want to delete this database?");
-
         await driver.tap(databaseDeletionConfirmationPassword);
-        await driver.enterText("PASSWORD");
+
+        await driver.enterText("Mypassword1!");
+        await driver.tap(deleteConfirmationButton);
+        //delete all databases created
+        final deleteDatabaseText0 = find.byValueKey("deleteDatabaseText0");
+
+        await driver.tap(deleteDatabaseText0);
+        await driver.tap(databaseDeletionConfirmationPassword);
+        await driver.enterText("Mypassword1!");
         await driver.tap(deleteConfirmationButton);
 
         final deleteDatabaseCancelButton =

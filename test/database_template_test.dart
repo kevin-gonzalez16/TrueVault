@@ -41,7 +41,7 @@ void main() {
     chooseButtons.add(chooseDatabaseTemplate(databases[2], 2, 0));
 
     final deleteButtons = databases
-        .map((database) => deleteDatabaseTemplate(database, 0, 0))
+        .map((database) => deleteDatabaseTemplate(database, 0, 0, "", ""))
         .toList();
 
     final recordButtons = databases

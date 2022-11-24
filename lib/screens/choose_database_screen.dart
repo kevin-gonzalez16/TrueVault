@@ -9,14 +9,19 @@ class ChooseDatabase extends StatefulWidget {
   //all of user's databases
   final List<Database> databases;
   final TrueVaultUser currentUser;
-  const ChooseDatabase({Key? key, required this.databases, required this.currentUser}) : super(key: key);
+  final String password;
+  const ChooseDatabase(
+      {Key? key,
+      required this.databases,
+      required this.currentUser,
+      required this.password})
+      : super(key: key);
   @override
   State<ChooseDatabase> createState() => _ChooseDatabaseState();
 }
 
 //Template to list over the databases
 Widget chooseDatabaseTemplate(Database database, int index, context) {
-
   //Individual Database Buttons
   return Padding(
     padding: const EdgeInsets.fromLTRB(8, 3, 8, 10),
@@ -27,8 +32,9 @@ Widget chooseDatabaseTemplate(Database database, int index, context) {
           onPressed: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ViewDatabaseScreen(database: database))
-            );
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ViewDatabaseScreen(database: database)));
           },
           style: TextButton.styleFrom(
             backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
@@ -39,8 +45,7 @@ Widget chooseDatabaseTemplate(Database database, int index, context) {
             Encryptor.cipherToPlainText(database.databaseName, "PASSWORD"),
             style: const TextStyle(color: Colors.white, fontSize: 20),
             key: Key("chooseDatabaseButtonText" + index.toString()),
-          )
-      ),
+          )),
     ),
   );
 }
@@ -59,8 +64,8 @@ class _ChooseDatabaseState extends State<ChooseDatabase> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SizedBox(
-                  height: phoneHeight/1.12,
-                  width: phoneWidth/1.22,
+                  height: phoneHeight / 1.12,
+                  width: phoneWidth / 1.22,
                   child: Container(
                       child: Column(
                         children: [
@@ -73,8 +78,10 @@ class _ChooseDatabaseState extends State<ChooseDatabase> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            MainScreen(currentUser: widget.currentUser,)),
+                                        builder: (context) => MainScreen(
+                                              currentUser: widget.currentUser,
+                                              password: widget.password,
+                                            )),
                                   );
                                 },
                                 style: TextButton.styleFrom(

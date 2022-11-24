@@ -173,8 +173,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     showMessage = true;
                     setTimer();
                   } else {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => MainScreen(currentUser: result)));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainScreen(
+                                currentUser: result,
+                                password: passwordController.text)));
                   }
                   setState(() {});
                 }),

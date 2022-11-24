@@ -10,7 +10,10 @@ import 'package:true_vault/utils/user.dart';
 
 class CreateDatabase extends StatefulWidget {
   final TrueVaultUser currentUser;
-  const CreateDatabase({Key? key, required this.currentUser}) : super(key: key);
+  final String password;
+  const CreateDatabase(
+      {Key? key, required this.currentUser, required this.password})
+      : super(key: key);
 
   @override
   State<CreateDatabase> createState() => _CreateDatabase();
@@ -52,8 +55,9 @@ class _CreateDatabase extends State<CreateDatabase> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          MainScreen(currentUser: widget.currentUser,)));
+                                      builder: (context) => MainScreen(
+                                          currentUser: widget.currentUser,
+                                          password: widget.password)));
                             },
                             style: TextButton.styleFrom(
                               primary: const Color.fromRGBO(165, 165, 165, 1),
@@ -122,7 +126,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                                   color: Color.fromARGB(
                                                       200, 24, 154, 180))))),
                                   onPressed: () {
-                                    setState(() async{
+                                    setState(() async {
                                       var locationCheck =
                                           databaseLocationController.text
                                               .replaceAll(' ', '');
@@ -141,19 +145,20 @@ class _CreateDatabase extends State<CreateDatabase> {
                                           locationCheck.isEmpty) {
                                         emptyInputDialog(context, errors);
                                       } else {
-
-                                        final DatabaseService test = DatabaseService(widget.currentUser.uID);
+                                        final DatabaseService test =
+                                            DatabaseService(
+                                                widget.currentUser.uID);
 
                                         String newDB = await test.addDatabase(
-                                            Encryptor.plainTextToCipher(databaseNameController.text,"PASSWORD"));
+                                            Encryptor.plainTextToCipher(
+                                                databaseNameController.text,
+                                                "PASSWORD"));
 
                                         Database databaseObj = Database(
-                                          Encryptor.plainTextToCipher(
-                                              databaseNameController.text,
-                                              "PASSWORD"),
-                                          Encryptor.plainTextToCipher(
-                                              newDB, "PASSWORD"),
-                                        );
+                                            Encryptor.plainTextToCipher(
+                                                databaseNameController.text,
+                                                "PASSWORD"),
+                                            newDB);
 
                                         Navigator.pop(context, databaseObj);
 
