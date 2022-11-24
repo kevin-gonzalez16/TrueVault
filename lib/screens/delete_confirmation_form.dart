@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<bool> DeleteConfirmationScreen(BuildContext context) async {
+Future<bool> DeleteConfirmationScreen(BuildContext context, password) async {
   String check = "false";
 
   return await showDialog(
@@ -66,10 +66,11 @@ Future<bool> DeleteConfirmationScreen(BuildContext context) async {
                   FlatButton(
                     key: Key("DeleteConfirmationButton"),
                     onPressed: () {
-                      if (check == "PASSWORD") {
+                      if (check == password) {
                         Navigator.of(context).pop(true);
                       } else {
                         //display incorrect password message
+
                       }
                     },
                     child: Text(

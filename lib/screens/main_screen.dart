@@ -10,14 +10,17 @@ import 'package:true_vault/utils/user.dart';
 
 import 'landing_screen.dart';
 
-
 class MainScreen extends StatefulWidget {
   final TrueVaultUser currentUser;
-  const MainScreen({Key? key, required this.currentUser}) : super(key: key);
+  final String password;
+  const MainScreen(
+      {Key? key, required this.currentUser, required this.password})
+      : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
+
 int databaseIndex = 0;
 int recordIndex = 0;
 
@@ -40,43 +43,51 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 TextButton(
                   key: const Key("logoutButton"),
-                    child: const Text("Logout",
-                      style: TextStyle(color:Colors.grey),
-                    ),
-                    onPressed: (){
+                  child: const Text(
+                    "Logout",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  onPressed: () {
                     setState(() {
                       databaseIndex = 0;
                       recordIndex = 0;
                     });
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => const LandingScreen()));
-                    },
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LandingScreen()));
+                  },
                 ),
               ],
             ),
             GestureDetector(
               //Swiper for database
-              onHorizontalDragEnd: (dragEndDetails){
+              onHorizontalDragEnd: (dragEndDetails) {
                 //Swipe right gesture
                 if (dragEndDetails.primaryVelocity! < 0) {
                   setState(() {
                     databaseIndex += 1;
                     recordIndex = 0;
-                    databaseIndex = databaseIndex >= widget.currentUser.databases.length ? 0 : databaseIndex;
+                    databaseIndex =
+                        databaseIndex >= widget.currentUser.databases.length
+                            ? 0
+                            : databaseIndex;
                   });
                 }
                 //swipe left gesture
-                else if(dragEndDetails.primaryVelocity! > 0){
+                else if (dragEndDetails.primaryVelocity! > 0) {
                   setState(() {
                     databaseIndex -= 1;
                     recordIndex = 0;
-                    databaseIndex = databaseIndex < 0 ? widget.currentUser.databases.length - 1 : databaseIndex;
+                    databaseIndex = databaseIndex < 0
+                        ? widget.currentUser.databases.length - 1
+                        : databaseIndex;
                   });
                 }
               },
               child: Container(
-                  width: phoneWidth/1.265,
-                  height: phoneHeight/4.55,
+                  width: phoneWidth / 1.265,
+                  height: phoneHeight / 4.55,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: Color(0xff189AB4),
@@ -93,29 +104,38 @@ class _MainScreenState extends State<MainScreen> {
                               Icon(
                                 Icons.donut_large_rounded,
                                 color: Colors.white,
-                                size: phoneWidth/4.56,
+                                size: phoneWidth / 4.56,
                               ),
                             ],
-                          )
-                      ),
+                          )),
                       Container(
                         width: 10.0,
                       ),
                       Align(
                         alignment: Alignment.centerRight,
-                        child:Text(
-                          widget.currentUser.databases.isEmpty ? " " :
-                          Encryptor.cipherToPlainText(widget.currentUser.databases[databaseIndex].databaseName, "PASSWORD"),
-                          style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                        child: Text(
+                          widget.currentUser.databases.isEmpty
+                              ? " "
+                              : Encryptor.cipherToPlainText(
+                                  widget.currentUser.databases[databaseIndex]
+                                      .databaseName,
+                                  "PASSWORD"),
+                          style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
                         ),
                       )
                     ],
-                  )
-              ),
-              onTap: (){
-                if(widget.currentUser.databases.isNotEmpty) {
-                  Navigator.push(context,MaterialPageRoute(
-                      builder: (context) => ViewDatabaseScreen(database: widget.currentUser.databases[databaseIndex])),
+                  )),
+              onTap: () {
+                if (widget.currentUser.databases.isNotEmpty) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewDatabaseScreen(
+                            database:
+                                widget.currentUser.databases[databaseIndex])),
                   );
                 }
               },
@@ -126,59 +146,83 @@ class _MainScreenState extends State<MainScreen> {
             ),
             GestureDetector(
               //Swiper for records
-              onHorizontalDragEnd: (dragEndDetails){
+              onHorizontalDragEnd: (dragEndDetails) {
                 //swipe right gesture
                 if (dragEndDetails.primaryVelocity! < 0) {
                   setState(() {
                     recordIndex += 1;
-                    if (widget.currentUser.databases.isEmpty){
+                    if (widget.currentUser.databases.isEmpty) {
                       recordIndex = 0;
-                    }
-                    else{
-                      recordIndex =  recordIndex >= widget.currentUser.databases[databaseIndex].forms.length ? 0 : recordIndex;
+                    } else {
+                      recordIndex = recordIndex >=
+                              widget.currentUser.databases[databaseIndex].forms
+                                  .length
+                          ? 0
+                          : recordIndex;
                     }
                   });
                 }
                 //swipe left gesture
-                else if(dragEndDetails.primaryVelocity! > 0){
+                else if (dragEndDetails.primaryVelocity! > 0) {
                   setState(() {
                     recordIndex -= 0;
-                    if(widget.currentUser.databases.isEmpty){
+                    if (widget.currentUser.databases.isEmpty) {
                       recordIndex = 0;
-                    }
-                    else{
-                      recordIndex = recordIndex < 0 ? widget.currentUser.databases[databaseIndex].forms.length - 1 : recordIndex;
+                    } else {
+                      recordIndex = recordIndex < 0
+                          ? widget.currentUser.databases[databaseIndex].forms
+                                  .length -
+                              1
+                          : recordIndex;
                     }
                   });
                 }
               },
-              child:
-              Container(
-                width: phoneWidth/1.417,
-                height: phoneHeight/11.383,
+              child: Container(
+                width: phoneWidth / 1.417,
+                height: phoneHeight / 11.383,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(50)),
                   color: Color(0xff189AB4),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:[
+                  children: [
                     Text(
-                      widget.currentUser.databases.isEmpty  ? " " : widget.currentUser.databases[databaseIndex].forms.isEmpty ? " " : Encryptor.cipherToPlainText(widget.currentUser.databases[databaseIndex].forms[recordIndex].formDetails["serviceName"], "PASSWORD"),
-                      style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                      widget.currentUser.databases.isEmpty
+                          ? " "
+                          : widget.currentUser.databases[databaseIndex].forms
+                                  .isEmpty
+                              ? " "
+                              : Encryptor.cipherToPlainText(
+                                  widget
+                                      .currentUser
+                                      .databases[databaseIndex]
+                                      .forms[recordIndex]
+                                      .formDetails["serviceName"],
+                                  "PASSWORD"),
+                      style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              onTap: (){
-                if(widget.currentUser.databases.isNotEmpty && widget.currentUser.databases[databaseIndex].forms.isNotEmpty){
-                  Navigator.push(context,MaterialPageRoute(
-                      builder: (context) => ViewRecordForm(form: widget.currentUser.databases[databaseIndex].forms[recordIndex])),
+              onTap: () {
+                if (widget.currentUser.databases.isNotEmpty &&
+                    widget.currentUser.databases[databaseIndex].forms
+                        .isNotEmpty) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewRecordForm(
+                            form: widget.currentUser.databases[databaseIndex]
+                                .forms[recordIndex])),
                   );
                 }
               },
             ),
-
 
             Container(
               height: 40.0,
@@ -191,8 +235,8 @@ class _MainScreenState extends State<MainScreen> {
                       width: 65.0,
                     ),
                     SizedBox(
-                        height: phoneHeight/11.383,
-                        width: phoneWidth/1.868,
+                        height: phoneHeight / 11.383,
+                        width: phoneWidth / 1.868,
                         child: TextButton(
                           key: const Key("new-database-button"),
                           style: ButtonStyle(
@@ -205,17 +249,20 @@ class _MainScreenState extends State<MainScreen> {
                                       side: BorderSide(
                                           color: Color.fromARGB(
                                               200, 24, 154, 180))))),
-                          onPressed: () async{
-                            try{
+                          onPressed: () async {
+                            try {
                               Database newDatabaseObject = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CreateDatabase(currentUser: widget.currentUser,)),
+                                    builder: (context) => CreateDatabase(
+                                        currentUser: widget.currentUser,
+                                        password: widget.password)),
                               ) as Database;
-                              setState((){
-                                widget.currentUser.databases.add(newDatabaseObject);
+                              setState(() {
+                                widget.currentUser.databases
+                                    .add(newDatabaseObject);
                               });
-                            }catch(e){}
+                            } catch (e) {}
                           },
                           child: const Text(
                             'New Database',
@@ -232,17 +279,20 @@ class _MainScreenState extends State<MainScreen> {
                         child: InkWell(
                           key: const Key("new-database-icon-button"),
                           splashColor: Colors.white, // Splash color
-                          onTap: () async{
-                            try{
+                          onTap: () async {
+                            try {
                               Database newDatabaseObject = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CreateDatabase(currentUser: widget.currentUser,)),
+                                    builder: (context) => CreateDatabase(
+                                        currentUser: widget.currentUser,
+                                        password: widget.password)),
                               ) as Database;
-                              setState((){
-                                widget.currentUser.databases.add(newDatabaseObject);
+                              setState(() {
+                                widget.currentUser.databases
+                                    .add(newDatabaseObject);
                               });
-                            }catch(e){}
+                            } catch (e) {}
                           },
                           child: SizedBox(
                               width: 56, height: 56, child: Icon(Icons.add)),
@@ -262,8 +312,8 @@ class _MainScreenState extends State<MainScreen> {
                       width: 65.0,
                     ),
                     SizedBox(
-                        height: phoneHeight/11.383,
-                        width: phoneWidth/1.868,
+                        height: phoneHeight / 11.383,
+                        width: phoneWidth / 1.868,
                         child: TextButton(
                           key: const Key("choose-database-button"),
                           style: ButtonStyle(
@@ -280,7 +330,10 @@ class _MainScreenState extends State<MainScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChooseDatabase(databases: widget.currentUser.databases,currentUser: widget.currentUser,)),
+                                  builder: (context) => ChooseDatabase(
+                                      databases: widget.currentUser.databases,
+                                      currentUser: widget.currentUser,
+                                      password: widget.password)),
                             );
                           },
                           child: const Text(
@@ -303,7 +356,10 @@ class _MainScreenState extends State<MainScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChooseDatabase(databases: widget.currentUser.databases, currentUser: widget.currentUser,)),
+                                  builder: (context) => ChooseDatabase(
+                                      databases: widget.currentUser.databases,
+                                      currentUser: widget.currentUser,
+                                      password: widget.password)),
                             );
                           },
                           child: SizedBox(
@@ -326,8 +382,8 @@ class _MainScreenState extends State<MainScreen> {
                       width: 65.0,
                     ),
                     SizedBox(
-                        height: phoneHeight/11.383,
-                        width: phoneWidth/1.868,
+                        height: phoneHeight / 11.383,
+                        width: phoneWidth / 1.868,
                         child: TextButton(
                           key: const Key("delete-database-button"),
                           style: ButtonStyle(
@@ -340,19 +396,24 @@ class _MainScreenState extends State<MainScreen> {
                                       side: BorderSide(
                                           color: Color.fromARGB(
                                               200, 24, 154, 180))))),
-                          onPressed: () async{
-                            try{
-                              while(true){
+                          onPressed: () async {
+                            try {
+                              while (true) {
                                 int indexToDelete = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DeleteDatabase(databases: widget.currentUser.databases,currentUser: widget.currentUser,)),
+                                      builder: (context) => DeleteDatabase(
+                                          databases:
+                                              widget.currentUser.databases,
+                                          currentUser: widget.currentUser,
+                                          password: widget.password)),
                                 ) as int;
-                                setState((){
-                                  widget.currentUser.databases.removeAt(indexToDelete);
+                                setState(() {
+                                  widget.currentUser.databases
+                                      .removeAt(indexToDelete);
                                 });
                               }
-                            }catch(e){}
+                            } catch (e) {}
                           },
                           child: const Text(
                             'Delete Database',
@@ -369,18 +430,23 @@ class _MainScreenState extends State<MainScreen> {
                         child: InkWell(
                           key: const Key("delete-database-icon-button"),
                           splashColor: Colors.white, // Splash color
-                          onTap: () async{
-                            while(true){
-                              try{
+                          onTap: () async {
+                            while (true) {
+                              try {
                                 int indexToDelete = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DeleteDatabase(databases: widget.currentUser.databases,currentUser: widget.currentUser,)),
+                                      builder: (context) => DeleteDatabase(
+                                          databases:
+                                              widget.currentUser.databases,
+                                          currentUser: widget.currentUser,
+                                          password: widget.password)),
                                 ) as int;
-                                setState((){
-                                  widget.currentUser.databases.removeAt(indexToDelete);
+                                setState(() {
+                                  widget.currentUser.databases
+                                      .removeAt(indexToDelete);
                                 });
-                              }catch(e){}
+                              } catch (e) {}
                             }
                           },
                           child: SizedBox(
