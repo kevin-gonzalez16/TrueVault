@@ -5,7 +5,8 @@ import 'package:true_vault/screens/empty_input_dialog.dart';
 
 class EditRecordForm extends StatefulWidget {
   final formClass.Form form;
-  const EditRecordForm({Key? key, required this.form}) : super(key: key);
+  final String password;
+  const EditRecordForm({Key? key, required this.form, required this.password}) : super(key: key);
   @override
   _EditRecordFormState createState() => _EditRecordFormState();
 }
@@ -77,7 +78,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       child: TextFormField(
                         key: const Key("edit-title-text-field"),
                         initialValue: Encryptor.cipherToPlainText(
-                            widget.form.formDetails["serviceName"], "PASSWORD"),
+                            widget.form.formDetails["serviceName"], widget.password),
                         onChanged: (newText) {
                           setState(() {
                             editedTitle = true;
@@ -114,7 +115,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       child: TextFormField(
                         key: const Key("edit-username-text-field"),
                         initialValue: Encryptor.cipherToPlainText(
-                            widget.form.formDetails["username"], "PASSWORD"),
+                            widget.form.formDetails["username"], widget.password),
                         onChanged: (newText) {
                           editedUsername = true;
                           username = newText;
@@ -154,7 +155,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                                 obscureText: obscureText,
                                 initialValue: Encryptor.cipherToPlainText(
                                     widget.form.formDetails["password"],
-                                    "PASSWORD"),
+                                    widget.password),
                                 onChanged: (newText) {
                                   editedPassword = true;
                                   password = newText;
@@ -203,7 +204,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       child: TextFormField(
                         key: const Key("edit-notes-text-field"),
                         initialValue: Encryptor.cipherToPlainText(
-                            widget.form.formDetails["notes"], "PASSWORD"),
+                            widget.form.formDetails["notes"], widget.password),
                         onChanged: (newText) {
                           editedNotes = true;
                           notes = newText;
@@ -248,16 +249,16 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       onTap: () {
                         var titleCheck = Encryptor.cipherToPlainText(
                                 widget.form.formDetails["serviceName"],
-                                "PASSWORD")
+                            widget.password)
                             .replaceAll(' ', '');
                         var usernameCheck = Encryptor.cipherToPlainText(
-                                widget.form.formDetails["username"], "PASSWORD")
+                                widget.form.formDetails["username"], widget.password)
                             .replaceAll(' ', '');
                         var passwordCheck = Encryptor.cipherToPlainText(
-                                widget.form.formDetails["password"], "PASSWORD")
+                                widget.form.formDetails["password"], widget.password)
                             .replaceAll(' ', '');
                         var notesCheck = Encryptor.cipherToPlainText(
-                                widget.form.formDetails["notes"], "PASSWORD")
+                                widget.form.formDetails["notes"], widget.password)
                             .replaceAll(' ', '');
 
                         if (editedTitle) {
@@ -295,24 +296,24 @@ class _EditRecordFormState extends State<EditRecordForm> {
                             passwordCheck.isNotEmpty) {
                           if (editedTitle) {
                             widget.form.editForm("serviceName",
-                                Encryptor.plainTextToCipher(title, "PASSWORD"));
+                                Encryptor.plainTextToCipher(title, widget.password));
                           }
 
                           if (editedUsername) {
                             widget.form.editForm(
                                 "username",
                                 Encryptor.plainTextToCipher(
-                                    username, "PASSWORD"));
+                                    username, widget.password));
                           }
                           if (editedPassword) {
                             widget.form.editForm(
                                 "password",
                                 Encryptor.plainTextToCipher(
-                                    password, "PASSWORD"));
+                                    password, widget.password));
                           }
                           if (editedNotes) {
                             widget.form.editForm("notes",
-                                Encryptor.plainTextToCipher(notes, "PASSWORD"));
+                                Encryptor.plainTextToCipher(notes, widget.password));
                           }
 
                           Navigator.of(context, rootNavigator: true).pop();

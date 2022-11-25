@@ -7,12 +7,10 @@ import 'package:true_vault/utils/user.dart';
 
 class ChooseDatabase extends StatefulWidget {
   //all of user's databases
-  final List<Database> databases;
   final TrueVaultUser currentUser;
   final String password;
   const ChooseDatabase(
       {Key? key,
-      required this.databases,
       required this.currentUser,
       required this.password})
       : super(key: key);
@@ -21,7 +19,7 @@ class ChooseDatabase extends StatefulWidget {
 }
 
 //Template to list over the databases
-Widget chooseDatabaseTemplate(Database database, int index, context) {
+Widget chooseDatabaseTemplate(Database database, int index, context, password) {
   //Individual Database Buttons
   return Padding(
     padding: const EdgeInsets.fromLTRB(8, 3, 8, 10),
@@ -34,7 +32,7 @@ Widget chooseDatabaseTemplate(Database database, int index, context) {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        ViewDatabaseScreen(database: database)));
+                        ViewDatabaseScreen(database: database, password: password,)));
           },
           style: TextButton.styleFrom(
             backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
@@ -42,7 +40,7 @@ Widget chooseDatabaseTemplate(Database database, int index, context) {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
           child: Text(
-            Encryptor.cipherToPlainText(database.databaseName, "PASSWORD"),
+            Encryptor.cipherToPlainText(database.databaseName, password),
             style: const TextStyle(color: Colors.white, fontSize: 20),
             key: Key("chooseDatabaseButtonText" + index.toString()),
           )),
@@ -120,10 +118,10 @@ class _ChooseDatabaseState extends State<ChooseDatabase> {
                               child: SizedBox(
                                   child: ListView.builder(
                             scrollDirection: Axis.vertical,
-                            itemCount: widget.databases.length,
+                            itemCount: widget.currentUser.databases.length,
                             itemBuilder: (BuildContext test, int index) {
                               return chooseDatabaseTemplate(
-                                  widget.databases[index], index, context);
+                                  widget.currentUser.databases[index], index, context, widget.password);
                             },
                           ))),
                         ],

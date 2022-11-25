@@ -113,7 +113,15 @@ class DatabaseService {
         .doc(databaseID).delete(); //Delete the specific database
   }
 
-  Future<void> removeRecord() async {}
+  Future<void> removeRecord(String databaseID, String recordID) async {
+
+    await FirebaseFirestore.instance.collection("records") //Root Directory
+        .doc(uid) //Unique user document
+        .collection("Databases") //Accessing the Databases
+        .doc(databaseID) //Unique database
+        .collection("Forms") //Access the Forms collection
+        .doc(recordID).delete(); //Delete the specific record
+  }
 
   Future<void> editRecord() async {}
 

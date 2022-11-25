@@ -7,7 +7,8 @@ import 'package:true_vault/screens/edit_record.dart';
 
 class ViewRecordForm extends StatefulWidget {
   final formClass.Form form;
-  const ViewRecordForm({Key? key, required this.form}) : super(key: key);
+  final String password;
+  const ViewRecordForm({Key? key, required this.form, required this.password}) : super(key: key);
   @override
   _ViewRecordFormState createState() => _ViewRecordFormState();
 }
@@ -76,7 +77,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                         Text(
                           nameShortener(Encryptor.cipherToPlainText(
                               widget.form.formDetails["serviceName"],
-                              "PASSWORD")),
+                              widget.password)),
                           key: const Key("view-form-title"),
                           style: TextStyle(
                               fontSize: 30,
@@ -124,7 +125,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               child: Text(
                                 Encryptor.cipherToPlainText(
                                     widget.form.formDetails["username"],
-                                    "PASSWORD"),
+                                    widget.password),
                                 key: const Key("view-form-username"),
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
@@ -138,7 +139,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                             Clipboard.setData(new ClipboardData(
                                     text: Encryptor.cipherToPlainText(
                                         widget.form.formDetails["username"],
-                                        "PASSWORD")))
+                                        widget.password)))
                                 .then((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -179,7 +180,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                                     ? '${password.replaceAll(RegExp(r"."), "*")}'
                                     : Encryptor.cipherToPlainText(
                                         widget.form.formDetails["password"],
-                                        "PASSWORD"),
+                                    widget.password),
                                 key: const Key("view-form-password"),
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
@@ -207,7 +208,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               Clipboard.setData(new ClipboardData(
                                       text: Encryptor.cipherToPlainText(
                                           widget.form.formDetails["password"],
-                                          "PASSWORD")))
+                                          widget.password)))
                                   .then((_) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -248,7 +249,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                                 child: Text(
                                   Encryptor.cipherToPlainText(
                                       widget.form.formDetails["notes"],
-                                      "PASSWORD"),
+                                      widget.password),
                                   key: const Key("view-form-notes"),
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white),
@@ -262,7 +263,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                           onPressed: () async {
                             Clipboard.setData(new ClipboardData(
                               text: Encryptor.cipherToPlainText(
-                                  widget.form.formDetails["notes"], "PASSWORD"),
+                                  widget.form.formDetails["notes"], widget.password),
                             )).then((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -292,7 +293,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        EditRecordForm(form: widget.form)))
+                                        EditRecordForm(form: widget.form, password: widget.password,)))
                             .then((value) => setState(() {}));
                       },
                       child: SizedBox(

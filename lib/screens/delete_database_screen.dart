@@ -10,12 +10,12 @@ import 'package:true_vault/utils/user.dart';
 
 class DeleteDatabase extends StatefulWidget {
   //all of user's databases
-  final List<Database> databases;
+  //final List<Database> databases;
   final TrueVaultUser currentUser;
   final String password;
   const DeleteDatabase(
       {Key? key,
-      required this.databases,
+      //required this.databases,
       required this.currentUser,
       required this.password})
       : super(key: key);
@@ -77,7 +77,7 @@ Widget deleteDatabaseTemplate(
                 ),
                 child: Text(
                   Encryptor.cipherToPlainText(
-                      database.databaseName, "PASSWORD"),
+                      database.databaseName, password),
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                   key: Key("deleteDatabaseText" + index.toString()),
                 )),
@@ -159,10 +159,10 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
                             child: SizedBox(
                                 child: ListView.builder(
                           scrollDirection: Axis.vertical,
-                          itemCount: widget.databases.length,
+                          itemCount: widget.currentUser.databases.length,
                           itemBuilder: (context, int index) =>
                               deleteDatabaseTemplate(
-                                  widget.databases[index],
+                                  widget.currentUser.databases[index],
                                   context,
                                   index,
                                   widget.password,

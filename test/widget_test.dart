@@ -41,7 +41,7 @@ void main() {
     databases.add(newDatabase);
     await tester.pumpWidget(MaterialApp(
         home: ChooseDatabase(
-            databases: databases, currentUser: test, password: "")));
+            currentUser: test, password: "PASSWORD")));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 
@@ -62,7 +62,7 @@ void main() {
     databases.add(newDatabase);
     await tester.pumpWidget(MaterialApp(
         home: DeleteDatabase(
-            databases: databases, currentUser: test, password: "")));
+            currentUser: test, password: "PASSWORD")));
     expect(find.text("cancel"), findsOneWidget);
     expect(find.text("New Database"), findsNothing);
 

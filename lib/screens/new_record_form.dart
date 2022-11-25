@@ -5,7 +5,8 @@ import 'package:true_vault/screens/generate_password_dialog.dart';
 import 'package:true_vault/screens/empty_input_dialog.dart';
 
 class NewRecordForm extends StatefulWidget {
-  const NewRecordForm({Key? key}) : super(key: key);
+  final String password;
+  const NewRecordForm({Key? key, required this.password}) : super(key: key);
 
   @override
   State<NewRecordForm> createState() => _NewRecordFormState();
@@ -260,12 +261,12 @@ class _NewRecordFormState extends State<NewRecordForm> {
                             usernameCheck.isNotEmpty &&
                             passwordCheck.isNotEmpty) {
                           formClass.Form newForm = formClass.Form([
-                            Encryptor.plainTextToCipher(title, "PASSWORD"),
-                            Encryptor.plainTextToCipher(username, "PASSWORD"),
-                            Encryptor.plainTextToCipher(password, "PASSWORD"),
-                            Encryptor.plainTextToCipher(notes, "PASSWORD"),
-                            Encryptor.plainTextToCipher(" ", "PASSWORD"),
-                            Encryptor.plainTextToCipher(" ", "PASSWORD"),
+                            Encryptor.plainTextToCipher(title, widget.password),
+                            Encryptor.plainTextToCipher(username, widget.password),
+                            Encryptor.plainTextToCipher(password, widget.password),
+                            Encryptor.plainTextToCipher(notes, widget.password),
+                            Encryptor.plainTextToCipher(" ", widget.password),
+                            Encryptor.plainTextToCipher(" ", widget.password),
                           ]);
                           Navigator.pop(context, newForm);
                         }
