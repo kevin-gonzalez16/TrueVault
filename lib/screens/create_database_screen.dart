@@ -152,12 +152,12 @@ class _CreateDatabase extends State<CreateDatabase> {
                                         String newDB = await test.addDatabase(
                                             Encryptor.plainTextToCipher(
                                                 databaseNameController.text,
-                                                "PASSWORD"));
+                                                widget.password));
 
                                         Database databaseObj = Database(
                                             Encryptor.plainTextToCipher(
                                                 databaseNameController.text,
-                                                "PASSWORD"),
+                                                widget.password),
                                             newDB);
 
                                         Navigator.pop(context, databaseObj);
@@ -168,7 +168,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                                 builder: (context) =>
                                                     ViewDatabaseScreen(
                                                         database:
-                                                            databaseObj)));
+                                                            databaseObj, password: widget.password,)));
                                       }
                                     });
                                   },

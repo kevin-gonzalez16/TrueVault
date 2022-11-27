@@ -12,9 +12,9 @@ double phoneHeight = 0;
 
 class ViewDatabaseScreen extends StatefulWidget {
   final Database database;
-  const ViewDatabaseScreen({Key? key, required this.database})
+  final String password;
+  const ViewDatabaseScreen({Key? key, required this.database, required this.password})
       : super(key: key);
-
   @override
   State<ViewDatabaseScreen> createState() => _ViewDatabaseScreenState();
 }
@@ -26,7 +26,7 @@ String nameShortener(String databaseName) {
 }
 
 Widget viewDatabaseTemplate(
-    formClass.Form form, context, index, Database database) {
+    formClass.Form form, context, index, Database database, password) {
   return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
       child: Row(
@@ -51,12 +51,12 @@ Widget viewDatabaseTemplate(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                ViewRecordForm(form: form))) as formClass.Form;
+                                ViewRecordForm(form: form,password: password,))) as formClass.Form;
                   } catch (e) {}
                 },
                 child: Text(
                   Encryptor.cipherToPlainText(
-                      form.formDetails["serviceName"], "PASSWORD"),
+                      form.formDetails["serviceName"], password),
                   key: Key("view-record-button-text" + index.toString()),
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
@@ -78,7 +78,7 @@ Widget viewDatabaseTemplate(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    ViewDatabaseScreen(database: database)));
+                                    ViewDatabaseScreen(database: database, password: password,)));
                       }
                     } catch (e) {}
 
@@ -147,10 +147,10 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                             padding: const EdgeInsets.all(15.0),
                             child: Text(
                               nameShortener(Encryptor.cipherToPlainText(
-                                  widget.database.databaseName, "PASSWORD")),
+                                  widget.database.databaseName, widget.password)),
                               key: Key(Encryptor.cipherToPlainText(
                                       widget.database.databaseName,
-                                      "PASSWORD") +
+                                      widget.password) +
                                   "_text"),
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 25),
@@ -181,7 +181,8 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                               widget.database.forms[index],
                               context,
                               index,
-                              widget.database);
+                              widget.database,
+                              widget.password);
                         },
                       ))),
                     ],
@@ -204,7 +205,7 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const NewRecordForm()))
+                                            NewRecordForm(password: widget.password,)))
                                 as formClass.Form;
                             setState(() {
                               widget.database.addForm(myform);

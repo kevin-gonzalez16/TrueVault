@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 Future<bool> DeleteConfirmationScreen(BuildContext context) async {
-  String check = "false";
 
   return await showDialog(
       context: context,

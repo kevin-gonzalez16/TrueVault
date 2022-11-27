@@ -119,7 +119,7 @@ class _MainScreenState extends State<MainScreen> {
                               : Encryptor.cipherToPlainText(
                                   widget.currentUser.databases[databaseIndex]
                                       .databaseName,
-                                  "PASSWORD"),
+                                  widget.password),
                           style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white,
@@ -135,7 +135,8 @@ class _MainScreenState extends State<MainScreen> {
                     MaterialPageRoute(
                         builder: (context) => ViewDatabaseScreen(
                             database:
-                                widget.currentUser.databases[databaseIndex])),
+                                widget.currentUser.databases[databaseIndex], password: widget.password,),),
+
                   );
                 }
               },
@@ -200,7 +201,7 @@ class _MainScreenState extends State<MainScreen> {
                                       .databases[databaseIndex]
                                       .forms[recordIndex]
                                       .formDetails["serviceName"],
-                                  "PASSWORD"),
+                                  widget.password),
                       style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
@@ -218,7 +219,7 @@ class _MainScreenState extends State<MainScreen> {
                     MaterialPageRoute(
                         builder: (context) => ViewRecordForm(
                             form: widget.currentUser.databases[databaseIndex]
-                                .forms[recordIndex])),
+                                .forms[recordIndex], password: widget.password,)),
                   );
                 }
               },
@@ -331,7 +332,7 @@ class _MainScreenState extends State<MainScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ChooseDatabase(
-                                      databases: widget.currentUser.databases,
+                                      //databases: widget.currentUser.databases,
                                       currentUser: widget.currentUser,
                                       password: widget.password)),
                             );
@@ -357,7 +358,7 @@ class _MainScreenState extends State<MainScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ChooseDatabase(
-                                      databases: widget.currentUser.databases,
+                                      //databases: widget.currentUser.databases,
                                       currentUser: widget.currentUser,
                                       password: widget.password)),
                             );
@@ -403,8 +404,8 @@ class _MainScreenState extends State<MainScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => DeleteDatabase(
-                                          databases:
-                                              widget.currentUser.databases,
+                                          // databases:
+                                          //     widget.currentUser.databases,
                                           currentUser: widget.currentUser,
                                           password: widget.password)),
                                 ) as int;
@@ -437,8 +438,8 @@ class _MainScreenState extends State<MainScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => DeleteDatabase(
-                                          databases:
-                                              widget.currentUser.databases,
+                                          // databases:
+                                          //     widget.currentUser.databases,
                                           currentUser: widget.currentUser,
                                           password: widget.password)),
                                 ) as int;
