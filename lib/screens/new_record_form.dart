@@ -1,12 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 import 'package:true_vault/screens/generate_password_dialog.dart';
 import 'package:true_vault/screens/empty_input_dialog.dart';
+import 'package:true_vault/services/database.dart';
+import 'package:true_vault/utils/user.dart';
 
 class NewRecordForm extends StatefulWidget {
   final String password;
-  const NewRecordForm({Key? key, required this.password}) : super(key: key);
+  final Database database;
+  const NewRecordForm(
+      {Key? key, required this.password, required this.database})
+      : super(key: key);
 
   @override
   State<NewRecordForm> createState() => _NewRecordFormState();
@@ -260,14 +267,31 @@ class _NewRecordFormState extends State<NewRecordForm> {
                         if (titleCheck.isNotEmpty &&
                             usernameCheck.isNotEmpty &&
                             passwordCheck.isNotEmpty) {
+                          //create a new form
                           formClass.Form newForm = formClass.Form([
                             Encryptor.plainTextToCipher(title, widget.password),
-                            Encryptor.plainTextToCipher(username, widget.password),
-                            Encryptor.plainTextToCipher(password, widget.password),
+                            Encryptor.plainTextToCipher(
+                                username, widget.password),
+                            Encryptor.plainTextToCipher(
+                                password, widget.password),
                             Encryptor.plainTextToCipher(notes, widget.password),
                             Encryptor.plainTextToCipher(" ", widget.password),
                             Encryptor.plainTextToCipher(" ", widget.password),
                           ]);
+
+                          //create a new form in firebase
+                          final user = FirebaseAuth.instance.currentUser!;
+                          final DatabaseService addRec =
+                              DatabaseService(user.uid);
+                          await addRec.addRecord(widget.database.databaseID, [
+                            Encryptor.plainTextToCipher(title, widget.password),
+                            Encryptor.plainTextToCipher(
+                                username, widget.password),
+                            Encryptor.plainTextToCipher(
+                                password, widget.password),
+                            Encryptor.plainTextToCipher(notes, widget.password)
+                          ]);
+
                           Navigator.pop(context, newForm);
                         }
                       },

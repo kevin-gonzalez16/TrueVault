@@ -13,7 +13,8 @@ double phoneHeight = 0;
 class ViewDatabaseScreen extends StatefulWidget {
   final Database database;
   final String password;
-  const ViewDatabaseScreen({Key? key, required this.database, required this.password})
+  const ViewDatabaseScreen(
+      {Key? key, required this.database, required this.password})
       : super(key: key);
   @override
   State<ViewDatabaseScreen> createState() => _ViewDatabaseScreenState();
@@ -50,8 +51,10 @@ Widget viewDatabaseTemplate(
                     form = await Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                ViewRecordForm(form: form,password: password,))) as formClass.Form;
+                            builder: (context) => ViewRecordForm(
+                                  form: form,
+                                  password: password,
+                                ))) as formClass.Form;
                   } catch (e) {}
                 },
                 child: Text(
@@ -69,19 +72,22 @@ Widget viewDatabaseTemplate(
                 child: InkWell(
                   key: Key("delete-record-icon-button" + index.toString()),
                   splashColor: Colors.white, // Splash color
-                  onTap: () async{
+                  onTap: () async {
                     try {
-                      bool deleteDatabase = await DeleteConfirmationScreen(context);
+                      bool deleteDatabase =
+                          await DeleteConfirmationScreen(context);
                       if (deleteDatabase) {
                         database.removeForm(index);
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    ViewDatabaseScreen(database: database, password: password,)));
+                                builder: (context) => ViewDatabaseScreen(
+                                      database: database,
+                                      password: password,
+                                    )));
                       }
                     } catch (e) {}
-
                   },
                   child: const SizedBox(
                       width: 50, height: 50, child: Icon(Icons.delete)),
@@ -147,7 +153,8 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                             padding: const EdgeInsets.all(15.0),
                             child: Text(
                               nameShortener(Encryptor.cipherToPlainText(
-                                  widget.database.databaseName, widget.password)),
+                                  widget.database.databaseName,
+                                  widget.password)),
                               key: Key(Encryptor.cipherToPlainText(
                                       widget.database.databaseName,
                                       widget.password) +
@@ -202,11 +209,12 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                         onTap: () async {
                           try {
                             formClass.Form myform = await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            NewRecordForm(password: widget.password,)))
-                                as formClass.Form;
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => NewRecordForm(
+                                          password: widget.password,
+                                          database: widget.database,
+                                        ))) as formClass.Form;
                             setState(() {
                               widget.database.addForm(myform);
                             });
