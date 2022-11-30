@@ -12,7 +12,7 @@ void main() {
       Encryptor.plainTextToCipher("this is a new account", "PASSWORD"),
       Encryptor.plainTextToCipher("google.com", "PASSWORD"),
       Encryptor.plainTextToCipher("google.jpeg", "PASSWORD"),
-    ]);
+    ], " ");
 
     Map matcher = {
       "serviceName": "Google",
@@ -36,7 +36,7 @@ void main() {
       Encryptor.plainTextToCipher("this is a new account", "PASSWORD"),
       Encryptor.plainTextToCipher("google.com", "PASSWORD"),
       Encryptor.plainTextToCipher("google.jpeg", "PASSWORD"),
-    ]);
+    ], " ");
 
     newForm.editForm("serviceName", Encryptor.plainTextToCipher("Facebook", "PASSWORD"));
     expect(Encryptor.cipherToPlainText(newForm.formDetails["serviceName"], "PASSWORD"), "Facebook");
@@ -67,7 +67,7 @@ void main() {
       Encryptor.plainTextToCipher("this is a new account", "PASSWORD"),
       Encryptor.plainTextToCipher("google.com", "PASSWORD"),
       Encryptor.plainTextToCipher("google.jpeg", "PASSWORD"),
-    ]);
+    ], " ");
 
     DateTime original = newForm.lastEdited;
     String matcher = original.month.toString() + "/" + original.day.toString();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:true_vault/services/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 import 'package:true_vault/screens/empty_input_dialog.dart';
@@ -6,7 +7,9 @@ import 'package:true_vault/screens/empty_input_dialog.dart';
 class EditRecordForm extends StatefulWidget {
   final formClass.Form form;
   final String password;
-  const EditRecordForm({Key? key, required this.form, required this.password}) : super(key: key);
+  final String uid;
+  final String databaseID;
+  const EditRecordForm({Key? key, required this.form, required this.password, required this.uid, required this.databaseID}) : super(key: key);
   @override
   _EditRecordFormState createState() => _EditRecordFormState();
 }
@@ -315,7 +318,14 @@ class _EditRecordFormState extends State<EditRecordForm> {
                             widget.form.editForm("notes",
                                 Encryptor.plainTextToCipher(notes, widget.password));
                           }
-
+                          //edit here
+                          DatabaseService databaseService = DatabaseService(widget.uid);
+                          databaseService.editRecord(widget.databaseID, [
+                            widget.form.formDetails["serviceName"],
+                            widget.form.formDetails["username"],
+                            widget.form.formDetails["password"],
+                            widget.form.formDetails["notes"],
+                          ], widget.form.recordID);
                           Navigator.of(context, rootNavigator: true).pop();
                         } else {
                           emptyInputDialog(context, errors);

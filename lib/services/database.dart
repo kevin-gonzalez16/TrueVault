@@ -70,7 +70,7 @@ class DatabaseService {
           formData["notes"],
           "url",
           "icon",
-        ]);
+        ], form.id);
         //append it to the database
         newDatabase.forms.add(newForm);
       }
@@ -78,8 +78,6 @@ class DatabaseService {
     }
     return databases;
   }
-
-  Future<void> createUserDocument() async {}
 
   Future<String> addDatabase(String databaseName) async {
     //Get the Collection of Databases for the specific user
@@ -91,8 +89,8 @@ class DatabaseService {
     return newDB.id;
   }
 
-  Future<void> addRecord(String databaseID, List<String> recordInfo) async {
-    await FirebaseFirestore.instance
+  Future<String> addRecord(String databaseID, List<String> recordInfo) async {
+    dynamic newRecord = await FirebaseFirestore.instance
         .collection("records") //Root Directory
         .doc(uid) //Unique user document
         .collection("Databases") //Accessing the Database collections
@@ -105,6 +103,7 @@ class DatabaseService {
       "password": recordInfo[2],
       "notes": recordInfo[3]
     });
+    return newRecord.id;
   }
 
   Future<void> removeDatabase(String databaseID) async {
