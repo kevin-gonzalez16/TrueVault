@@ -168,7 +168,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                                 builder: (context) =>
                                                     ViewDatabaseScreen(
                                                         database:
-                                                            databaseObj, password: widget.password,)));
+                                                            databaseObj, password: widget.password, uid:widget.currentUser.uID)));
                                       }
                                     });
                                   },

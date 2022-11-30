@@ -8,7 +8,9 @@ import 'package:true_vault/screens/edit_record.dart';
 class ViewRecordForm extends StatefulWidget {
   final formClass.Form form;
   final String password;
-  const ViewRecordForm({Key? key, required this.form, required this.password}) : super(key: key);
+  final String databaseID;
+  final String uid;
+  const ViewRecordForm({Key? key, required this.form, required this.password, required this.databaseID, required this.uid}) : super(key: key);
   @override
   _ViewRecordFormState createState() => _ViewRecordFormState();
 }
@@ -293,7 +295,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        EditRecordForm(form: widget.form, password: widget.password,)))
+                                        EditRecordForm(form: widget.form, password: widget.password, databaseID: widget.databaseID,uid: widget.uid,)))
                             .then((value) => setState(() {}));
                       },
                       child: SizedBox(

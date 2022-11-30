@@ -13,8 +13,9 @@ double phoneHeight = 0;
 class ViewDatabaseScreen extends StatefulWidget {
   final Database database;
   final String password;
+  final String uid;
   const ViewDatabaseScreen(
-      {Key? key, required this.database, required this.password})
+      {Key? key, required this.database, required this.password, required this.uid})
       : super(key: key);
   @override
   State<ViewDatabaseScreen> createState() => _ViewDatabaseScreenState();
@@ -27,7 +28,7 @@ String nameShortener(String databaseName) {
 }
 
 Widget viewDatabaseTemplate(
-    formClass.Form form, context, index, Database database, password) {
+    formClass.Form form, context, index, Database database, password, uid) {
   return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
       child: Row(
@@ -54,6 +55,8 @@ Widget viewDatabaseTemplate(
                             builder: (context) => ViewRecordForm(
                                   form: form,
                                   password: password,
+                                  databaseID: database.databaseID,
+                                  uid: uid,
                                 ))) as formClass.Form;
                   } catch (e) {}
                 },
@@ -85,6 +88,7 @@ Widget viewDatabaseTemplate(
                                 builder: (context) => ViewDatabaseScreen(
                                       database: database,
                                       password: password,
+                                      uid: uid,
                                     )));
                       }
                     } catch (e) {}
@@ -189,7 +193,8 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                               context,
                               index,
                               widget.database,
-                              widget.password);
+                              widget.password,
+                              widget.uid);
                         },
                       ))),
                     ],

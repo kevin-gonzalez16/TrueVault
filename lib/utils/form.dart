@@ -11,6 +11,7 @@ class Form{
     "url" : "",
     "icon" : ""
   };
+  String recordID;
   DateTime lastEdited = DateTime.now();
 
   //Constructor
@@ -21,7 +22,7 @@ class Form{
     passed and maps it by location,so make sure the order is correct.
     Also the list must be <String> if its <dynamic> it will error.
   */
-  Form(List<String>details){
+  Form(List<String>details, this.recordID){
 
     Iterable keys = formDetails.keys;
     int index = 0;

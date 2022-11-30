@@ -31,7 +31,7 @@ void main(){
       Encryptor.plainTextToCipher("notes", "PASSWORD"),
       Encryptor.plainTextToCipher("discord.com", "PASSWORD"),
       Encryptor.plainTextToCipher("icon.jpeg", "PASSWORD"),
-    ]));
+    ], " "));
 
     expect(newDatabase.forms.length, 1);
     Map matcher = {
@@ -53,7 +53,7 @@ void main(){
       Encryptor.plainTextToCipher("new account", "PASSWORD"),
       Encryptor.plainTextToCipher("facebook.com", "PASSWORD"),
       Encryptor.plainTextToCipher("facebook.jpeg", "PASSWORD"),
-    ]));
+    ], " "));
 
     expect(newDatabase.forms.length, 2);
     matcher = {
@@ -82,7 +82,7 @@ void main(){
       Encryptor.plainTextToCipher("notes", "PASSWORD"),
       Encryptor.plainTextToCipher("discord.com", "PASSWORD"),
       Encryptor.plainTextToCipher("icon.jpeg", "PASSWORD"),
-    ]));
+    ], " "));
     expect(newDatabase.forms.length, 1);
 
     newDatabase.addForm(Form([
@@ -92,7 +92,7 @@ void main(){
       Encryptor.plainTextToCipher("new account", "PASSWORD"),
       Encryptor.plainTextToCipher("facebook.com", "PASSWORD"),
       Encryptor.plainTextToCipher("facebook.jpeg", "PASSWORD"),
-    ]));
+    ], " "));
     expect(newDatabase.forms.length, 2);
 
     newDatabase.removeForm(0);

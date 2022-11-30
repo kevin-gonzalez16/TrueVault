@@ -267,6 +267,20 @@ class _NewRecordFormState extends State<NewRecordForm> {
                         if (titleCheck.isNotEmpty &&
                             usernameCheck.isNotEmpty &&
                             passwordCheck.isNotEmpty) {
+
+                          //create a new form in firebase
+                          final user = FirebaseAuth.instance.currentUser!;
+                          final DatabaseService addRec =
+                              DatabaseService(user.uid);
+                          String recordID = await addRec.addRecord(widget.database.databaseID, [
+                            Encryptor.plainTextToCipher(title, widget.password),
+                            Encryptor.plainTextToCipher(
+                                username, widget.password),
+                            Encryptor.plainTextToCipher(
+                                password, widget.password),
+                            Encryptor.plainTextToCipher(notes, widget.password)
+                          ]);
+
                           //create a new form
                           formClass.Form newForm = formClass.Form([
                             Encryptor.plainTextToCipher(title, widget.password),
@@ -277,20 +291,7 @@ class _NewRecordFormState extends State<NewRecordForm> {
                             Encryptor.plainTextToCipher(notes, widget.password),
                             Encryptor.plainTextToCipher(" ", widget.password),
                             Encryptor.plainTextToCipher(" ", widget.password),
-                          ]);
-
-                          //create a new form in firebase
-                          final user = FirebaseAuth.instance.currentUser!;
-                          final DatabaseService addRec =
-                              DatabaseService(user.uid);
-                          await addRec.addRecord(widget.database.databaseID, [
-                            Encryptor.plainTextToCipher(title, widget.password),
-                            Encryptor.plainTextToCipher(
-                                username, widget.password),
-                            Encryptor.plainTextToCipher(
-                                password, widget.password),
-                            Encryptor.plainTextToCipher(notes, widget.password)
-                          ]);
+                          ], recordID);
 
                           Navigator.pop(context, newForm);
                         }

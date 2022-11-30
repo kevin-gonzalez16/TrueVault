@@ -135,7 +135,7 @@ class _MainScreenState extends State<MainScreen> {
                     MaterialPageRoute(
                         builder: (context) => ViewDatabaseScreen(
                             database:
-                                widget.currentUser.databases[databaseIndex], password: widget.password,),),
+                                widget.currentUser.databases[databaseIndex], password: widget.password, uid: widget.currentUser.uID,),),
 
                   );
                 }
@@ -219,7 +219,9 @@ class _MainScreenState extends State<MainScreen> {
                     MaterialPageRoute(
                         builder: (context) => ViewRecordForm(
                             form: widget.currentUser.databases[databaseIndex]
-                                .forms[recordIndex], password: widget.password,)),
+                                .forms[recordIndex], password: widget.password,
+                        databaseID: widget.currentUser.databases[databaseIndex].databaseID,
+                        uid: widget.currentUser.uID,)),
                   );
                 }
               },
