@@ -45,18 +45,16 @@ class _NewRecordFormState extends State<NewRecordForm> {
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: TextButton(
-                key: const Key("new-record-back-button"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: TextButton.styleFrom(
-                  primary: const Color.fromRGBO(165, 165, 165, 1),
-                ),
-                child: const Text(
-                  "back",
-                  style: TextStyle(fontSize: 15),
-                ),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    //replace with our own icon data.
+                  )
+                ],
               ),
             ),
             Container(
@@ -267,12 +265,12 @@ class _NewRecordFormState extends State<NewRecordForm> {
                         if (titleCheck.isNotEmpty &&
                             usernameCheck.isNotEmpty &&
                             passwordCheck.isNotEmpty) {
-
                           //create a new form in firebase
                           final user = FirebaseAuth.instance.currentUser!;
                           final DatabaseService addRec =
                               DatabaseService(user.uid);
-                          String recordID = await addRec.addRecord(widget.database.databaseID, [
+                          String recordID = await addRec
+                              .addRecord(widget.database.databaseID, [
                             Encryptor.plainTextToCipher(title, widget.password),
                             Encryptor.plainTextToCipher(
                                 username, widget.password),

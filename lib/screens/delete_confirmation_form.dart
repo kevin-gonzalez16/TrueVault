@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 Future<bool> DeleteConfirmationScreen(BuildContext context, password) async {
   String check = "false";
@@ -10,6 +11,17 @@ Future<bool> DeleteConfirmationScreen(BuildContext context, password) async {
       context: context,
       builder: (context) {
         return StatefulBuilder(builder: (context, setState) {
+          recieveResponseFromTimer() {
+            setState(() {
+              showMessage = false;
+            });
+          }
+
+          setTimer() {
+            var duration = Duration(seconds: 3);
+            return Timer(duration, recieveResponseFromTimer);
+          }
+
           return AlertDialog(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -119,6 +131,7 @@ Future<bool> DeleteConfirmationScreen(BuildContext context, password) async {
                         //display incorrect password message
                         setState(() {
                           showMessage = true;
+                          setTimer();
                         });
                       }
                     },

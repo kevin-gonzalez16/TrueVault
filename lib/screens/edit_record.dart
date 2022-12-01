@@ -9,7 +9,13 @@ class EditRecordForm extends StatefulWidget {
   final String password;
   final String uid;
   final String databaseID;
-  const EditRecordForm({Key? key, required this.form, required this.password, required this.uid, required this.databaseID}) : super(key: key);
+  const EditRecordForm(
+      {Key? key,
+      required this.form,
+      required this.password,
+      required this.uid,
+      required this.databaseID})
+      : super(key: key);
   @override
   _EditRecordFormState createState() => _EditRecordFormState();
 }
@@ -46,17 +52,16 @@ class _EditRecordFormState extends State<EditRecordForm> {
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: TextButton.styleFrom(
-                  primary: const Color.fromRGBO(165, 165, 165, 1),
-                ),
-                child: const Text(
-                  "back",
-                  style: TextStyle(fontSize: 15),
-                ),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    //replace with our own icon data.
+                  )
+                ],
               ),
             ),
             Container(
@@ -81,7 +86,8 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       child: TextFormField(
                         key: const Key("edit-title-text-field"),
                         initialValue: Encryptor.cipherToPlainText(
-                            widget.form.formDetails["serviceName"], widget.password),
+                            widget.form.formDetails["serviceName"],
+                            widget.password),
                         onChanged: (newText) {
                           setState(() {
                             editedTitle = true;
@@ -118,7 +124,8 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       child: TextFormField(
                         key: const Key("edit-username-text-field"),
                         initialValue: Encryptor.cipherToPlainText(
-                            widget.form.formDetails["username"], widget.password),
+                            widget.form.formDetails["username"],
+                            widget.password),
                         onChanged: (newText) {
                           editedUsername = true;
                           username = newText;
@@ -252,16 +259,19 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       onTap: () {
                         var titleCheck = Encryptor.cipherToPlainText(
                                 widget.form.formDetails["serviceName"],
-                            widget.password)
+                                widget.password)
                             .replaceAll(' ', '');
                         var usernameCheck = Encryptor.cipherToPlainText(
-                                widget.form.formDetails["username"], widget.password)
+                                widget.form.formDetails["username"],
+                                widget.password)
                             .replaceAll(' ', '');
                         var passwordCheck = Encryptor.cipherToPlainText(
-                                widget.form.formDetails["password"], widget.password)
+                                widget.form.formDetails["password"],
+                                widget.password)
                             .replaceAll(' ', '');
                         var notesCheck = Encryptor.cipherToPlainText(
-                                widget.form.formDetails["notes"], widget.password)
+                                widget.form.formDetails["notes"],
+                                widget.password)
                             .replaceAll(' ', '');
 
                         if (editedTitle) {
@@ -298,8 +308,10 @@ class _EditRecordFormState extends State<EditRecordForm> {
                             usernameCheck.isNotEmpty &&
                             passwordCheck.isNotEmpty) {
                           if (editedTitle) {
-                            widget.form.editForm("serviceName",
-                                Encryptor.plainTextToCipher(title, widget.password));
+                            widget.form.editForm(
+                                "serviceName",
+                                Encryptor.plainTextToCipher(
+                                    title, widget.password));
                           }
 
                           if (editedUsername) {
@@ -315,17 +327,23 @@ class _EditRecordFormState extends State<EditRecordForm> {
                                     password, widget.password));
                           }
                           if (editedNotes) {
-                            widget.form.editForm("notes",
-                                Encryptor.plainTextToCipher(notes, widget.password));
+                            widget.form.editForm(
+                                "notes",
+                                Encryptor.plainTextToCipher(
+                                    notes, widget.password));
                           }
                           //edit here
-                          DatabaseService databaseService = DatabaseService(widget.uid);
-                          databaseService.editRecord(widget.databaseID, [
-                            widget.form.formDetails["serviceName"],
-                            widget.form.formDetails["username"],
-                            widget.form.formDetails["password"],
-                            widget.form.formDetails["notes"],
-                          ], widget.form.recordID);
+                          DatabaseService databaseService =
+                              DatabaseService(widget.uid);
+                          databaseService.editRecord(
+                              widget.databaseID,
+                              [
+                                widget.form.formDetails["serviceName"],
+                                widget.form.formDetails["username"],
+                                widget.form.formDetails["password"],
+                                widget.form.formDetails["notes"],
+                              ],
+                              widget.form.recordID);
                           Navigator.of(context, rootNavigator: true).pop();
                         } else {
                           emptyInputDialog(context, errors);

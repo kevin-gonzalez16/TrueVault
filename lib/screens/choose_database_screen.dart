@@ -10,16 +10,15 @@ class ChooseDatabase extends StatefulWidget {
   final TrueVaultUser currentUser;
   final String password;
   const ChooseDatabase(
-      {Key? key,
-      required this.currentUser,
-      required this.password})
+      {Key? key, required this.currentUser, required this.password})
       : super(key: key);
   @override
   State<ChooseDatabase> createState() => _ChooseDatabaseState();
 }
 
 //Template to list over the databases
-Widget chooseDatabaseTemplate(Database database, int index, context, password, uid) {
+Widget chooseDatabaseTemplate(
+    Database database, int index, context, password, uid) {
   //Individual Database Buttons
   return Padding(
     padding: const EdgeInsets.fromLTRB(8, 3, 8, 10),
@@ -31,8 +30,8 @@ Widget chooseDatabaseTemplate(Database database, int index, context, password, u
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        ViewDatabaseScreen(database: database, password: password, uid:uid)));
+                    builder: (context) => ViewDatabaseScreen(
+                        database: database, password: password, uid: uid)));
           },
           style: TextButton.styleFrom(
             backgroundColor: const Color.fromRGBO(24, 154, 180, 1),
@@ -121,7 +120,11 @@ class _ChooseDatabaseState extends State<ChooseDatabase> {
                             itemCount: widget.currentUser.databases.length,
                             itemBuilder: (BuildContext test, int index) {
                               return chooseDatabaseTemplate(
-                                  widget.currentUser.databases[index], index, context, widget.password, widget.currentUser.uID);
+                                  widget.currentUser.databases[index],
+                                  index,
+                                  context,
+                                  widget.password,
+                                  widget.currentUser.uID);
                             },
                           ))),
                         ],

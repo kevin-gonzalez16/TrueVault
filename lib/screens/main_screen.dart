@@ -10,6 +10,10 @@ import 'package:true_vault/utils/user.dart';
 
 import 'landing_screen.dart';
 
+enum _MenuValues {
+  logout,
+}
+
 class MainScreen extends StatefulWidget {
   final TrueVaultUser currentUser;
   final String password;
@@ -41,6 +45,32 @@ class _MainScreenState extends State<MainScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                PopupMenuButton<_MenuValues>(
+                  itemBuilder: (BuildContext context) => [
+                    PopupMenuItem(
+                      child: Text(
+                        'Logout',
+                      ),
+                      value: _MenuValues.logout,
+                    ),
+                  ],
+                  onSelected: (value) {
+                    switch (value) {
+                      case _MenuValues.logout:
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LandingScreen()));
+                        break;
+                    }
+                  },
+                ),
+              ],
+            ),
+
+            /*Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
                 TextButton(
                   key: const Key("logoutButton"),
                   child: const Text(
@@ -59,7 +89,7 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
               ],
-            ),
+            ),*/
             GestureDetector(
               //Swiper for database
               onHorizontalDragEnd: (dragEndDetails) {
@@ -85,6 +115,7 @@ class _MainScreenState extends State<MainScreen> {
                   });
                 }
               },
+
               child: Container(
                   width: phoneWidth / 1.265,
                   height: phoneHeight / 4.55,
@@ -133,10 +164,12 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ViewDatabaseScreen(
-                            database:
-                                widget.currentUser.databases[databaseIndex], password: widget.password, uid: widget.currentUser.uID,),),
-
+                      builder: (context) => ViewDatabaseScreen(
+                        database: widget.currentUser.databases[databaseIndex],
+                        password: widget.password,
+                        uid: widget.currentUser.uID,
+                      ),
+                    ),
                   );
                 }
               },
@@ -218,10 +251,13 @@ class _MainScreenState extends State<MainScreen> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ViewRecordForm(
-                            form: widget.currentUser.databases[databaseIndex]
-                                .forms[recordIndex], password: widget.password,
-                        databaseID: widget.currentUser.databases[databaseIndex].databaseID,
-                        uid: widget.currentUser.uID,)),
+                              form: widget.currentUser.databases[databaseIndex]
+                                  .forms[recordIndex],
+                              password: widget.password,
+                              databaseID: widget.currentUser
+                                  .databases[databaseIndex].databaseID,
+                              uid: widget.currentUser.uID,
+                            )),
                   );
                 }
               },

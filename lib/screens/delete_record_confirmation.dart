@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 Future<bool> DeleteConfirmationScreen(BuildContext context) async {
-
   return await showDialog(
       context: context,
       builder: (context) {
@@ -44,7 +43,7 @@ Future<bool> DeleteConfirmationScreen(BuildContext context) async {
                   ),
                   FlatButton(
                     onPressed: () {
-                        Navigator.of(context).pop(true);
+                      Navigator.of(context).pop(true);
                     },
                     child: Text(
                       'Delete',

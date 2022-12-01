@@ -10,7 +10,13 @@ class ViewRecordForm extends StatefulWidget {
   final String password;
   final String databaseID;
   final String uid;
-  const ViewRecordForm({Key? key, required this.form, required this.password, required this.databaseID, required this.uid}) : super(key: key);
+  const ViewRecordForm(
+      {Key? key,
+      required this.form,
+      required this.password,
+      required this.databaseID,
+      required this.uid})
+      : super(key: key);
   @override
   _ViewRecordFormState createState() => _ViewRecordFormState();
 }
@@ -43,18 +49,16 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: TextButton(
-                key: const Key("view-record-back-button"),
-                onPressed: () {
-                  Navigator.pop(context, widget.form);
-                },
-                style: TextButton.styleFrom(
-                  primary: const Color.fromRGBO(165, 165, 165, 1),
-                ),
-                child: const Text(
-                  "back",
-                  style: TextStyle(fontSize: 15),
-                ),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    //replace with our own icon data.
+                  )
+                ],
               ),
             ),
             Container(
@@ -182,7 +186,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                                     ? '${password.replaceAll(RegExp(r"."), "*")}'
                                     : Encryptor.cipherToPlainText(
                                         widget.form.formDetails["password"],
-                                    widget.password),
+                                        widget.password),
                                 key: const Key("view-form-password"),
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
@@ -265,7 +269,8 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                           onPressed: () async {
                             Clipboard.setData(new ClipboardData(
                               text: Encryptor.cipherToPlainText(
-                                  widget.form.formDetails["notes"], widget.password),
+                                  widget.form.formDetails["notes"],
+                                  widget.password),
                             )).then((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -292,11 +297,14 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                       splashColor: Colors.white, // Splash color
                       onTap: () async {
                         Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        EditRecordForm(form: widget.form, password: widget.password, databaseID: widget.databaseID,uid: widget.uid,)))
-                            .then((value) => setState(() {}));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditRecordForm(
+                                      form: widget.form,
+                                      password: widget.password,
+                                      databaseID: widget.databaseID,
+                                      uid: widget.uid,
+                                    ))).then((value) => setState(() {}));
                       },
                       child: SizedBox(
                           width: 56,
