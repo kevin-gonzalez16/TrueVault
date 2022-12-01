@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 Future<bool> DeleteConfirmationScreen(BuildContext context, password) async {
   String check = "false";
 
+  bool _isVisible = false;
+  bool showMessage = false;
+
   return await showDialog(
       context: context,
       builder: (context) {
@@ -31,23 +34,67 @@ Future<bool> DeleteConfirmationScreen(BuildContext context, password) async {
               ],
             ),
             // const Text('Database Deletion'),
+
             actions: <Widget>[
               Container(
                 alignment: Alignment.topCenter,
                 child: SizedBox(
                   width: 225.0,
                   child: TextField(
-                    key: Key("text-field-database-deletion-password"),
+                    obscureText: !_isVisible,
+                    key: const Key("text-field-database-deletion-password"),
                     onChanged: (text) {
                       check = text;
                     },
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isVisible = !_isVisible;
+                          });
+                        },
+                        icon: _isVisible
+                            ? Icon(
+                                Icons.visibility,
+                                color: Colors.black,
+                              )
+                            : Icon(Icons.visibility_off, color: Colors.grey),
+                      ),
+                      filled: true,
+                      fillColor: Color(0xffc9c9c9),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 3, color: Color(0xffC9C9C9)),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 3, color: Color(0xffC9C9C9)),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                       hintText: 'Enter Password',
+                      hintStyle:
+                          TextStyle(fontSize: 18, color: Color(0xff989898)),
+                      //),
+                      //),
+                      //border: OutlineInputBorder(),
+                      // hintText: 'Enter Password',
                     ),
                   ),
                 ),
               ),
+              Container(
+                height: 10.0,
+              ),
+              (showMessage)
+                  ? Center(
+                      child: Text(
+                      'Incorrect password',
+                      style: TextStyle(fontSize: 15, color: Colors.red),
+
+                      //   key: Key("incorrect-login-text-message"),
+                    ))
+                  : Text(""),
               Container(
                 height: 30.0,
               ),
@@ -70,7 +117,9 @@ Future<bool> DeleteConfirmationScreen(BuildContext context, password) async {
                         Navigator.of(context).pop(true);
                       } else {
                         //display incorrect password message
-
+                        setState(() {
+                          showMessage = true;
+                        });
                       }
                     },
                     child: Text(
