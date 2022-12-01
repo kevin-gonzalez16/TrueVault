@@ -6,6 +6,7 @@ import 'package:true_vault/screens/view_record.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/form.dart' as formClass;
 import 'package:true_vault/screens/delete_record_confirmation.dart';
+import 'package:true_vault/services/database.dart';
 
 double phoneWidth = 0;
 double phoneHeight = 0;
@@ -82,7 +83,14 @@ Widget viewDatabaseTemplate(
                     try {
                       bool deleteDatabase =
                           await DeleteConfirmationScreen(context);
+
                       if (deleteDatabase) {
+                        //delete from firebase
+
+                        DatabaseService databaseService = DatabaseService(uid);
+                        databaseService.removeRecord(
+                            database.databaseID, form.recordID);
+
                         database.removeForm(index);
 
                         Navigator.push(
@@ -122,13 +130,19 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  IconButton(
+                  TextButton(
+                    key: const Key("chooseRecordBackButton"),
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                    //replace with our own icon data.
-                  )
+                    style: TextButton.styleFrom(
+                      primary: const Color.fromRGBO(165, 165, 165, 1),
+                    ),
+                    child: const Text(
+                      "back",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
                 ],
               ),
             ),

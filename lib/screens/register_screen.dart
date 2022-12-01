@@ -20,6 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController confirmPasswordTextEditingController =
       TextEditingController();
 
+  bool loading = false;
   bool _isVisible = false;
 
   bool _isPassword8Characters = false;
@@ -396,45 +397,66 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Container(
               height: 15.0,
             ),
-            RaisedButton(
-                key: const Key("register-screen-button"),
-                child: Text(
-                  'Create Account',
-                  style: TextStyle(color: Color(0xff989898)),
-                  key: const Key("register-screen-button-text"),
-                ),
-                color: Color(0xff189AB4),
-                onPressed: () async {
-                  if (!_isEmpty) {
-                    if (_match) {
-                      match = true;
-                    } else {
-                      match = false;
-                    }
-                    if (isValidPassword) {
-                      notValid = true;
-                    } else if (!isValidPassword) {
-                      notValid = false;
-                    }
+            loading
+                ? CircularProgressIndicator(
+                    strokeWidth: 5,
+                  )
+                : RaisedButton(
+                    key: const Key("register-screen-button"),
+                    child: Text(
+                      'Create Account',
+                      style: TextStyle(color: Color(0xff989898)),
+                      key: const Key("register-screen-button-text"),
+                    ),
+                    color: Color(0xff189AB4),
+                    onPressed: () async {
+                      if (!_isEmpty) {
+                        if (_match) {
+                          match = true;
+                        } else {
+                          match = false;
+                        }
+                        if (isValidPassword) {
+                          notValid = true;
+                        } else if (!isValidPassword) {
+                          notValid = false;
+                        }
 
-                    if (isValidPassword && match) {
-                      await Firebase.initializeApp();
-                      AuthService test = AuthService();
-                      dynamic result = await test.registerWithEmailAndPassword(
-                          widget.email.text,
-                          confirmPasswordTextEditingController.text);
+                        if (isValidPassword && match) {
+                          setState(() {
+                            loading = true;
+                          });
+                          await Firebase.initializeApp();
+                          AuthService test = AuthService();
+                          dynamic result =
+                              await test.registerWithEmailAndPassword(
+                                  widget.email.text,
+                                  confirmPasswordTextEditingController.text);
+                          await Firebase.initializeApp();
+                          AuthService auth = AuthService();
+                          dynamic signIn =
+                              await auth.signInWithEmailAndPassword(
+                                  widget.email.text,
+                                  confirmPasswordTextEditingController.text);
 
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LandingScreen()));
-                    }
-                    empty = false;
-                  } else {
-                    empty = true;
-                  }
-                  setState(() {});
-                }),
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainScreen(
+                                      currentUser: signIn,
+                                      password:
+                                          confirmPasswordTextEditingController
+                                              .text)));
+                        }
+                        setState(() {
+                          loading = false;
+                        });
+                        empty = false;
+                      } else {
+                        empty = true;
+                      }
+                      setState(() {});
+                    }),
           ],
         )));
   }

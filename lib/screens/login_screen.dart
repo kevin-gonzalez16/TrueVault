@@ -17,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool showMessage = false;
   bool _isVisible = false;
+  bool loading = false;
   recieveResponseFromTimer() {
     if (!mounted) return;
 
@@ -150,38 +151,47 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               height: 15.0,
             ),
-            RaisedButton(
-                padding: const EdgeInsets.fromLTRB(75, 20, 75, 20),
-                key: const Key("login-screen-button"),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: const Text(
-                  'Log in',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                  key: Key("loginButtonText"),
-                ),
-                color: Color(0xff189AB4),
-                //  color: Color(0xff189AB4),
-                onPressed: () async {
-                  await Firebase.initializeApp();
-                  AuthService auth = AuthService();
-                  dynamic result = await auth.signInWithEmailAndPassword(
-                      emailController.text, passwordController.text);
+            loading
+                ? CircularProgressIndicator(
+                    strokeWidth: 5,
+                  )
+                : RaisedButton(
+                    padding: const EdgeInsets.fromLTRB(75, 20, 75, 20),
+                    key: const Key("login-screen-button"),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: const Text(
+                      'Log in',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      key: Key("loginButtonText"),
+                    ),
+                    color: Color(0xff189AB4),
+                    //  color: Color(0xff189AB4),
+                    onPressed: () async {
+                      setState(() {
+                        loading = true;
+                      });
+                      await Firebase.initializeApp();
+                      AuthService auth = AuthService();
+                      dynamic result = await auth.signInWithEmailAndPassword(
+                          emailController.text, passwordController.text);
 
-                  if (result == null) {
-                    showMessage = true;
-                    setTimer();
-                  } else {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainScreen(
-                                currentUser: result,
-                                password: passwordController.text)));
-                  }
-                  setState(() {});
-                }),
+                      if (result == null) {
+                        showMessage = true;
+                        setTimer();
+                      } else {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainScreen(
+                                    currentUser: result,
+                                    password: passwordController.text)));
+                      }
+                      setState(() {
+                        loading = false;
+                      });
+                    }),
           ],
         )));
   }
