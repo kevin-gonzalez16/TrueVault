@@ -15,7 +15,10 @@ class ViewDatabaseScreen extends StatefulWidget {
   final String password;
   final String uid;
   const ViewDatabaseScreen(
-      {Key? key, required this.database, required this.password, required this.uid})
+      {Key? key,
+      required this.database,
+      required this.password,
+      required this.uid})
       : super(key: key);
   @override
   State<ViewDatabaseScreen> createState() => _ViewDatabaseScreenState();
@@ -119,19 +122,13 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  TextButton(
-                    key: const Key("chooseRecordBackButton"),
+                  IconButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    style: TextButton.styleFrom(
-                      primary: const Color.fromRGBO(165, 165, 165, 1),
-                    ),
-                    child: const Text(
-                      "back",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ),
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    //replace with our own icon data.
+                  )
                 ],
               ),
             ),
