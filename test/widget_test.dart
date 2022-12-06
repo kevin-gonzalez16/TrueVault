@@ -19,12 +19,16 @@ import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/user.dart';
 
 void main() {
+  String uID = "2LrMteAPf2XoLYUFc8RM2xDh8P02";
+
   testWidgets("Logout button takes you to the landing screen",
       (WidgetTester tester) async {
     TrueVaultUser test = TrueVaultUser("uID", []);
     await tester.pumpWidget(
         MaterialApp(home: MainScreen(currentUser: test, password: "")));
-    expect(find.text("Logout"), findsOneWidget);
+    expect(find.text("New Database"), findsOneWidget);
+    await tester.tap(find.byKey(const Key("PopupMenuButton")));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key("logoutButton")));
     await tester.pumpAndSettle();
     expect(find.text("Register"), findsOneWidget);
@@ -35,8 +39,8 @@ void main() {
     TrueVaultUser test = TrueVaultUser("uID", []);
     List<Database> databases = [];
     Database newDatabase = Database(
-      Encryptor.plainTextToCipher("new database2", "PASSWORD"),
-      Encryptor.plainTextToCipher("/", "PASSWORD"),
+      Encryptor.plainTextToCipher("new database2", "PASSWORD",uID),
+      Encryptor.plainTextToCipher("/", "PASSWORD",uID),
     );
     databases.add(newDatabase);
     await tester.pumpWidget(MaterialApp(
@@ -56,8 +60,8 @@ void main() {
     TrueVaultUser test = TrueVaultUser("uID", []);
     List<Database> databases = [];
     Database newDatabase = Database(
-      Encryptor.plainTextToCipher("new database2", "PASSWORD"),
-      Encryptor.plainTextToCipher("/", "PASSWORD"),
+      Encryptor.plainTextToCipher("new database2", "PASSWORD",uID),
+      Encryptor.plainTextToCipher("/", "PASSWORD",uID),
     );
     databases.add(newDatabase);
     await tester.pumpWidget(MaterialApp(

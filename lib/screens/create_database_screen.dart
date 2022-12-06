@@ -152,12 +152,15 @@ class _CreateDatabase extends State<CreateDatabase> {
                                         String newDB = await test.addDatabase(
                                             Encryptor.plainTextToCipher(
                                                 databaseNameController.text,
-                                                widget.password));
+                                                widget.password,
+                                                widget.currentUser.uID
+                                            ));
 
                                         Database databaseObj = Database(
                                             Encryptor.plainTextToCipher(
                                                 databaseNameController.text,
-                                                widget.password),
+                                                widget.password,
+                                                widget.currentUser.uID),
                                             newDB);
 
                                         Navigator.pop(context, databaseObj);

@@ -11,8 +11,9 @@ import 'package:true_vault/utils/user.dart';
 class NewRecordForm extends StatefulWidget {
   final String password;
   final Database database;
+  final String uID;
   const NewRecordForm(
-      {Key? key, required this.password, required this.database})
+      {Key? key, required this.password, required this.database, required this.uID})
       : super(key: key);
 
   @override
@@ -52,6 +53,7 @@ class _NewRecordFormState extends State<NewRecordForm> {
                       Navigator.pop(context);
                     },
                     icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    key: const Key("new-record-back-button"),
                     //replace with our own icon data.
                   )
                 ],
@@ -271,24 +273,24 @@ class _NewRecordFormState extends State<NewRecordForm> {
                               DatabaseService(user.uid);
                           String recordID = await addRec
                               .addRecord(widget.database.databaseID, [
-                            Encryptor.plainTextToCipher(title, widget.password),
+                            Encryptor.plainTextToCipher(title, widget.password, widget.uID),
                             Encryptor.plainTextToCipher(
-                                username, widget.password),
+                                username, widget.password, widget.uID),
                             Encryptor.plainTextToCipher(
-                                password, widget.password),
-                            Encryptor.plainTextToCipher(notes, widget.password)
+                                password, widget.password, widget.uID),
+                            Encryptor.plainTextToCipher(notes, widget.password, widget.uID)
                           ]);
 
                           //create a new form
                           formClass.Form newForm = formClass.Form([
-                            Encryptor.plainTextToCipher(title, widget.password),
+                            Encryptor.plainTextToCipher(title, widget.password, widget.uID),
                             Encryptor.plainTextToCipher(
-                                username, widget.password),
+                                username, widget.password, widget.uID),
                             Encryptor.plainTextToCipher(
-                                password, widget.password),
-                            Encryptor.plainTextToCipher(notes, widget.password),
-                            Encryptor.plainTextToCipher(" ", widget.password),
-                            Encryptor.plainTextToCipher(" ", widget.password),
+                                password, widget.password, widget.uID),
+                            Encryptor.plainTextToCipher(notes, widget.password, widget.uID),
+                            Encryptor.plainTextToCipher(" ", widget.password, widget.uID),
+                            Encryptor.plainTextToCipher(" ", widget.password, widget.uID),
                           ], recordID);
 
                           Navigator.pop(context, newForm);

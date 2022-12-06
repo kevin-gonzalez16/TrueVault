@@ -87,7 +87,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                         key: const Key("edit-title-text-field"),
                         initialValue: Encryptor.cipherToPlainText(
                             widget.form.formDetails["serviceName"],
-                            widget.password),
+                            widget.password, widget.uid),
                         onChanged: (newText) {
                           setState(() {
                             editedTitle = true;
@@ -125,7 +125,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                         key: const Key("edit-username-text-field"),
                         initialValue: Encryptor.cipherToPlainText(
                             widget.form.formDetails["username"],
-                            widget.password),
+                            widget.password ,widget.uid),
                         onChanged: (newText) {
                           editedUsername = true;
                           username = newText;
@@ -165,7 +165,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                                 obscureText: obscureText,
                                 initialValue: Encryptor.cipherToPlainText(
                                     widget.form.formDetails["password"],
-                                    widget.password),
+                                    widget.password, widget.uid),
                                 onChanged: (newText) {
                                   editedPassword = true;
                                   password = newText;
@@ -214,7 +214,7 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       child: TextFormField(
                         key: const Key("edit-notes-text-field"),
                         initialValue: Encryptor.cipherToPlainText(
-                            widget.form.formDetails["notes"], widget.password),
+                            widget.form.formDetails["notes"], widget.password, widget.uid),
                         onChanged: (newText) {
                           editedNotes = true;
                           notes = newText;
@@ -259,19 +259,19 @@ class _EditRecordFormState extends State<EditRecordForm> {
                       onTap: () {
                         var titleCheck = Encryptor.cipherToPlainText(
                                 widget.form.formDetails["serviceName"],
-                                widget.password)
+                                widget.password, widget.uid)
                             .replaceAll(' ', '');
                         var usernameCheck = Encryptor.cipherToPlainText(
                                 widget.form.formDetails["username"],
-                                widget.password)
+                                widget.password, widget.uid)
                             .replaceAll(' ', '');
                         var passwordCheck = Encryptor.cipherToPlainText(
                                 widget.form.formDetails["password"],
-                                widget.password)
+                                widget.password, widget.uid)
                             .replaceAll(' ', '');
                         var notesCheck = Encryptor.cipherToPlainText(
                                 widget.form.formDetails["notes"],
-                                widget.password)
+                                widget.password, widget.uid)
                             .replaceAll(' ', '');
 
                         if (editedTitle) {
@@ -311,26 +311,26 @@ class _EditRecordFormState extends State<EditRecordForm> {
                             widget.form.editForm(
                                 "serviceName",
                                 Encryptor.plainTextToCipher(
-                                    title, widget.password));
+                                    title, widget.password, widget.uid));
                           }
 
                           if (editedUsername) {
                             widget.form.editForm(
                                 "username",
                                 Encryptor.plainTextToCipher(
-                                    username, widget.password));
+                                    username, widget.password, widget.uid));
                           }
                           if (editedPassword) {
                             widget.form.editForm(
                                 "password",
                                 Encryptor.plainTextToCipher(
-                                    password, widget.password));
+                                    password, widget.password, widget.uid));
                           }
                           if (editedNotes) {
                             widget.form.editForm(
                                 "notes",
                                 Encryptor.plainTextToCipher(
-                                    notes, widget.password));
+                                    notes, widget.password, widget.uid));
                           }
                           //edit here
                           DatabaseService databaseService =

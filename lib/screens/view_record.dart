@@ -56,7 +56,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                       Navigator.pop(context);
                     },
                     icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                    //replace with our own icon data.
+                    key: const Key("view-record-back-button"),
                   )
                 ],
               ),
@@ -83,7 +83,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                         Text(
                           nameShortener(Encryptor.cipherToPlainText(
                               widget.form.formDetails["serviceName"],
-                              widget.password)),
+                              widget.password, widget.uid)),
                           key: const Key("view-form-title"),
                           style: TextStyle(
                               fontSize: 30,
@@ -131,7 +131,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               child: Text(
                                 Encryptor.cipherToPlainText(
                                     widget.form.formDetails["username"],
-                                    widget.password),
+                                    widget.password, widget.uid),
                                 key: const Key("view-form-username"),
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
@@ -145,7 +145,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                             Clipboard.setData(new ClipboardData(
                                     text: Encryptor.cipherToPlainText(
                                         widget.form.formDetails["username"],
-                                        widget.password)))
+                                        widget.password, widget.uid)))
                                 .then((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -186,7 +186,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                                     ? '${password.replaceAll(RegExp(r"."), "*")}'
                                     : Encryptor.cipherToPlainText(
                                         widget.form.formDetails["password"],
-                                        widget.password),
+                                        widget.password, widget.uid),
                                 key: const Key("view-form-password"),
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
@@ -214,7 +214,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                               Clipboard.setData(new ClipboardData(
                                       text: Encryptor.cipherToPlainText(
                                           widget.form.formDetails["password"],
-                                          widget.password)))
+                                          widget.password, widget.uid)))
                                   .then((_) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -255,7 +255,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                                 child: Text(
                                   Encryptor.cipherToPlainText(
                                       widget.form.formDetails["notes"],
-                                      widget.password),
+                                      widget.password, widget.uid),
                                   key: const Key("view-form-notes"),
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white),
@@ -270,7 +270,7 @@ class _ViewRecordFormState extends State<ViewRecordForm> {
                             Clipboard.setData(new ClipboardData(
                               text: Encryptor.cipherToPlainText(
                                   widget.form.formDetails["notes"],
-                                  widget.password),
+                                  widget.password, widget.uid),
                             )).then((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
