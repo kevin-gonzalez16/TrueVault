@@ -63,11 +63,17 @@ class DatabaseService {
         Map<String, dynamic> formData = form.data();
 
         //make a new form object
+        /*
+        0 - serviceName
+        1 - username
+        2 - password
+        3 - notes
+         */
         Form newForm = Form([
-          formData["serviceName"],
-          formData["username"],
-          formData["password"],
-          formData["notes"],
+          formData["0"],
+          formData["1"],
+          formData["2"],
+          formData["3"],
           "url",
           "icon",
         ], form.id);
@@ -98,10 +104,10 @@ class DatabaseService {
         .collection("Forms") //Access the Forms collection for that DB
         .add({
       //add the form
-      "serviceName": recordInfo[0],
-      "username": recordInfo[1],
-      "password": recordInfo[2],
-      "notes": recordInfo[3]
+      "0": recordInfo[0],
+      "1": recordInfo[1],
+      "2": recordInfo[2],
+      "3": recordInfo[3]
     });
     return newRecord.id;
   }
@@ -137,10 +143,10 @@ class DatabaseService {
         .doc(recordID) //Access the specific form
         .set({
       //update the form with edited data
-      "serviceName": recordInfo[0],
-      "username": recordInfo[1],
-      "password": recordInfo[2],
-      "notes": recordInfo[3]
+      "0": recordInfo[0],
+      "1": recordInfo[1],
+      "2": recordInfo[2],
+      "3": recordInfo[3]
     });
   }
 }

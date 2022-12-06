@@ -5,18 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d32852c9-ee18-4051-accc-63385da310dc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/choose_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/choose_database_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/create_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/create_database_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/delete_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/delete_database_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/edit_record.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/edit_record.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/main_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/new_record_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/new_record_form.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/view_database_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/view_database_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/view_record.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/view_record.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/services/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/database.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/form.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/encryptor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/encryptor.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/database_class_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/database_class_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/database_template_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/database_template_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/encryptor_class_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/encryptor_class_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/form_class_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/form_class_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_driver/app_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test_driver/app_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,9 +87,10 @@
     </key>
   </component>
   <component name="RunManager" selected="Flutter Test.tests in test">
-    <configuration name="encryptor.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/lib/utils/encryptor.dart" />
-      <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <configuration name="Template function creates a button for each database" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Template function creates a button for each database" />
+      <option name="testFile" value="$PROJECT_DIR$/test/database_template_test.dart" />
+      <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="tests in database_class_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -98,23 +103,23 @@
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in test" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testDir" value="$PROJECT_DIR$/test" />
+    <configuration name="tests in encryptor_class_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/encryptor_class_test.dart" />
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in widget_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/widget_test.dart" />
+    <configuration name="tests in test" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testDir" value="$PROJECT_DIR$/test" />
       <option name="useRegexp" value="false" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Flutter Test.tests in test" />
-        <item itemvalue="Flutter Test.tests in widget_test.dart" />
         <item itemvalue="Flutter Test.tests in database_template_test.dart" />
         <item itemvalue="Flutter Test.tests in database_class_test.dart" />
-        <item itemvalue="Dart Command Line App.encryptor.dart" />
+        <item itemvalue="Flutter Test.Template function creates a button for each database" />
+        <item itemvalue="Flutter Test.tests in encryptor_class_test.dart" />
       </list>
     </recent_temporary>
   </component>

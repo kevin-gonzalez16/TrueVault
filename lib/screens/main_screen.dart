@@ -46,8 +46,10 @@ class _MainScreenState extends State<MainScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 PopupMenuButton<_MenuValues>(
+                  key: const Key("PopupMenuButton"),
                   itemBuilder: (BuildContext context) => [
                     PopupMenuItem(
+                      key: const Key("logoutButton"),
                       child: Text(
                         'Logout',
                       ),
@@ -61,6 +63,10 @@ class _MainScreenState extends State<MainScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const LandingScreen()));
+                        setState(() {
+                          databaseIndex = 0;
+                          recordIndex = 0;
+                        });
                         break;
                     }
                   },
@@ -150,7 +156,7 @@ class _MainScreenState extends State<MainScreen> {
                               : Encryptor.cipherToPlainText(
                                   widget.currentUser.databases[databaseIndex]
                                       .databaseName,
-                                  widget.password),
+                                  widget.password, widget.currentUser.uID),
                           style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white,
@@ -234,7 +240,7 @@ class _MainScreenState extends State<MainScreen> {
                                       .databases[databaseIndex]
                                       .forms[recordIndex]
                                       .formDetails["serviceName"],
-                                  widget.password),
+                                  widget.password, widget.currentUser.uID),
                       style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,

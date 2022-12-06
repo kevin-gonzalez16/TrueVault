@@ -438,6 +438,9 @@ void main() {
             find.byValueKey("chooseDatabaseCancelButton");
         await driver.tap(chooseDatabaseCancelButton);
 
+        final popupMenuButton = find.byValueKey("PopupMenuButton");
+        await driver.tap(popupMenuButton);
+
         final logoutButton = find.byValueKey("logoutButton");
         await driver.tap(logoutButton);
 
@@ -749,6 +752,9 @@ void main() {
         final logoutButton = find.byValueKey("logoutButton");
 
         await driver.tap(deleteDatabaseCancelButton);
+
+        final popupMenuButton = find.byValueKey("PopupMenuButton");
+        await driver.tap(popupMenuButton);
         await driver.tap(logoutButton);
       });
       test("Login screen rejects wrong login credentials", () async {

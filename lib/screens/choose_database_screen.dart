@@ -39,7 +39,7 @@ Widget chooseDatabaseTemplate(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
           child: Text(
-            Encryptor.cipherToPlainText(database.databaseName, password),
+            Encryptor.cipherToPlainText(database.databaseName, password, uid),
             style: const TextStyle(color: Colors.white, fontSize: 20),
             key: Key("chooseDatabaseButtonText" + index.toString()),
           )),

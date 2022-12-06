@@ -4,33 +4,34 @@ import 'package:true_vault/utils/form.dart';
 import 'package:true_vault/utils/encryptor.dart';
 
 void main(){
+  String uID = "2LrMteAPf2XoLYUFc8RM2xDh8P02";
 
   test("Database should be created correctly", (){
     Database newDatabase = Database(
-        Encryptor.plainTextToCipher("new database", "PASSWORD"),
-        Encryptor.plainTextToCipher("DATABASE ID", "PASSWORD"),
+        Encryptor.plainTextToCipher("new database", "PASSWORD", uID),
+        Encryptor.plainTextToCipher("DATABASE ID", "PASSWORD", uID),
     );
 
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD"), "new database");
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseID, "PASSWORD"), "DATABASE ID");
+    expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD", uID), "new database");
+    expect(Encryptor.cipherToPlainText(newDatabase.databaseID, "PASSWORD", uID), "DATABASE ID");
     expect(newDatabase.forms.length, 0);
   });
 
   test("Database adds a form correctly to the end", (){
 
     Database newDatabase = Database(
-      Encryptor.plainTextToCipher("new database", "PASSWORD"),
-      Encryptor.plainTextToCipher("/", "PASSWORD"),
+      Encryptor.plainTextToCipher("new database", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("/", "PASSWORD", uID),
     );
     expect(newDatabase.forms.length, 0);
 
     newDatabase.addForm(Form([
-      Encryptor.plainTextToCipher("Discord", "PASSWORD"),
-      Encryptor.plainTextToCipher("username", "PASSWORD"),
-      Encryptor.plainTextToCipher("password", "PASSWORD"),
-      Encryptor.plainTextToCipher("notes", "PASSWORD"),
-      Encryptor.plainTextToCipher("discord.com", "PASSWORD"),
-      Encryptor.plainTextToCipher("icon.jpeg", "PASSWORD"),
+      Encryptor.plainTextToCipher("Discord", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("username", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("password", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("notes", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("discord.com", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("icon.jpeg", "PASSWORD", uID),
     ], " "));
 
     expect(newDatabase.forms.length, 1);
@@ -43,16 +44,16 @@ void main(){
       "icon" : "icon.jpeg"
     };
     newDatabase.forms[0].formDetails.forEach((key, value) {
-      expect(Encryptor.cipherToPlainText(newDatabase.forms[0].formDetails[key], "PASSWORD"), matcher[key]);
+      expect(Encryptor.cipherToPlainText(newDatabase.forms[0].formDetails[key], "PASSWORD", uID), matcher[key]);
     });
 
     newDatabase.addForm(Form([
-      Encryptor.plainTextToCipher("Facebook", "PASSWORD"),
-      Encryptor.plainTextToCipher("username1", "PASSWORD"),
-      Encryptor.plainTextToCipher("password123", "PASSWORD"),
-      Encryptor.plainTextToCipher("new account", "PASSWORD"),
-      Encryptor.plainTextToCipher("facebook.com", "PASSWORD"),
-      Encryptor.plainTextToCipher("facebook.jpeg", "PASSWORD"),
+      Encryptor.plainTextToCipher("Facebook", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("username1", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("password123", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("new account", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("facebook.com", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("facebook.jpeg", "PASSWORD", uID),
     ], " "));
 
     expect(newDatabase.forms.length, 2);
@@ -65,33 +66,33 @@ void main(){
       "icon" : "facebook.jpeg"
     };
     newDatabase.forms[1].formDetails.forEach((key, value) {
-      expect(Encryptor.cipherToPlainText(newDatabase.forms[1].formDetails[key], "PASSWORD"), matcher[key]);
+      expect(Encryptor.cipherToPlainText(newDatabase.forms[1].formDetails[key], "PASSWORD", uID), matcher[key]);
     });
   });
 
   test("Database removes a form correctly from index", (){
 
     Database newDatabase = Database(
-      Encryptor.plainTextToCipher("new database", "PASSWORD"),
-      Encryptor.plainTextToCipher("/", "PASSWORD"),
+      Encryptor.plainTextToCipher("new database", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("/", "PASSWORD", uID),
     );
     newDatabase.addForm(Form([
-      Encryptor.plainTextToCipher("Discord", "PASSWORD"),
-      Encryptor.plainTextToCipher("username", "PASSWORD"),
-      Encryptor.plainTextToCipher("password", "PASSWORD"),
-      Encryptor.plainTextToCipher("notes", "PASSWORD"),
-      Encryptor.plainTextToCipher("discord.com", "PASSWORD"),
-      Encryptor.plainTextToCipher("icon.jpeg", "PASSWORD"),
+      Encryptor.plainTextToCipher("Discord", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("username", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("password", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("notes", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("discord.com", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("icon.jpeg", "PASSWORD", uID),
     ], " "));
     expect(newDatabase.forms.length, 1);
 
     newDatabase.addForm(Form([
-      Encryptor.plainTextToCipher("Facebook", "PASSWORD"),
-      Encryptor.plainTextToCipher("username1", "PASSWORD"),
-      Encryptor.plainTextToCipher("password123", "PASSWORD"),
-      Encryptor.plainTextToCipher("new account", "PASSWORD"),
-      Encryptor.plainTextToCipher("facebook.com", "PASSWORD"),
-      Encryptor.plainTextToCipher("facebook.jpeg", "PASSWORD"),
+      Encryptor.plainTextToCipher("Facebook", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("username1", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("password123", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("new account", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("facebook.com", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("facebook.jpeg", "PASSWORD", uID),
     ], " "));
     expect(newDatabase.forms.length, 2);
 
@@ -106,7 +107,7 @@ void main(){
       "icon" : "facebook.jpeg"
     };
     newDatabase.forms[0].formDetails.forEach((key, value) {
-      expect(Encryptor.cipherToPlainText(newDatabase.forms[0].formDetails[key], "PASSWORD"), matcher[key]);
+      expect(Encryptor.cipherToPlainText(newDatabase.forms[0].formDetails[key], "PASSWORD", uID), matcher[key]);
     });
     newDatabase.removeForm(0);
     expect(newDatabase.forms.length, 0);
@@ -115,17 +116,17 @@ void main(){
 
   test("Database can be renamed correctly", (){
     Database newDatabase = Database(
-      Encryptor.plainTextToCipher("new database", "PASSWORD"),
-      Encryptor.plainTextToCipher("/", "PASSWORD"),
+      Encryptor.plainTextToCipher("new database", "PASSWORD", uID),
+      Encryptor.plainTextToCipher("/", "PASSWORD", uID),
     );
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD"), "new database");
+    expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD", uID), "new database");
 
 
-    newDatabase.renameDB(Encryptor.plainTextToCipher("newer database", "PASSWORD"));
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD"), "newer database");
+    newDatabase.renameDB(Encryptor.plainTextToCipher("newer database", "PASSWORD", uID));
+    expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD", uID), "newer database");
 
-    newDatabase.renameDB(Encryptor.plainTextToCipher("newest database", "PASSWORD"));
-    expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD"), "newest database");
+    newDatabase.renameDB(Encryptor.plainTextToCipher("newest database", "PASSWORD", uID));
+    expect(Encryptor.cipherToPlainText(newDatabase.databaseName, "PASSWORD", uID), "newest database");
 
   });
 

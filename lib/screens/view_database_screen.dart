@@ -66,7 +66,7 @@ Widget viewDatabaseTemplate(
                 },
                 child: Text(
                   Encryptor.cipherToPlainText(
-                      form.formDetails["serviceName"], password),
+                      form.formDetails["serviceName"], password, uid),
                   key: Key("view-record-button-text" + index.toString()),
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
@@ -169,10 +169,10 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                             child: Text(
                               nameShortener(Encryptor.cipherToPlainText(
                                   widget.database.databaseName,
-                                  widget.password)),
+                                  widget.password, widget.uid)),
                               key: Key(Encryptor.cipherToPlainText(
                                       widget.database.databaseName,
-                                      widget.password) +
+                                      widget.password, widget.uid) +
                                   "_text"),
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 25),
@@ -230,6 +230,7 @@ class _ViewDatabaseScreenState extends State<ViewDatabaseScreen> {
                                     builder: (context) => NewRecordForm(
                                           password: widget.password,
                                           database: widget.database,
+                                          uID: widget.uid,
                                         ))) as formClass.Form;
                             setState(() {
                               widget.database.addForm(myform);

@@ -25,7 +25,7 @@ class DeleteDatabase extends StatefulWidget {
 
 //Template to list over the database
 Widget deleteDatabaseTemplate(
-    Database database, context, index, password, deleteDatabaseInstance) {
+    Database database, context, index, password, deleteDatabaseInstance, uID) {
   //Individual delete buttons
   return Padding(
     padding: const EdgeInsets.fromLTRB(0, 3, 8, 10),
@@ -77,7 +77,7 @@ Widget deleteDatabaseTemplate(
                 ),
                 child: Text(
                   Encryptor.cipherToPlainText(
-                      database.databaseName, password),
+                      database.databaseName, password,uID),
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                   key: Key("deleteDatabaseText" + index.toString()),
                 )),
@@ -166,7 +166,8 @@ class _DeleteDatabaseState extends State<DeleteDatabase> {
                                   context,
                                   index,
                                   widget.password,
-                                  deleteDatabaseInstance),
+                                  deleteDatabaseInstance,
+                                  widget.currentUser.uID),
                         ))),
                       ],
                     ),
