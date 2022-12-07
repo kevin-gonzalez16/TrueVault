@@ -19,7 +19,6 @@ class _RegisterSelectionScreenState extends State<RegisterSelectionScreen> {
     super.dispose();
   }
 
-  bool phoneEmailSelection = true; //phone false, email true
   bool validInput = true;
 
   @override
@@ -54,24 +53,8 @@ class _RegisterSelectionScreenState extends State<RegisterSelectionScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: () {
-                    phoneEmailSelection = true;
-                    FocusScope.of(context).requestFocus(FocusNode());
-
-                    setState(() {});
-                  },
-                  style: TextButton.styleFrom(
-                    primary: Colors.white,
-                  ),
-                  child: const Text(
-                    "PHONE",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                TextButton(
                   key: const Key("email-text-button-register-selection-screen"),
                   onPressed: () {
-                    phoneEmailSelection = false;
                     FocusScope.of(context).requestFocus(FocusNode());
 
                     setState(() {});
@@ -86,104 +69,73 @@ class _RegisterSelectionScreenState extends State<RegisterSelectionScreen> {
                 ),
               ],
             ),
-            phoneEmailSelection
-                ? Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                        child: TextFormField(
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Color(0xffc9c9c9),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 3, color: Color(0xffC9C9C9)),
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 3, color: Color(0xffC9C9C9)),
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              hintText: 'Phone Number',
-                              hintStyle: TextStyle(
-                                  fontSize: 18, color: Color(0xff989898)),
-                            )),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 25, 30, 0),
-                          child: AspectRatio(
-                            aspectRatio: 9 / 2,
-                            child: Text(
-                                "You may receive SMS notification from us for security and login purposes.",
-                                style: TextStyle(color: Colors.white)),
-                          )),
-                    ],
-                  )
-                : Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(50, 0, 50, 103.5),
-                        child: TextFormField(
-                          onChanged: (value){
-                            RegExp validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                            if (!validEmail.hasMatch(value)){
-                              setState(() {
-                                validInput = false;
-                              });
-                            }
-                            else{
-                              validInput = true;
-                            }
-                          },
-                            key: const Key(
-                                "email-text-field-register-selection-screen"),
-                            controller: emailTextEditingController,
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Color(0xffc9c9c9),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 3, color: validInput ? Color(0xffC9C9C9) : Colors.redAccent),
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 3, color:validInput ? Color(0xffC9C9C9) : Colors.redAccent),
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              hintText: 'Email Address',
-                              hintStyle: TextStyle(
-                                  fontSize: 18, color: Color(0xff989898)),
-                            )
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(50, 0, 50, 50),
+                  child: TextFormField(
+                      onChanged: (value) {
+                        RegExp validEmail = RegExp(
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                        if (!validEmail.hasMatch(value)) {
+                          setState(() {
+                            validInput = false;
+                          });
+                        } else {
+                          validInput = true;
+                        }
+                      },
+                      key: const Key(
+                          "email-text-field-register-selection-screen"),
+                      controller: emailTextEditingController,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xffc9c9c9),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 3,
+                              color: validInput
+                                  ? Color(0xffC9C9C9)
+                                  : Colors.redAccent),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
-                      ),
-                    ],
-                  ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 3,
+                              color: validInput
+                                  ? Color(0xffC9C9C9)
+                                  : Colors.redAccent),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        hintText: 'Email Address',
+                        hintStyle:
+                            TextStyle(fontSize: 18, color: Color(0xff989898)),
+                      )),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
               child: AspectRatio(
                   aspectRatio: 9 / 2,
                   child: TextButton(
                     key: const Key("next-button-register-selection-screen"),
-                    onPressed: (){
-                      RegExp validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                      if (!validEmail.hasMatch(emailTextEditingController.text)){
+                    onPressed: () {
+                      RegExp validEmail = RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                      if (!validEmail
+                          .hasMatch(emailTextEditingController.text)) {
                         setState(() {
                           validInput = false;
                         });
-                      }
-                      else{
+                      } else {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => RegisterScreen(
                                     email: emailTextEditingController)));
                       }
-
                     },
                     child: const Text(
                       "Next",
