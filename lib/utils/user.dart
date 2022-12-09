@@ -2,10 +2,18 @@ import 'package:true_vault/utils/database.dart';
 
 class TrueVaultUser {
   String uID;
+  String email;
+
   List<Database> databases;
 
-  TrueVaultUser(this.uID, this.databases);
+  TrueVaultUser(
+    this.uID,
+    this.email,
+    this.databases,
+  );
 }
+
+
 /*
 Class User
     Name = Encrypted String

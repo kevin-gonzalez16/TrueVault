@@ -15,7 +15,12 @@ class AuthService {
 
     //return a true vault user from a firebase user
     //passing the firebase user unique id and its databases
-    return TrueVaultUser(user.uid, databases);
+    String email = user.email!;
+    return TrueVaultUser(
+      user.uid,
+      email,
+      databases,
+    );
   }
 
   //sign in with email and password

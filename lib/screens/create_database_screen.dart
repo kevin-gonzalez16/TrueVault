@@ -21,7 +21,6 @@ class CreateDatabase extends StatefulWidget {
 
 class _CreateDatabase extends State<CreateDatabase> {
   TextEditingController databaseNameController = TextEditingController();
-  TextEditingController databaseLocationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -92,23 +91,6 @@ class _CreateDatabase extends State<CreateDatabase> {
                                     fontSize: 18, color: Color(0xff989898)),
                               ),
                             ),
-                            TextField(
-                              key: const Key("newDatabaseLocationTextField"),
-                              controller: databaseLocationController,
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Color(0xffC9C9C9),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 3, color: Color(0xffC9C9C9)),
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                hintText: 'Database Location',
-                                hintStyle: TextStyle(
-                                    fontSize: 18, color: Color(0xff989898)),
-                              ),
-                            ),
                             SizedBox(
                                 height: phoneHeight / 8.537,
                                 width: phoneWidth / 1.644,
@@ -127,9 +109,6 @@ class _CreateDatabase extends State<CreateDatabase> {
                                                       200, 24, 154, 180))))),
                                   onPressed: () {
                                     setState(() async {
-                                      var locationCheck =
-                                          databaseLocationController.text
-                                              .replaceAll(' ', '');
                                       var nameCheck = databaseNameController
                                           .text
                                           .replaceAll(' ', '');
@@ -138,11 +117,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                       if (nameCheck.isEmpty) {
                                         errors += "Name cannot be empty\n";
                                       }
-                                      if (locationCheck.isEmpty) {
-                                        errors += "Location cannot be empty\n";
-                                      }
-                                      if (nameCheck.isEmpty ||
-                                          locationCheck.isEmpty) {
+                                      if (nameCheck.isEmpty) {
                                         emptyInputDialog(context, errors);
                                       } else {
                                         final DatabaseService test =
@@ -153,8 +128,7 @@ class _CreateDatabase extends State<CreateDatabase> {
                                             Encryptor.plainTextToCipher(
                                                 databaseNameController.text,
                                                 widget.password,
-                                                widget.currentUser.uID
-                                            ));
+                                                widget.currentUser.uID));
 
                                         Database databaseObj = Database(
                                             Encryptor.plainTextToCipher(
@@ -170,8 +144,11 @@ class _CreateDatabase extends State<CreateDatabase> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     ViewDatabaseScreen(
-                                                        database:
-                                                            databaseObj, password: widget.password, uid:widget.currentUser.uID)));
+                                                        database: databaseObj,
+                                                        password:
+                                                            widget.password,
+                                                        uid: widget
+                                                            .currentUser.uID)));
                                       }
                                     });
                                   },
