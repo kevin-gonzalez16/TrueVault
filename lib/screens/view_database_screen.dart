@@ -26,8 +26,8 @@ class ViewDatabaseScreen extends StatefulWidget {
 }
 
 String nameShortener(String databaseName) {
-  return databaseName.length > 14
-      ? databaseName.substring(0, 13) + "..."
+  return databaseName.length >= 14
+      ? databaseName.substring(0, 12) + "..."
       : databaseName;
 }
 

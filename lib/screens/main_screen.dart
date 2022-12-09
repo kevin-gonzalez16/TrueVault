@@ -36,6 +36,13 @@ class _MainScreenState extends State<MainScreen> {
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
           elevation: 0,
+          leading: Builder(
+            builder: (context) => IconButton(
+              key: const Key("MainDrawerKey"),
+              icon: const Icon(Icons.menu),
+              onPressed: ()=> Scaffold.of(context).openDrawer(),
+            )
+          ),
         ),
         drawer: MainDrawer(email: widget.currentUser.email),
         body: Center(

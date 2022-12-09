@@ -9,6 +9,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      key: const Key("MainDrawerKey"),
       child: Column(
         children: <Widget>[
           Container(
@@ -18,20 +19,6 @@ class MainDrawer extends StatelessWidget {
             child: Center(
               child: Column(
                 children: <Widget>[
-                  /* Container(
-                      width: 100,
-                      height: 100,
-                      margin: EdgeInsets.only(
-                        top: 30,
-                        bottom: 10,
-                      ),
-                      child: Column(
-                        children: [
-                          Icon(Icons.account_circle_rounded,
-                              size: 100.0, color: Colors.white54)
-                        ],
-                      )), */
-
                   Container(
                     width: 100,
                     height: 100,
@@ -87,6 +74,7 @@ class MainDrawer extends StatelessWidget {
             onTap: null,
           ),
           ListTile(
+            key: const Key("logoutButton"),
             leading: Icon(Icons.logout),
             title: Text(
               'Logout',

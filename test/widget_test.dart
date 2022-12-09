@@ -22,21 +22,21 @@ import 'package:true_vault/screens/main_drawer.dart';
 void main() {
   String uID = "2LrMteAPf2XoLYUFc8RM2xDh8P02";
 
-  /*testWidgets("Logout button takes you to the landing screen",
+  testWidgets("Logout button takes you to the landing screen",
       (WidgetTester tester) async {
     TrueVaultUser test = TrueVaultUser("uID", "email", []);
     await tester.pumpWidget(
         MaterialApp(home: MainScreen(currentUser: test, password: "")));
     expect(find.text("New Database"), findsOneWidget);
 
-    await tester
-        .pumpWidget(const MaterialApp(home: MainDrawer(email: "email")));
-    expect(find.text("Logout"), findsOneWidget);
+    await tester.tap(find.byKey(const Key("MainDrawerKey")));
+    await tester.pumpAndSettle();
+
     await tester.tap(find.byKey(const Key("logoutButton")));
     await tester.pumpAndSettle();
     expect(find.text("Register"), findsOneWidget);
     expect(find.text("Login"), findsOneWidget);
-  }); */
+  });
 
   testWidgets("Cancel button in Choose Database returns to main screen",
       (WidgetTester tester) async {
