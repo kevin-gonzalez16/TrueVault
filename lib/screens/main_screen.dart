@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:true_vault/screens/choose_database_screen.dart';
 import 'package:true_vault/screens/create_database_screen.dart';
 import 'package:true_vault/screens/delete_database_screen.dart';
+import 'package:true_vault/screens/main_drawer.dart';
 import 'package:true_vault/screens/view_database_screen.dart';
 import 'package:true_vault/screens/view_record.dart';
 import 'package:true_vault/utils/database.dart';
 import 'package:true_vault/utils/encryptor.dart';
 import 'package:true_vault/utils/user.dart';
 
-import 'landing_screen.dart';
-
-enum _MenuValues {
-  logout,
-}
+import './main_drawer.dart';
 
 class MainScreen extends StatefulWidget {
   final TrueVaultUser currentUser;
@@ -36,66 +33,18 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
         resizeToAvoidBottomInset: false, // set it to false
         backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
+        appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(23, 42, 58, 1.0),
+          elevation: 0,
+        ),
+        drawer: MainDrawer(email: widget.currentUser.email),
         body: Center(
             child: Column(
           children: [
             Container(
               height: 30.0,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                PopupMenuButton<_MenuValues>(
-                  key: const Key("PopupMenuButton"),
-                  itemBuilder: (BuildContext context) => [
-                    PopupMenuItem(
-                      key: const Key("logoutButton"),
-                      child: Text(
-                        'Logout',
-                      ),
-                      value: _MenuValues.logout,
-                    ),
-                  ],
-                  onSelected: (value) {
-                    switch (value) {
-                      case _MenuValues.logout:
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LandingScreen()));
-                        setState(() {
-                          databaseIndex = 0;
-                          recordIndex = 0;
-                        });
-                        break;
-                    }
-                  },
-                ),
-              ],
-            ),
 
-            /*Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                TextButton(
-                  key: const Key("logoutButton"),
-                  child: const Text(
-                    "Logout",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      databaseIndex = 0;
-                      recordIndex = 0;
-                    });
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LandingScreen()));
-                  },
-                ),
-              ],
-            ),*/
             GestureDetector(
               //Swiper for database
               onHorizontalDragEnd: (dragEndDetails) {
@@ -156,7 +105,8 @@ class _MainScreenState extends State<MainScreen> {
                               : Encryptor.cipherToPlainText(
                                   widget.currentUser.databases[databaseIndex]
                                       .databaseName,
-                                  widget.password, widget.currentUser.uID),
+                                  widget.password,
+                                  widget.currentUser.uID),
                           style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white,
@@ -240,7 +190,8 @@ class _MainScreenState extends State<MainScreen> {
                                       .databases[databaseIndex]
                                       .forms[recordIndex]
                                       .formDetails["serviceName"],
-                                  widget.password, widget.currentUser.uID),
+                                  widget.password,
+                                  widget.currentUser.uID),
                       style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
