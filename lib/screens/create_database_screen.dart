@@ -116,8 +116,6 @@ class _CreateDatabase extends State<CreateDatabase> {
                                       var errors = "";
                                       if (nameCheck.isEmpty) {
                                         errors += "Name cannot be empty\n";
-                                      }
-                                      if (nameCheck.isEmpty) {
                                         emptyInputDialog(context, errors);
                                       } else {
                                         final DatabaseService test =

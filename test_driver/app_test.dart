@@ -40,8 +40,6 @@ void main() {
 
     final newDatabaseNameTextField =
         find.byValueKey('newDatabaseNameTextField');
-    final newDatabaseLocationTextField =
-        find.byValueKey('newDatabaseLocationTextField');
     final createDatabaseButton = find.byValueKey('createDatabaseButton');
 
     final chooseDatabaseCancelButton =
@@ -103,8 +101,6 @@ void main() {
         //Testing actual database creation
         await driver.tap(newDatabaseNameTextField);
         await driver.enterText("Database Name");
-        await driver.tap(newDatabaseLocationTextField);
-        await driver.enterText("New Database Location");
         await driver.tap(createDatabaseButton);
 
         expect(await driver.getText(chooseDatabaseButton0), "Database Name");
@@ -126,8 +122,6 @@ void main() {
         //Testing actual database creation
         await driver.tap(newDatabaseNameTextField);
         await driver.enterText("Database 1");
-        await driver.tap(newDatabaseLocationTextField);
-        await driver.enterText("New Database Location 1");
         await driver.tap(createDatabaseButton);
 
         expect(await driver.getText(chooseDatabaseButton0), "Database 1");
@@ -138,8 +132,6 @@ void main() {
         //Testing actual database creation
         await driver.tap(newDatabaseNameTextField);
         await driver.enterText("Database 2");
-        await driver.tap(newDatabaseLocationTextField);
-        await driver.enterText("New Database Location 2");
         await driver.tap(createDatabaseButton);
 
         await driver.tap(chooseRecordBackButton);
@@ -438,9 +430,8 @@ void main() {
             find.byValueKey("chooseDatabaseCancelButton");
         await driver.tap(chooseDatabaseCancelButton);
 
-        final popupMenuButton = find.byValueKey("PopupMenuButton");
+        final popupMenuButton = find.byValueKey("MainDrawerKey");
         await driver.tap(popupMenuButton);
-
         final logoutButton = find.byValueKey("logoutButton");
         await driver.tap(logoutButton);
 
@@ -544,30 +535,12 @@ void main() {
         final emptyInputDialogOkButton =
             find.byValueKey("emptyInputDialogOkButton");
 
-        //test both empty fields
-        await driver.tap(createDatabaseButton);
-        expect(await driver.getText(emptyInputDialogText),
-            "Name cannot be empty\nLocation cannot be empty\n");
-        await driver.tap(emptyInputDialogOkButton);
-
         //test empty name
-        await driver.tap(newDatabaseLocationTextField);
-        await driver.enterText("New Database Location");
         await driver.tap(createDatabaseButton);
         expect(await driver.getText(emptyInputDialogText),
             "Name cannot be empty\n");
         await driver.tap(emptyInputDialogOkButton);
 
-        await driver.tap(newDatabaseLocationTextField);
-        await driver.enterText("");
-
-        //test empty location
-        await driver.tap(newDatabaseNameTextField);
-        await driver.enterText("Database Name");
-        await driver.tap(createDatabaseButton);
-        expect(await driver.getText(emptyInputDialogText),
-            "Location cannot be empty\n");
-        await driver.tap(emptyInputDialogOkButton);
       });
 
       test("Reject empty fields in new record screen", () async {
@@ -579,8 +552,6 @@ void main() {
         //create a database (already tested)
         await driver.tap(newDatabaseNameTextField);
         await driver.enterText("MyDatabaseName");
-        await driver.tap(newDatabaseLocationTextField);
-        await driver.enterText("New Database Location");
         await driver.tap(createDatabaseButton);
 
         //create a new record screen
@@ -749,12 +720,12 @@ void main() {
 
         final deleteDatabaseCancelButton =
             find.byValueKey("deleteDatabaseCancelButton");
-        final logoutButton = find.byValueKey("logoutButton");
 
         await driver.tap(deleteDatabaseCancelButton);
 
-        final popupMenuButton = find.byValueKey("PopupMenuButton");
+        final popupMenuButton = find.byValueKey("MainDrawerKey");
         await driver.tap(popupMenuButton);
+        final logoutButton = find.byValueKey("logoutButton");
         await driver.tap(logoutButton);
       });
       test("Login screen rejects wrong login credentials", () async {
