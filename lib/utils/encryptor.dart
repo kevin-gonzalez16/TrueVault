@@ -22,31 +22,8 @@ class Encryptor {
   }
 
   static String padKey(String key, String uID) {
-    if (key.length >= 32) {
 
-      String padding = "";
-      int index = 1;
-      int round = 1;
-
-      for (int x = 0; x < 16; x++) {
-        if(index >= uID.length){
-          round += 1;
-          index = 1 * round;
-        }
-        padding += uID.substring(index,index+1);
-        index *= 2;
-      }
-
-      int paddingIndex = 0;
-      for(int x = 0; x<32; x++){
-        //replace every other with padding
-        if (x % 2 == 0){
-          key = key.substring(0,x) + padding.substring(paddingIndex,paddingIndex + 1) + key.substring(x+1);
-          paddingIndex += 1;
-        }
-      }
-      return key.length == 32 ? key : key.substring(0,32);
-    }else {
+    if (key.length < 32){
       int missing = key.length;
       String padding = "";
       int index = 1;
@@ -60,7 +37,30 @@ class Encryptor {
         padding += uID.substring(index,index+1);
         index *= 2;
       }
-      return key+padding;
+      key = key+padding;
     }
+
+    String padding = "";
+    int index = 1;
+    int round = 1;
+
+    for (int x = 0; x < 16; x++) {
+      if(index >= uID.length){
+        round += 1;
+        index = 1 * round;
+      }
+      padding += uID.substring(index,index+1);
+      index *= 2;
+    }
+
+    int paddingIndex = 0;
+    for(int x = 0; x<32; x++){
+      //replace every other with padding
+      if (x % 2 == 0){
+        key = key.substring(0,x) + padding.substring(paddingIndex,paddingIndex + 1) + key.substring(x+1);
+        paddingIndex += 1;
+      }
+    }
+    return key.length == 32 ? key : key.substring(0,32);
   }
 }

@@ -9,7 +9,7 @@ void main() {
     String shortKey = "shortKey";
     String paddedKey = Encryptor.padKey(shortKey, uID);
     expect(paddedKey.length, 32);
-    expect(paddedKey, "shortKeyLrtfcrtfcMAL8tfceX2AL8PU");
+    expect(paddedKey, "LhrrtKfycrrftrffcMMLAtLc8XtAf8cU");
   });
 
   test("Encryptor pads a long key", () {
