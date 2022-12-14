@@ -109,11 +109,11 @@ class _MainScreenState extends State<MainScreen> {
                         child: Text(
                           widget.currentUser.databases.isEmpty
                               ? " "
-                              : Encryptor.cipherToPlainText(
+                              : " << " + Encryptor.cipherToPlainText(
                                   widget.currentUser.databases[databaseIndex]
                                       .databaseName,
                                   widget.password,
-                                  widget.currentUser.uID),
+                                  widget.currentUser.uID) + " >> ",
                           style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white,
@@ -191,14 +191,14 @@ class _MainScreenState extends State<MainScreen> {
                           : widget.currentUser.databases[databaseIndex].forms
                                   .isEmpty
                               ? " "
-                              : Encryptor.cipherToPlainText(
+                              : " << " + Encryptor.cipherToPlainText(
                                   widget
                                       .currentUser
                                       .databases[databaseIndex]
                                       .forms[recordIndex]
                                       .formDetails["serviceName"],
                                   widget.password,
-                                  widget.currentUser.uID),
+                                  widget.currentUser.uID) + " >> ",
                       style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
